@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-navbar color=''>
+        <ion-title>Registrate</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <div padding style="text-align: center;">
+            <img src="../../assets/imgs/smartphone.png" class="slide-image" />
+        </div>
+        <div padding>
+            <label>Ingresa unos cuantos daticos para que tu seas el protagonista de esta magica experiencia.</label>
+        </div>
+        <ion-item>
+            <ion-label stacked>Nombre usuario</ion-label>
+            <ion-input type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Nombres</ion-label>
+            <ion-input type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Apellidos</ion-label>
+            <ion-input type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Correo electronico</ion-label>
+            <ion-input type="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Contraseña</ion-label>
+            <ion-input type="password"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Confirmar Constraseña</ion-label>
+            <ion-input type="password"></ion-input>
+        </ion-item>
+        <br>
+        <ion-grid>
+            <ion-row justify-content-start>
+                <ion-col col-1>
+                    <ion-checkbox [(ngModel)]="recordar"></ion-checkbox>
+                </ion-col>
+                <ion-col col-9>
+                   <label>Declaro que he leido y aceptado los Terminos y Condiciones</label>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div padding>
+            <button ion-button (click)="goPrincipalMenu()" color="primary" block>Regístrate</button>
+        </div>
+    </ion-list>
+</ion-content>
