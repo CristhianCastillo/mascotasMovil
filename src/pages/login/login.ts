@@ -18,6 +18,7 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class LoginPage {
 
+  recordar: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform, public loadingCtrl: LoadingController) {
     let backAction =  platform.registerBackButtonAction(() => {
       console.log("second");

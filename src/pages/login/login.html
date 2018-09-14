@@ -5,28 +5,30 @@
 </ion-header>
 
 <ion-content>
-    <ion-list>
-        <div padding style="text-align: center;">
-            <img src="../../assets/imgs/smartphone.png" class="slide-image" />
-        </div>
-        <ion-item>
-            <ion-label stacked>Nombre usuario</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
-        
-        <ion-item>
-            <ion-label stacked>Contraseña</ion-label>
-            <ion-input type="password"></ion-input>
-        </ion-item>
+    <form>
+        <ion-list>
+            <div padding style="text-align: center;">
+                <img src="../../assets/imgs/smartphone.png" class="slide-image" />
+            </div>
+            <ion-item>
+                <ion-label stacked>Nombre usuario</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-label>Recuérdame</ion-label>
-            <ion-checkbox [(ngModel)]="recordar"></ion-checkbox>
-        </ion-item>
-    </ion-list>
-    <div padding>
-        <button ion-button (click)=" goPrincipalMenu()" color="primary" block>Ingresar</button>
-    </div>
+            <ion-item>
+                <ion-label stacked>Contraseña</ion-label>
+                <ion-input type="password"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Recuérdame</ion-label>
+                <ion-checkbox [(ngModel)]="recordar" name="recordar"></ion-checkbox>
+            </ion-item>
+        </ion-list>
+        <div padding>
+            <button type="submit" ion-button (click)=" goPrincipalMenu()" color="primary" block>Ingresar</button>
+        </div>
+    </form>
     <ion-item no-lines>
         <div style="text-align: right;">
             <a (click)="goResetPassword()">¿Olvidaste tu contraseña?</a>

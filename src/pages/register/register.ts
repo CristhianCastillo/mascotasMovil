@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
-
 /**
  * Generated class for the RegisterPage page.
  *

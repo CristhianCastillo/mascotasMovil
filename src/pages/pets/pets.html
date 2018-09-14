@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mascotas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item *ngFor="let mascota of mascotas">
+      <ion-thumbnail item-start>
+        <img [src]="mascota.imagen">
+      </ion-thumbnail>
+      <h2>{{mascota.nombre}}</h2>
+      <p>{{mascota.raza}}</p>
+      <p>{{mascota.fechaNacimiento}}</p>
+      <button ion-button clear item-end>Detalles</button>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom>
+      <button ion-fab (click)="goToCreatePet()" color="danger"><ion-icon name="add"></ion-icon></button>
+      <!-- <ion-fab-list side="left">
+        <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+        <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+        <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+        <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+      </ion-fab-list> -->
+    </ion-fab>
+</ion-content>

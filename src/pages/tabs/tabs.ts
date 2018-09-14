@@ -1,18 +1,22 @@
 import { Component } from '@angular/core';
+import { NavParams } from 'ionic-angular';
 
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
-import { HomePage } from '../home/home';
+import { PetsPage } from '../pets/pets';
+import { SuppliesPage } from '../supplies/supplies';
+import { EstablishmentsPage } from '../establishments/establishments';
+import { AgendaPage } from '../agenda/agenda';
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
-
-  constructor() {
+  tab1Root = PetsPage;
+  tab2Root = SuppliesPage;
+  tab3Root = EstablishmentsPage;
+  tab4Root = AgendaPage;
+  myIndex: number;
+  constructor(navParams: NavParams) {
+    this.myIndex = navParams.data.tabIndex || 0;
   }
 }
