@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams} from 'ionic-angular';
-import { PetCreatePage } from '../pets/pet-create/pet-create';
-import { PetModalPage } from '../pets/pet-modal/pet-modal';
+import { NavController, NavParams } from 'ionic-angular';
+import { AgendaCreatePage } from '../agenda-create/agenda-create';
 
 @Component({
-  selector: 'page-pets',
-  templateUrl: 'pets.html',
+  selector: 'page-choose-pet',
+  templateUrl: 'choose-pet.html',
 })
-export class PetsPage {
+export class ChoosePetPage {
 
   mascotas = [
     {
@@ -86,17 +85,13 @@ export class PetsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  goToModal(data){
-    console.log(data);
-    this.navCtrl.push(PetModalPage, data);
-  }
-
-  goToCreatePet(){
-    this.navCtrl.push(PetCreatePage);
+  goToCreateEvent(mascota){
+    console.log(mascota.nombre);
+    this.navCtrl.push(AgendaCreatePage, mascota);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PetsPage');
+    console.log('ionViewDidLoad ChoosePetPage');
   }
 
 }

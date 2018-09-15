@@ -1,20 +1,55 @@
 <ion-header>
-    <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-          </button>
-      <ion-title>Establecimientos</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-    <h2>Welcome to Ionic!</h2>
-    <p>
-      This starter project comes with simple tabs-based layout for apps
-      that are going to primarily use a Tabbed UI.
-    </p>
-    <p>
-      Take a look at the <code>src/pages/</code> directory to add or change tabs,
-      update any existing page or create new pages.
-    </p>
-  </ion-content>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Establecimientos</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="pet">
+      <ion-segment-button value="saved">
+        Guardados
+      </ion-segment-button>
+      <ion-segment-button value="search">
+        Buscar
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+</ion-header>
+
+<ion-content>
+
+  <div [ngSwitch]="pet">
+    <ion-list *ngSwitchCase="'saved'">
+      <ion-item *ngFor="let establecimiento of establecimientosGuardados" (click)="gotToViewEstableSaved(establecimiento)">
+        <ion-card class="adv-map">
+          <div style="position: relative">
+            <img [src]="establecimiento.imagenEstablecimiento">
+            <ion-fab right top>
+              <button ion-fab class="fab-map">
+                <ion-icon name='pin'></ion-icon>
+              </button>
+            </ion-fab>
+          </div>
+          <ion-item>
+            <ion-icon color="subtle" large item-start name='football'></ion-icon>
+            <h2>{{establecimiento.nombreEstablecimiento}}</h2>
+            <p><strong>Horarios:</strong> {{establecimiento.horarios}} - {{establecimiento.horaInicio}} - {{establecimiento.horaFinal}}</p>
+          </ion-item>
+          <ion-item actions>
+            <span ion-text item-start color="secondary" class="item-bold">{{establecimiento.tiempo}}</span>
+            <span ion-text item-start color="subtle">({{establecimiento.distancia}})</span>
+            <button ion-button color="primary" clear item-end icon-start>
+              <ion-icon name='navigate'></ion-icon>
+              Ir
+            </button>
+          </ion-item>
+        </ion-card>
+
+      </ion-item>
+      
+    </ion-list>
+  </div>
+</ion-content>

@@ -3,24 +3,35 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
 @Component({
-  selector: 'page-pet-create',
-  templateUrl: 'pet-create.html',
+  selector: 'page-agenda-create',
+  templateUrl: 'agenda-create.html',
 })
-export class PetCreatePage {
+export class AgendaCreatePage {
 
-  tipoMascotaAlertOpts: { title: string, subTitle: string };
-
+  tipoActividadAlertOpts: { title: string, subTitle: string };
+  nombreMascota: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, public alerCtrl: AlertController) {
-    this.tipoMascotaAlertOpts = {
-      title: 'Tipo Mascotas',
+    this.tipoActividadAlertOpts = {
+      title: 'Tipo Actividad',
       subTitle: 'Selecciona'
     };
+
+    this.nombreMascota = this.navParams.get('nombre');
   }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad AgendaCreatePage');
+  }
+
+  stpSelect() {
+    console.log('STP selected');
+  }
+
 
   doAlert() {
     let alert = this.alerCtrl.create({
-      title: 'Genial!!',
-      message: 'Un amigo tuyo acaba de ser registrado.',
+      title: 'Evento Agendado',
+      message: 'Exitoso!!',
       buttons: [{
         text: 'Aceptar',
         handler: () => {
@@ -30,13 +41,4 @@ export class PetCreatePage {
     });
     alert.present()
   }
-
-  stpSelect() {
-    console.log('STP selected');
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PetCreatePage');
-  }
-
 }

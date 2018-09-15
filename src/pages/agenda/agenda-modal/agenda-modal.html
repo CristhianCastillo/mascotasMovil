@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar>
+    <ion-toolbar no-border-top>
+      <ion-title>Evento para {{nombreMascota}}</ion-title>
+      <ion-buttons end>
+          <button  ion-button (click)="deleteAlert()" icon-end >
+              <ion-icon name="cut"></ion-icon>
+            </button>
+            <button  ion-button (click)="upLoad()" icon-end >
+                <ion-icon name="create"></ion-icon>
+            </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Nombre Evento</ion-label>
+        <ion-input type="text" [(ngModel)]="nombreEvento"  name="nombreDelEvento"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Ubicación</ion-label>
+        <ion-input type="text" [(ngModel)]="ubicacion" name="ubicacionDelEvento"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Tipo Actividad</ion-label>
+        <ion-select [(ngModel)]="tipoActividad" [selectOptions]="tipoActividadAlertOpts" name="tipoDeActividad">
+          <ion-option>Vaterinario</ion-option>
+          <ion-option>Peluqueria</ion-option>
+          <ion-option>Vacuna B2</ion-option>
+          <ion-option>Jugar</ion-option>
+          <ion-option>dientes</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Fecha Evento</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="fecha" name="fechaDelEvento"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Hora Evento</ion-label>
+        <ion-datetime displayFormat="hh:mm A" [(ngModel)]="hora" name="horaDelEvento"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Descripción</ion-label>
+        <ion-textarea name="descripcionDelEvento" [(ngModel)]="descripcionActividad"></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
