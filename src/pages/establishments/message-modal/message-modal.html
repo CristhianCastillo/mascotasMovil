@@ -1,0 +1,47 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Enviar a {{nombreEstablecimiento}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">
+        Cerrar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form>
+    <ion-list>
+      <ion-item>
+        <ion-label>Mascota</ion-label>
+        <ion-select [(ngModel)]="mascotas" name="mascotasAplicacion">
+          <ion-option>Raton</ion-option>
+          <ion-option>Perro</ion-option>
+          <ion-option>Gato</ion-option>
+          <ion-option>Conejo</ion-option>
+          <ion-option>Loro</ion-option>
+          <ion-option>Aguila</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Servicio</ion-label>
+        <ion-select [(ngModel)]="servicio" name="serviciosAplicacion">
+          <ion-option value="f">Hembra</ion-option>
+          <ion-option value="m">Macho</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Mensaje</ion-label>
+        <ion-textarea></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button (click)="doAlert()" full>Enviar</button>
+    </div>
+  </form>
+</ion-content>

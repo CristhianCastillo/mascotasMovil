@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ModalOptions, AlertController} from 'ionic-angular';
+import { MessageModalPage } from '../message-modal/message-modal';
 
 @Component({
   selector: 'page-establishments-saved-modal',
@@ -24,7 +25,7 @@ export class EstablishmentsSavedModalPage {
   descripcion: string;
   calificacion: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private modal: ModalController, public alerCtrl: AlertController) {
     this.establecimiento = this.navParams.get("establecimiento");
 
     this.nombreEstablecimiento = this.establecimiento.nombreEstablecimiento;
@@ -34,6 +35,47 @@ export class EstablishmentsSavedModalPage {
     this.paginaWeb = this.establecimiento.paginaWeb;
     this.calificacion = this.establecimiento.calificacion;
     this.imagenEstablecimiento = this.establecimiento.imagenEstablecimiento;
+  }
+
+  deleteAlert() {
+    let alert = this.alerCtrl.create({
+      title: 'Eliminar',
+      message: '¿Deseas eliminar este establecimiento?',
+      buttons: [{
+        text: 'Aceptar',
+        handler: () => {
+          let alert1 = this.alerCtrl.create({
+            title: 'Eliminar',
+            message: 'Establecimiento eliminado',
+            buttons: [{
+              text: 'Aceptar',
+              handler: () => {
+                this.navCtrl.pop();
+              }
+            }]
+          });
+          alert1.present();
+        }
+      },
+      {
+        text: 'Cancelar',
+        handler: () => {
+          console.log("Operación cancelada");
+        }
+      }
+    ]
+    });
+    alert.present();
+  }
+
+  viewSendMessage(){
+
+    const myModalOptions: ModalOptions = {
+      enableBackdropDismiss: false
+    };
+
+    const myModal = this.modal.create(MessageModalPage, {nombre: this.nombreEstablecimiento}, myModalOptions);
+    myModal.present();
   }
 
   ionViewDidLoad() {

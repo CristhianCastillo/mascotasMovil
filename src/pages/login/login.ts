@@ -1,16 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { StartPage } from '../start/start';
-import { RegisterPage } from '../register/register';
 import { LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
   selector: 'page-login',
@@ -32,7 +24,7 @@ export class LoginPage {
   }
 
   goRegister(){
-    this.navCtrl.push(RegisterPage);
+    this.navCtrl.push(StartPage);
   }
 
   goPrincipalMenu(){

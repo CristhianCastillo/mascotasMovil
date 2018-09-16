@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button  ion-button (click)="doAlert()" icon-end >
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Establecimiento</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Nombre Establecimiento</ion-label>
+        <ion-input type="text" [(ngModel)]="nombre" name="nombreEstablecimiento"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Telefono</ion-label>
+        <ion-input type="number" [(ngModel)]="telefono" name="telefonoEstablecimiento"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Direccion</ion-label>
+        <ion-input type="text" [(ngModel)]="direccion" name=direccionEstablecimiento></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Correo electronico</ion-label>
+        <ion-input type="email" [(ngModel)]="correo" name="correoElectronico"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Pagina Web</ion-label>
+        <ion-input type="text" [(ngModel)]="paginaWeb" name="paginaWebEstablecimiento"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Servicios</ion-label>
+        <ion-select [(ngModel)]="servicios" name="serviciosEstablecimiento">
+          <ion-option>Hospital</ion-option>
+          <ion-option>Tienda</ion-option>
+          <ion-option>Comida</ion-option>
+          <ion-option>Peluqueria</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Horarios</ion-label>
+        <ion-select [(ngModel)]="horarios" name="horariosEstablecimiento">
+          <ion-option value="24 H">24 Horas</ion-option>
+          <ion-option value="Establecido">Establecido</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Desde</ion-label>
+        <ion-datetime displayFormat="hh:mm A" [(ngModel)]="horaInicial" name="horaInicialEstablecimiento"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Hasta</ion-label>
+        <ion-datetime displayFormat="hh:mm A" [(ngModel)]="horaFinal" name="horaFinalEstablecimiento"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Descripcion</ion-label>
+        <ion-textarea name="descripcionEstablecimiento" [(ngModel)]="descripcion"></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

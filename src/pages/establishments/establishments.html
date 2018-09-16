@@ -34,7 +34,37 @@
             </ion-fab>
           </div>
           <ion-item>
-            <ion-icon color="subtle" large item-start name='football'></ion-icon>
+            <ion-icon color="subtle" large item-start name='information-circle'></ion-icon>
+            <h2>{{establecimiento.nombreEstablecimiento}}</h2>
+            <p><strong>Horarios:</strong> {{establecimiento.horarios}} - {{establecimiento.horaInicio}} - {{establecimiento.horaFinal}}</p>
+          </ion-item>
+          <ion-item actions>
+            <span ion-text item-start color="secondary" class="item-bold">{{establecimiento.tiempo}}</span>
+            <span ion-text item-start color="subtle">({{establecimiento.distancia}})</span>
+            <button ion-button color="primary" clear item-end icon-start>
+              <ion-icon name='navigate'></ion-icon>
+              Ir
+            </button>
+          </ion-item>
+        </ion-card>
+
+      </ion-item>
+      
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'search'">
+      <ion-item *ngFor="let establecimiento of establecimientosBuscar" (click)="gotToViewEstableSearch(establecimiento)">
+        <ion-card class="adv-map">
+          <div style="position: relative">
+            <img [src]="establecimiento.imagenEstablecimiento">
+            <ion-fab right top>
+              <button ion-fab class="fab-map">
+                <ion-icon name='pin'></ion-icon>
+              </button>
+            </ion-fab>
+          </div>
+          <ion-item>
+            <ion-icon color="subtle" large item-start name='information-circle'></ion-icon>
             <h2>{{establecimiento.nombreEstablecimiento}}</h2>
             <p><strong>Horarios:</strong> {{establecimiento.horarios}} - {{establecimiento.horaInicio}} - {{establecimiento.horaFinal}}</p>
           </ion-item>

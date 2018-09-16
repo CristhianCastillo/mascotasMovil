@@ -1,20 +1,25 @@
 <ion-header>
-    <ion-navbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-          </button>
-      <ion-title>Suministros</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-    <h2>Welcome to Ionic!</h2>
-    <p>
-      This starter project comes with simple tabs-based layout for apps
-      that are going to primarily use a Tabbed UI.
-    </p>
-    <p>
-      Take a look at the <code>src/pages/</code> directory to add or change tabs,
-      update any existing page or create new pages.
-    </p>
-  </ion-content>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Suministros</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let suministro of suministros">
+    <ion-list-header>
+      {{suministro.nombreTipoSuministro}}
+    </ion-list-header>
+    <ion-item *ngFor="let detalle of suministro.detales" (click)="goToViewSupplie(detalle)">
+      {{detalle.nombreSuministro}}
+      <ion-icon name='color-wand' item-start></ion-icon>
+      <ion-note item-end>{{detalle.cantidadSuministro}} {{detalle.unidadMedida}}</ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab (click)="goToCreateSupplie()" color="danger"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

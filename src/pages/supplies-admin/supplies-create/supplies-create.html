@@ -1,0 +1,60 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-toolbar no-border-top>
+      <ion-title>Suministro</ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="doAlert()" icon-end>
+          <ion-icon name="create"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Nombre Suministro</ion-label>
+        <ion-input type="text" [(ngModel)]="nombreSuministro" name="nombreDelSuministro"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Cantidad Suministro</ion-label>
+        <ion-input type="number" [(ngModel)]="cantidadSuministro" name="cantidadDelSuministro"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Unidad Medida</ion-label>
+        <ion-select [(ngModel)]="unidadMedida" name="unidadDeMedidia">
+          <ion-option value="u">Unidades</ion-option>
+          <ion-option value="Kg">Kg</ion-option>
+          <ion-option value="g">g</ion-option>
+          <ion-option value="m">m</ion-option>
+          <ion-option value="cm">cm</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Fecha Compra</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="fechaCompra" name="fechaDeCompra"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Precio</ion-label>
+        <ion-input type="number" [(ngModel)]="precioSuministro" name="precioDelSuministro"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Proveedor</ion-label>
+        <ion-input type="text" [(ngModel)]="nombreProveedor" name="nombreDeProveedor"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Comentarios</ion-label>
+        <ion-textarea name="comentariosDelSuministro" [(ngModel)]="comentariosSuministro"></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

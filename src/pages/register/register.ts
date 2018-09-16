@@ -2,12 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { GlobalProvider } from '../../providers/global/global';
 
 @Component({
   selector: 'page-register',
@@ -15,7 +10,8 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class RegisterPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform, public loadingCtrl: LoadingController
+  , public global: GlobalProvider) {
     let backAction =  platform.registerBackButtonAction(() => {
       console.log("second");
       this.navCtrl.pop();
@@ -24,6 +20,7 @@ export class RegisterPage {
   }
 
   goPrincipalMenu(){
+    this.global.set('tipoUsuario');
     const loader = this.loadingCtrl.create({
       content: "Por favor espera...",
       duration: 3000

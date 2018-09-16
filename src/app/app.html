@@ -6,12 +6,20 @@
     </ion-header>
 
     <ion-content>
-        <ion-list>
+        <ion-list *ngIf="tipoUsuario(); else adminUsuario">
             <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
                 <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
                 {{p.title}}
             </button>
         </ion-list>
+        <ng-template #adminUsuario>
+            <ion-list>
+                <button menuClose ion-item *ngFor="let p of pagesAdmin" (click)="openPage(p)">
+                    <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
+                    {{p.title}}
+                </button>
+            </ion-list>
+        </ng-template>
     </ion-content>
 </ion-menu>
 

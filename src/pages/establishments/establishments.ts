@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { EstablishmentsSavedModalPage } from '../establishments/establishments-saved-modal/establishments-saved-modal';
+import { EstablishmentsSearchPage } from '../establishments/establishments-search/establishments-search';
 
 @Component({
   selector: 'page-establishments',
@@ -28,7 +29,24 @@ export class EstablishmentsPage {
       calificacion: 'Buena'
     }
   ];
-  establecimientosBuscar = [];
+  establecimientosBuscar = [
+    {
+      imagenEstablecimiento: '../../assets/imgs/shop - 2.jpg',
+      nombreEstablecimiento: 'Veterinaria Grecia',
+      distancia: '0.3 Km',
+      tiempo: '10 min',
+      direccion: 'Crr 45 F No 23',
+      telefono: '6197601',
+      email: 'veterinariaGrecia@gmail.com',
+      paginaWeb: 'www.veterinariagrecia.com',
+      servicios: ['Veterinaria', 'Tienda', 'Peluqueria'],
+      horarios: 'Establecidos',
+      horaInicio: '04:00',
+      horaFinal: '23:00',
+      descripcion: 'Establecimiento para todo tipo de mascotas.',
+      calificacion: 'Regular'
+    }
+  ];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
   
@@ -39,7 +57,7 @@ export class EstablishmentsPage {
   }
 
   gotToViewEstableSearch(establecimiento){
-    this.navCtrl.push(establecimiento);
+    this.navCtrl.push(EstablishmentsSearchPage, {establecimiento: establecimiento});
   }
 
   ionViewDidLoad() {

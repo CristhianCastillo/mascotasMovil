@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { LoginPage } from '../login/login';
+
+import { RegisterAdminPage } from '../register-admin/register-admin';
 import { RegisterPage } from '../register/register';
 import { Platform } from 'ionic-angular';
 
@@ -14,11 +15,11 @@ export class StartPage {
     platform.registerBackButtonAction(() => {console.log("backPressed 1");},1);
   }
 
-  goLogin(){
-    this.navCtrl.push(LoginPage);
+  goRegisterUser(){
+    this.navCtrl.push(RegisterPage);
   }
 
-  goRegister(){
-    this.navCtrl.push(RegisterPage);
+  goRegisterAdmin(){
+    this.navCtrl.push(RegisterAdminPage);
   }
 }

@@ -2,15 +2,26 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { GlobalProvider } from '../providers/global/global';
 
 import { SlideIntroPage} from "../pages/slide-intro/slide-intro";
+
+import { TabsAdminPage } from '../pages/tabs-admin/tabs-admin';
+import { EstablishmentAdminPage } from '../pages/establishment-admin/establishment-admin';
+import { PetsAdminPage } from '../pages/pets-admin/pets-admin';
+import { SuppliesAdminPage } from '../pages/supplies-admin/supplies';
+import { DashboardAdminPage } from '../pages/dashboard-admin/dashboard-admin';
+
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { PetsPage } from '../pages/pets/pets';
 import { SuppliesPage } from '../pages/supplies/supplies';
 import { EstablishmentsPage } from '../pages/establishments/establishments';
 import { AgendaPage } from '../pages/agenda/agenda';
+
+import { AboutPage } from '../pages/about/about';
+import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
 
 export interface PageInterface {
   title: string;
@@ -33,14 +44,23 @@ export class MyApp {
     { title: 'Mascotas', name: 'TabsPage', component: TabsPage, tabComponent: PetsPage, index: 0, icon: 'paw' },
     { title: 'Suministros', name: 'TabsPage', component: TabsPage, tabComponent: SuppliesPage, index: 1, icon: 'filing' },
     { title: 'Establecimientos', name: 'TabsPage', component: TabsPage, tabComponent: EstablishmentsPage, index: 2, icon: 'medkit' },
-    { title: 'Agenda', name: 'TabsPage', component: TabsPage, tabComponent: AgendaPage, index: 3, icon: 'paper' }
+    { title: 'Agenda', name: 'TabsPage', component: TabsPage, tabComponent: AgendaPage, index: 3, icon: 'paper' },
+    { title: 'Configuracion', name: 'Settings', component: AboutPage, icon: 'settings' },
+    { title: 'Salir', name: 'Exit', component: HomePage, icon: 'exit' }
   ];
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
+  pagesAdmin: PageInterface[] = [
+    { title: 'Establecimiento', name: 'TabsAdminPage', component: TabsAdminPage, tabComponent: EstablishmentAdminPage, index: 0, icon: 'medkit' },
+    { title: 'Mascotas', name: 'TabsAdminPage', component: TabsAdminPage, tabComponent: PetsAdminPage, index: 1, icon: 'paw' },
+    { title: 'Suministros', name: 'TabsAdminPage', component: TabsAdminPage, tabComponent: SuppliesAdminPage, index: 2, icon: 'filing' },
+    { title: 'Estadisticas', name: 'TabsAdminPage', component: TabsAdminPage, tabComponent: DashboardAdminPage, index: 3, icon: 'pie' },
+    { title: 'Configuracion', name: 'Settings', component: AboutPage, icon: 'settings' },
+    { title: 'Salir', name: 'Exit', component: HomePage, icon: 'exit' }
+  ];
 
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public global: GlobalProvider) {
+    this.initializeApp();
      // used for an example of ngFor and navigation
-     
   }
 
   initializeApp() {
@@ -52,9 +72,13 @@ export class MyApp {
     });
   }
 
+  tipoUsuario(){
+    return this.global.tipoUsuario === 'tipoUsuario' ? true : false;
+  }
+
   openPage(page: PageInterface) {
     let params = {};
- 
+    let namePage: string;
     // The index is equal to the order of our tabs inside tabs.ts
     if (page.index) {
       params = { tabIndex: page.index };
@@ -64,9 +88,13 @@ export class MyApp {
     if (this.nav.getActiveChildNavs().length && page.index != undefined) {
       this.nav.getActiveChildNavs()[0].select(page.index);
     } else {
-      // Tabs are not active, so reset the root page 
-      // In this case: moving to or from SpecialPage
-      this.nav.setRoot(page.component, params);
+      namePage = page.name;
+      if(namePage === 'Exit'){
+        this.nav.setRoot(LoginPage);
+      }
+      else{
+        this.nav.setRoot(page.component, params);
+      }
     }
   }
  
