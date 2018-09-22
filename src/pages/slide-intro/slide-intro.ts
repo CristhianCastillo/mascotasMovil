@@ -20,12 +20,12 @@ export class SlideIntroPage {
     {
       title: "¿Que es Mascotas.ga?",
       description: "<b>Mascotas.ga</b> basicamente es una muestra de amor a tus mascotas.",
-      image: "assets/img/ica-slidebox-img-2.png",
+      image: "../assets/imgs/amorMascotas.jpg",
     },
     {
       title: "¿Que esperas para usarla?",
       description: "The <b>Ionic Cloud</b> is a cloud platform for managing and scaling Ionic apps with integrated services like push notifications, native builds, user auth, and live updating.",
-      image: "assets/img/ica-slidebox-img-3.png",
+      image: "../assets/imgs/esperar.png",
     }
   ];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
