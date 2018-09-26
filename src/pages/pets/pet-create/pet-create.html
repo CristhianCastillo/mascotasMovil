@@ -4,7 +4,7 @@
       <ion-toolbar no-border-top>
           <ion-title>Datos {{nombre}}</ion-title>
           <ion-buttons end>
-            <button  ion-button (click)="doAlert()" icon-end >
+            <button  ion-button (click)="saveData()" icon-end >
               <ion-icon name="create"></ion-icon>
             </button>
           </ion-buttons>
@@ -13,47 +13,46 @@
 </ion-header>
 
 <ion-content padding>
-  <form>
+  <form [formGroup]= "petForm" (ngSubmit) ="saveData()">
     <ion-list>
       <ion-item>
         <ion-label floating>Nombre</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input formControlName="nombre" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label>Tipo de Mascota</ion-label>
-        <ion-select [(ngModel)]="music" [selectOptions]="tipoMascotaAlertOpts" name="tipoMascota">
+        <ion-select formControlName="tipoMascota" [(ngModel)]="tipoMascota" [selectOptions]="tipoMascotaAlertOpts" name="tipoMascota">
             <ion-option>Raton</ion-option>
             <ion-option>Perro</ion-option>
             <ion-option>Gato</ion-option>
             <ion-option>Conejo</ion-option>
             <ion-option>Loro</ion-option>
             <ion-option>Aguila</ion-option>
-            <ion-option (select)="stpSelect()">León</ion-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
         <ion-label>Genero</ion-label>
-        <ion-select [(ngModel)]="gender" name="generoMascota">
-          <ion-option value="f">Hembra</ion-option>
-          <ion-option value="m">Macho</ion-option>
+        <ion-select formControlName="genero" [(ngModel)]="genero" name="generoMascota">
+          <ion-option value="Hembra">Hembra</ion-option>
+          <ion-option value="Macho">Macho</ion-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
         <ion-label>Nacimiento</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate" name="fechaNacimiento"></ion-datetime>
+        <ion-datetime formControlName="fechaNacimiento" displayFormat="MM/DD/YYYY" [(ngModel)]="myDate" name="fechaNacimiento"></ion-datetime>
       </ion-item>
 
       <ion-item>
           <ion-label floating>Raza</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input formControlName="raza" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
           <ion-label>Esterilizado</ion-label>
-          <ion-select [(ngModel)]="gender" name="esterilizado">
+          <ion-select formControlName="esterilizado" [(ngModel)]="esterilizado" name="esterilizado">
             <ion-option value="Si">Si</ion-option>
             <ion-option value="No">No</ion-option>
           </ion-select>
@@ -61,12 +60,12 @@
 
       <ion-item>
           <ion-label floating>Color</ion-label>
-          <ion-input type="text"></ion-input>
+          <ion-input formControlName="color" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
           <ion-label floating>Descripcion</ion-label>
-          <ion-textarea ></ion-textarea>
+          <ion-textarea formControlName="descripcion" ></ion-textarea>
       </ion-item>
 
     </ion-list>

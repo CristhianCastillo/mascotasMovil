@@ -41,6 +41,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GlobalProvider } from '../providers/global/global';
 
+import { HttpClientModule } from "@angular/common/http";
+
+import { LoginServiceProvider } from '../providers/login-service/login-service';
+import { PetsServiceProvider } from '../providers/pets-service/pets-service';
+
+import { GlobalErrorHandler } from '../providers/GlobalErrorHandler';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -72,6 +79,7 @@ import { GlobalProvider } from '../providers/global/global';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -106,8 +114,11 @@ import { GlobalProvider } from '../providers/global/global';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    GlobalProvider
+    //{provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: ErrorHandler, useClass: GlobalErrorHandler},
+    GlobalProvider,
+    LoginServiceProvider,
+    PetsServiceProvider
   ]
 })
 export class AppModule {}

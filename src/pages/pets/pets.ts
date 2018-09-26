@@ -3,6 +3,8 @@ import { NavController, NavParams} from 'ionic-angular';
 import { PetCreatePage } from '../pets/pet-create/pet-create';
 import { PetModalPage } from '../pets/pet-modal/pet-modal';
 
+import { PetsServiceProvider } from '../../providers/pets-service/pets-service';
+
 @Component({
   selector: 'page-pets',
   templateUrl: 'pets.html',
@@ -38,7 +40,7 @@ export class PetsPage {
       id: 3,
       imagen: '../../assets/imgs/pet - 3.png',
       nombre: 'Muñeca',
-      tipoMascota: 'Gatp',
+      tipoMascota: 'Gato',
       genero: 'Hembra',
       fechaNacimiento: '2017-03-17',
       raza: 'Gata gris',
@@ -83,7 +85,10 @@ export class PetsPage {
       descripcion: 'Es un animal muy veloz.'
     }
   ];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  mascotasAny;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public petsService: PetsServiceProvider) {
   }
 
   goToModal(data){
@@ -94,9 +99,22 @@ export class PetsPage {
   goToCreatePet(){
     this.navCtrl.push(PetCreatePage);
   }
+  
+  ionViewDidEnter(){
+    this.petsService.getAllPets().subscribe(
+      (data)=>{
+        console.log(data);
+        this.mascotasAny = data;
+      },
+      (error)=>{
+        console.error(error);
+      }
+    )
+    console.log('Refresco de la pagina');
+  }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PetsPage');
+    console.log('ionViewDidLoad PetsPage Primera Vez');
   }
 
 }

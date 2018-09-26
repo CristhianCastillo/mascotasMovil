@@ -5,28 +5,28 @@
 </ion-header>
 
 <ion-content>
-    <form>
+    <form [formGroup]= "loginForm" (ngSubmit) ="saveData()">
         <ion-list>
             <div padding style="text-align: center;">
                 <img src="../../assets/imgs/smartphone.png" class="slide-image" />
             </div>
             <ion-item>
                 <ion-label stacked>Nombre usuario</ion-label>
-                <ion-input type="text"></ion-input>
+                <ion-input formControlName="usuario" type="text" id="usuario" ></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label stacked>Contraseña</ion-label>
-                <ion-input type="password"></ion-input>
+                <ion-input formControlName="password" type="password" id="password"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label>Recuérdame</ion-label>
-                <ion-checkbox [(ngModel)]="recordar" name="recordar"></ion-checkbox>
+                <ion-checkbox formControlName="recordarPassword" [(ngModel)]="recordar" name="recordar"></ion-checkbox>
             </ion-item>
         </ion-list>
         <div padding>
-            <button type="submit" ion-button (click)=" goPrincipalMenu()" color="primary" block>Ingresar</button>
+            <button ion-button block color="primary" type="submit" [disabled]="!loginForm.valid">Ingresar</button>
         </div>
     </form>
     <ion-item no-lines>
