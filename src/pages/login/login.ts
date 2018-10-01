@@ -40,21 +40,7 @@ export class LoginPage {
     });
   }
 
-  loginUser(data){
-    this.serviceLogin.loginUser(data).subscribe(
-      (result: boolean) =>{
-        console.log(result);
-        if(result){
-          this.userMessageEnter("Correcto!!");
-        }
-        else{
-          this.userMessageNoEnter("Usuario y/o password incorrectos");
-        }
-      }
-    );
-  }
-
-  saveData(){
+  validateForm(){
     const usuarioLogin = { 
       usuario: this.loginForm.value['usuario'],
       password: this.loginForm.value['password']
@@ -62,39 +48,27 @@ export class LoginPage {
     this.loginUser(usuarioLogin);
   }
 
-  goResetPassword(){
-    this.navCtrl.setRoot(StartPage);
-  }
-
-  goRegister(){
-    this.navCtrl.push(StartPage);
-  }
-
-  goPrincipalMenu(){
+  loginUser(data){
     const loader = this.loadingCtrl.create({
-      content: "Por favor espera...",
-      duration: 3000
+      content: "Verificando..."
     });
     loader.present();
-    this.navCtrl.setRoot(TabsPage);
-    loader.dismiss();
-  }
-
-  userMessageEnter(mensaje: string) {
-    let alert = this.alertController.create({
-      title: 'Mensaje',
-      message: mensaje,
-      buttons: [{
-        text: 'Aceptar',
-        handler: () => {
-          this.goPrincipalMenu();
+    this.serviceLogin.loginUser(data).subscribe(
+      (result: boolean) =>{
+        console.log(result);
+        if(result){
+          loader.dismiss();
+          this.navCtrl.setRoot(TabsPage);
         }
-      }]
-    });
-    alert.present()
+        else{
+          loader.dismiss();
+          this.showMessageNoEnter("Usuario y/o password incorrectos");
+        }
+      }
+    );
   }
 
-  userMessageNoEnter(mensaje: string) {
+  showMessageNoEnter(mensaje: string) {
     let alert = this.alertController.create({
       title: 'Error',
       message: mensaje,
@@ -104,4 +78,12 @@ export class LoginPage {
     });
     alert.present()
   }
+
+  goResetPassword(){
+    this.navCtrl.setRoot(StartPage);
+  }
+
+  goRegister(){
+    this.navCtrl.push(StartPage);
+  }  
 }
