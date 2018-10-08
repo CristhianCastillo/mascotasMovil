@@ -14,33 +14,51 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 })
 export class LoginPage {
 
-  loginForm: FormGroup;
-  login: any;
-  recordar: boolean;
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform, public loadingCtrl: LoadingController
+  /**
+   * Login Form.
+   */
+  private loginForm: FormGroup;
+
+  /**
+   * Validate remember password.
+   */
+  public recordar: boolean;
+
+  /**
+   *
+   * @param navCtrl
+   * @param navParams
+   * @param platform
+   * @param loadingCtrl
+   * @param serviceLogin
+   * @param formBuilder
+   * @param alertController
+   */
+  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public loadingCtrl: LoadingController
     , public serviceLogin: LoginServiceProvider, private formBuilder: FormBuilder, public alertController: AlertController ) {
     let backAction =  platform.registerBackButtonAction(() => {
       console.log("second");
       this.navCtrl.pop();
       backAction();
     },2)
-    this.loginForm = this.createForm();
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
-  private createForm(){
-    return this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       usuario: ['', Validators.required],
       password: ['', Validators.required],
       recordarPassword : true
     });
   }
 
-  validateForm(){
+  /**
+   * Event when did load the page.
+   */
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad LoginPage');
+  }
+
+  /**
+   * Get data from the form.
+   */
+  getDataForm(){
     const usuarioLogin = { 
       usuario: this.loginForm.value['usuario'],
       password: this.loginForm.value['password']
@@ -48,6 +66,10 @@ export class LoginPage {
     this.loginUser(usuarioLogin);
   }
 
+  /**
+   * Make the authentification login with a REST service.
+   * @param data User from the login.
+   */
   loginUser(data){
     const loader = this.loadingCtrl.create({
       content: "Verificando..."
@@ -68,6 +90,10 @@ export class LoginPage {
     );
   }
 
+  /**
+   * Show a alert Controller when error comes.
+   * @param mensaje Message from the error.
+   */
   showMessageNoEnter(mensaje: string) {
     let alert = this.alertController.create({
       title: 'Error',
@@ -79,11 +105,17 @@ export class LoginPage {
     alert.present()
   }
 
+  /**
+   * Go to reset password.
+   */
   goResetPassword(){
     this.navCtrl.setRoot(StartPage);
   }
 
-  goRegister(){
+  /**
+   * Go to register page.
+   */
+  goRegisterPage(){
     this.navCtrl.push(StartPage);
   }  
 }

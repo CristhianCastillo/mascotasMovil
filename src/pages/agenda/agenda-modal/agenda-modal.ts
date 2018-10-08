@@ -1,44 +1,81 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { Validators, FormGroup, FormBuilder} from '@angular/forms';
+import { Cita } from "../../../models/cita";
 
 @Component({
   selector: 'page-agenda-modal',
   templateUrl: 'agenda-modal.html',
 })
 export class AgendaModalPage {
-  cita: any;
-  nombreMascota: string;
-  nombreEvento: String;
-  ubicacion: String;
-  tipoActividad: String;
-  fecha: string;
-  hora: string;
-  descripcionActividad: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alerCtrl: AlertController) {
-    this.cita = this.navParams.get("cita");
-    console.log(this.cita.nombreEvento);
-    this.nombreEvento = this.cita.nombreEvento;
-    this.ubicacion = this.cita.ubicacion;
-    this.tipoActividad = this.cita.tipoActividad;
-    this.fecha = this.cita.fecha;
-    this.hora = this.cita.hora;
-    this.descripcionActividad = this.cita.descripcionActividad;
+
+  /**
+   * Form register.
+   */
+  private editEventForm: FormGroup;
+  public evento: Cita;
+  public nombreMascota: string;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController,
+              private formBuilder: FormBuilder) {
+
+    this.evento = <Cita>this.navParams.get("cita");
     this.nombreMascota = this.navParams.get("nombreAnimal");
+
+    this.editEventForm = this.formBuilder.group({
+      nombreEvento : [this.evento.nombre, Validators.required],
+      ubicacion: [this.evento.ubicacion, Validators.required],
+      tipoActividad: [this.evento.tipoActividad, Validators.required],
+      fechaEvento: [this.evento.fechaEvento, Validators.required],
+      horaEvento: [this.evento.horaEvento, Validators.required],
+      descripcion: [this.evento.descripcionEvento, Validators.required]
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AgendaModalPage');
   }
 
-  deleteAlert() {
-    let alert = this.alerCtrl.create({
+  getDataEvent(){
+    const evento = {
+      nombreEvento: this.editEventForm.value['nombreEvento'],
+      ubicacion: this.editEventForm.value['ubicacion'],
+      tipoActividad: this.editEventForm.value['tipoActividad'],
+      fechaEvento: this.editEventForm.value['fechaEvento'],
+      horaEvento: this.editEventForm.value['horaEvento'],
+      descripcion: this.editEventForm.value['descripcion']
+    }
+    this.editEvent(evento);
+  }
+
+  editEvent(event){
+    this.showUserMessageCorrect("Evento actualizado correctamente.");
+    // this.servicePet.createPet(data).subscribe(
+    //   (result: Mascota) =>{
+    //     console.log(result);
+    //     if(result){
+    //       this.userMessageCorrect("Un amigo tuyo acaba de ser creado.");
+    //     }
+    //     else{
+    //       this.userMessageError("Ha ocurrido un error");
+    //     }
+    //   }
+    // );
+    console.log(event);
+  }
+
+  deleteEvent(event) {
+  }
+
+  showAlertDeleteEvent() {
+    let alert = this.alertController.create({
       title: 'Eliminar',
       message: '¿Deseas eliminar este evento?',
       buttons: [{
         text: 'Aceptar',
         handler: () => {
-          let alert1 = this.alerCtrl.create({
+          let alert1 = this.alertController.create({
             title: 'Eliminar',
             message: 'Evento eliminado',
             buttons: [{
@@ -51,22 +88,21 @@ export class AgendaModalPage {
           alert1.present();
         }
       },
-      {
-        text: 'Cancelar',
-        handler: () => {
-          console.log("Operación cancelada");
+        {
+          text: 'Cancelar',
+          handler: () => {
+            console.log("Operación cancelada");
+          }
         }
-      }
-    ]
+      ]
     });
     alert.present();
-
   }
 
-  upLoad() {
-    let alert = this.alerCtrl.create({
-      title: 'Genial!!',
-      message: 'Actualizacion exitosa!',
+  showUserMessageCorrect(mensaje: string) {
+    let alert = this.alertController.create({
+      title: 'Mensaje',
+      message: mensaje,
       buttons: [{
         text: 'Aceptar',
         handler: () => {
@@ -74,7 +110,17 @@ export class AgendaModalPage {
         }
       }]
     });
-    alert.present();
+    alert.present()
   }
 
+  showUserMessageError(mensaje: string) {
+    let alert = this.alertController.create({
+      title: 'Error',
+      message: mensaje,
+      buttons: [{
+        text: 'Aceptar'
+      }]
+    });
+    alert.present()
+  }
 }

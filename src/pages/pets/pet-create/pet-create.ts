@@ -12,8 +12,8 @@ import { Mascota } from '../../../models/mascota';
 })
 export class PetCreatePage {
 
-  petForm: FormGroup;
-  tipoMascotaAlertOpts: { title: string, subTitle: string };
+  public petForm: FormGroup;
+  public tipoMascotaAlertOpts: { title: string, subTitle: string };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController,
     public servicePet: PetsServiceProvider, private formBuilder: FormBuilder) {
@@ -22,11 +22,7 @@ export class PetCreatePage {
       subTitle: 'Selecciona'
     };
 
-    this.petForm = this.createForm();
-  }
-
-  private createForm(){
-    return this.formBuilder.group({
+    this.petForm = this.formBuilder.group({
       nombre : ['', Validators.required],
       tipoMascota: ['', Validators.required],
       genero: ['', Validators.required],
@@ -38,7 +34,7 @@ export class PetCreatePage {
     });
   }
 
-  saveData(){
+  getDataPet(){
       const mascota = {
         imagen: '../../assets/imgs/pet - default.png',
         nombre: this.petForm.value['nombre'],
@@ -59,24 +55,20 @@ export class PetCreatePage {
       (result: Mascota) =>{
         console.log(result);
         if(result){
-          this.userMessageCorrect("Un amigo tuyo acaba de ser creado.");
+          this.showUserMessageCorrect("Un amigo tuyo acaba de ser creado.");
         }
         else{
-          this.userMessageError("Ha ocurrido un error");
+          this.showUserMessageError("Ha ocurrido un error");
         }
       }
     );
-  }
-
-  stpSelect() {
-    console.log('STP selected');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PetCreatePage');
   }
 
-  userMessageCorrect(mensaje: string) {
+  showUserMessageCorrect(mensaje: string) {
     let alert = this.alertController.create({
       title: 'Mensaje',
       message: mensaje,
@@ -90,7 +82,7 @@ export class PetCreatePage {
     alert.present()
   }
 
-  userMessageError(mensaje: string) {
+  showUserMessageError(mensaje: string) {
     let alert = this.alertController.create({
       title: 'Error',
       message: mensaje,

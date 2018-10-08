@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, AlertController, ModalOptions } from 'ionic-angular';
 import { MessageModalPage } from '../message-modal/message-modal';
+import {Establecimiento} from "../../../models/establecimiento";
 
 @Component({
   selector: 'page-establishments-search',
@@ -8,36 +9,16 @@ import { MessageModalPage } from '../message-modal/message-modal';
 })
 export class EstablishmentsSearchPage {
 
-  establecimiento: any;
-  
-  imagenEstablecimiento: string;
-  nombreEstablecimiento: string;
-  distancia: string;
-  tiempo: string;
-  direccion: string;
-  telefono: string;
-  email: string;
-  paginaWeb: string;
-  servicios: string[];
-  horarios: string;
-  horaInicio: string;
-  horaFinal: string;
-  descripcion: string;
-  calificacion: string;
-
+  public establecimiento: Establecimiento;
   constructor(public navCtrl: NavController, public navParams: NavParams, private modal: ModalController, public alerCtrl: AlertController) {
-    this.establecimiento = this.navParams.get("establecimiento");
-
-    this.nombreEstablecimiento = this.establecimiento.nombreEstablecimiento;
-    this.direccion = this.establecimiento.direccion;
-    this.telefono = this.establecimiento.telefono;
-    this.email = this.establecimiento.email;
-    this.paginaWeb = this.establecimiento.paginaWeb;
-    this.calificacion = this.establecimiento.calificacion;
-    this.imagenEstablecimiento = this.establecimiento.imagenEstablecimiento;
+    this.establecimiento = <Establecimiento>this.navParams.get("establecimiento");
   }
 
-  saveAlert(){
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad EstablishmentsSearchPage');
+  }
+
+  saveEstablishment(){
     let alert = this.alerCtrl.create({
       title: 'Guardar',
       message: 'Establecimiento guardado!',
@@ -45,12 +26,6 @@ export class EstablishmentsSearchPage {
         text: 'Aceptar',
         handler: () => {
           this.navCtrl.pop();
-        }
-      },
-      {
-        text: 'Cancelar',
-        handler: () => {
-          console.log("Operación cancelada");
         }
       }
     ]
@@ -63,12 +38,7 @@ export class EstablishmentsSearchPage {
       enableBackdropDismiss: false
     };
 
-    const myModal = this.modal.create(MessageModalPage, {nombre: this.nombreEstablecimiento}, myModalOptions);
+    const myModal = this.modal.create(MessageModalPage, {nombre: this.establecimiento.nombre}, myModalOptions);
     myModal.present();
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EstablishmentsSearchPage');
-  }
-
 }

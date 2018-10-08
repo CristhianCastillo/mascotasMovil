@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, ModalOptions, AlertController} from 'ionic-angular';
 import { MessageModalPage } from '../message-modal/message-modal';
+import { Establecimiento } from "../../../models/establecimiento";
 
 @Component({
   selector: 'page-establishments-saved-modal',
@@ -8,36 +9,15 @@ import { MessageModalPage } from '../message-modal/message-modal';
 })
 export class EstablishmentsSavedModalPage {
 
-  establecimiento: any;
-  
-  imagenEstablecimiento: string;
-  nombreEstablecimiento: string;
-  distancia: string;
-  tiempo: string;
-  direccion: string;
-  telefono: string;
-  email: string;
-  paginaWeb: string;
-  servicios: string[];
-  horarios: string;
-  horaInicio: string;
-  horaFinal: string;
-  descripcion: string;
-  calificacion: string;
+  public establecimiento: Establecimiento;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private modal: ModalController, public alerCtrl: AlertController) {
-    this.establecimiento = this.navParams.get("establecimiento");
+    this.establecimiento = <Establecimiento>this.navParams.get("establecimiento");
 
-    this.nombreEstablecimiento = this.establecimiento.nombreEstablecimiento;
-    this.direccion = this.establecimiento.direccion;
-    this.telefono = this.establecimiento.telefono;
-    this.email = this.establecimiento.email;
-    this.paginaWeb = this.establecimiento.paginaWeb;
-    this.calificacion = this.establecimiento.calificacion;
-    this.imagenEstablecimiento = this.establecimiento.imagenEstablecimiento;
+    console.log(this.establecimiento);
   }
 
-  deleteAlert() {
+  deleteEstablishment() {
     let alert = this.alerCtrl.create({
       title: 'Eliminar',
       message: '¿Deseas eliminar este establecimiento?',
@@ -69,12 +49,10 @@ export class EstablishmentsSavedModalPage {
   }
 
   viewSendMessage(){
-
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false
     };
-
-    const myModal = this.modal.create(MessageModalPage, {nombre: this.nombreEstablecimiento}, myModalOptions);
+    const myModal = this.modal.create(MessageModalPage, {nombre: this.establecimiento.nombre}, myModalOptions);
     myModal.present();
   }
 

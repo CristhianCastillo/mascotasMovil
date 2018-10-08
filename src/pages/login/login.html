@@ -1,48 +1,63 @@
 <ion-header>
-    <ion-navbar color=''>
-        <ion-title>Iniciar Sesión</ion-title>
-    </ion-navbar>
+  <ion-navbar center-text>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <form [formGroup]= "loginForm" (ngSubmit) ="validateForm()">
-        <ion-list>
-            <div padding style="text-align: center;">
-                <img src="../../assets/imgs/smartphone.png" class="slide-image" />
-            </div>
-            <ion-item>
-                <ion-label stacked>Nombre usuario</ion-label>
-                <ion-input formControlName="usuario" type="text" id="usuario" ></ion-input>
-            </ion-item>
+  <form [formGroup]="loginForm" (ngSubmit)="getDataForm()">
+    <ion-list>
+      <div padding style="text-align: center;">
+        <img src="../../assets/imgs/smartphone.png" class="slide-image"/>
+      </div>
+      <ion-item>
+        <ion-label stacked>Nombre usuario</ion-label>
+        <ion-input formControlName="usuario" type="text" id="usuario"></ion-input>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(loginForm.get('usuario').hasError('required')) && loginForm.get('usuario').touched">
+        <div class="error"
+             *ngIf="(loginForm.get('usuario').hasError('required')) && loginForm.get('usuario').touched">
+          <p class="error_message">Ingresa un nombre valido.</p>
+        </div>
+      </ion-item>
 
-            <ion-item>
-                <ion-label stacked>Contraseña</ion-label>
-                <ion-input formControlName="password" type="password" id="password"></ion-input>
-            </ion-item>
+      <ion-item>
+        <ion-label stacked>Contraseña</ion-label>
+        <ion-input formControlName="password" type="password" id="password"></ion-input>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(loginForm.get('password').hasError('required')) && loginForm.get('password').touched">
+        <div class="error"
+             *ngIf="(loginForm.get('password').hasError('required')) && loginForm.get('password').touched">
+          <p class="error_message">Ingresa una contraseña valida.</p>
+        </div>
+      </ion-item>
 
-            <ion-item>
-                <ion-label>Recuérdame</ion-label>
-                <ion-checkbox formControlName="recordarPassword" [(ngModel)]="recordar" name="recordar"></ion-checkbox>
-            </ion-item>
-        </ion-list>
-        <div padding>
-            <button ion-button block color="primary" type="submit" [disabled]="!loginForm.valid">Ingresar</button>
-        </div>
-    </form>
-    <ion-item no-lines>
-        <div style="text-align: right;">
-            <a (click)="goResetPassword()">¿Olvidaste tu contraseña?</a>
-        </div>
-    </ion-item>
-    <br>
-    <ion-toolbar>
-        <div padding>
-            <p><strong>¿NO ESTÁS REGISTRADO?</strong></p>
-            <p>
-                Llena el formulario de registro y podrás disfrutar al maximo el cuidado que solo tu le puedes brindar a tus mascotas con
-                <strong>Mascotas.ga</strong>.
-            </p>
-            <button ion-button (click)="goRegister()" color="dark" block>Registrate</button>
-        </div>
-    </ion-toolbar>
+      <ion-item>
+        <ion-label>Recuérdame</ion-label>
+        <ion-checkbox formControlName="recordarPassword" [(ngModel)]="recordar" name="recordar"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <button ion-button block color="primary" type="submit" [disabled]="!loginForm.valid">Ingresar</button>
+    </div>
+  </form>
+  <ion-item no-lines>
+    <div style="text-align: right;">
+      <a (click)="goResetPassword()">¿Olvidaste tu contraseña?</a>
+    </div>
+  </ion-item>
+  <br>
+  <ion-toolbar>
+    <div padding>
+      <p><strong>¿NO ESTÁS REGISTRADO?</strong></p>
+      <p>
+        Llena el formulario de registro y podrás disfrutar al maximo el cuidado que solo tu le puedes brindar a tus
+        mascotas con
+        <strong>Mascotas.ga</strong>.
+      </p>
+      <button ion-button (click)="goRegisterPage()" color="dark" block>Registrate</button>
+    </div>
+  </ion-toolbar>
 </ion-content>

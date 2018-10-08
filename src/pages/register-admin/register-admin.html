@@ -1,74 +1,157 @@
 <ion-header>
-  <ion-navbar color=''>
-    <ion-title>Propietario</ion-title>
+  <ion-navbar>
+    <ion-title>Registro Propietario</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <div padding style="text-align: center;">
-      <img src="../../assets/imgs/propietario.jpg" class="slide-image" />
-    </div>
-    <div padding>
-      <label>Ingresa unos cuantos daticos para que tu seas el protagonista de esta magica experiencia.</label>
-    </div>
-    <ion-item>
-      <ion-label stacked>Nombre usuario</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+  <form [formGroup]="registerForm" (ngSubmit)="getDataUser()">
+    <ion-list>
+      <div padding style="text-align: center;">
+        <img src="../../assets/imgs/propietario.jpg" class="slide-image"/>
+      </div>
+      <div padding>
+        <label>Ingresa unos cuantos daticos para que tu seas el protagonista de esta magica experiencia.</label>
+      </div>
+      <ion-item>
+        <ion-label stacked>Nombre usuario</ion-label>
+        <ion-input formControlName="nombreUsuario" type="text"></ion-input>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(registerForm.get('nombreUsuario').hasError('required')) && registerForm.get('nombreUsuario').touched">
+        <div class="error"
+             *ngIf="(registerForm.get('nombreUsuario').hasError('required')) && registerForm.get('nombreUsuario').touched">
+          <p class="error_message">Ingresa un usuario valido.</p>
+        </div>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Nombres</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label stacked>Nombres</ion-label>
+        <ion-input formControlName="nombres" type="text"></ion-input>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(registerForm.get('nombres').hasError('required')) && registerForm.get('nombres').touched">
+        <div class="error"
+             *ngIf="(registerForm.get('nombres').hasError('required')) && registerForm.get('nombres').touched">
+          <p class="error_message">Ingresa un nombre valido.</p>
+        </div>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Apellidos</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label stacked>Apellidos</ion-label>
+        <ion-input formControlName="apellidos" type="text"></ion-input>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(registerForm.get('apellidos').hasError('required')) && registerForm.get('apellidos').touched">
+        <div class="error"
+             *ngIf="(registerForm.get('apellidos').hasError('required')) && registerForm.get('apellidos').touched">
+          <p class="error_message">Ingresa al menos un apellido valido.</p>
+        </div>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Correo electronico</ion-label>
-      <ion-input type="email"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label stacked>Correo electronico</ion-label>
+        <ion-input formControlName="emailUsuario" type="email"></ion-input>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(registerForm.get('emailUsuario').hasError('required') || registerForm.get('emailUsuario').hasError('pattern') ) && registerForm.get('emailUsuario').touched">
+        <div class="error"
+             *ngIf="(registerForm.get('emailUsuario').hasError('required') ) && registerForm.get('emailUsuario').touched">
+          <p class="error_message">Ingresa un email valido.</p>
+        </div>
+        <div class="error"
+             *ngIf="(registerForm.get('emailUsuario').hasError('pattern') ) && registerForm.get('emailUsuario').touched">
+          <p class="error_message">Email ingresado no valido.</p>
+        </div>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Nombre Establecimiento</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label stacked>Nombre Establecimiento</ion-label>
+        <ion-input formControlName="nombreEstablecimiento" type="text"></ion-input>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(registerForm.get('nombreEstablecimiento').hasError('required')) && registerForm.get('nombreEstablecimiento').touched">
+        <div class="error"
+             *ngIf="(registerForm.get('nombreEstablecimiento').hasError('required')) && registerForm.get('nombreEstablecimiento').touched">
+          <p class="error_message">Ingresa un nombre valido.</p>
+        </div>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Nit Establecimiento</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label stacked>Nit Establecimiento</ion-label>
+        <ion-input formControlName="nitEstablecimiento" type="text"></ion-input>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(registerForm.get('nitEstablecimiento').hasError('required')) && registerForm.get('nitEstablecimiento').touched">
+        <div class="error"
+             *ngIf="(registerForm.get('nitEstablecimiento').hasError('required')) && registerForm.get('nitEstablecimiento').touched">
+          <p class="error_message">Ingresa un Nit valido.</p>
+        </div>
+      </ion-item>
 
-    <ion-item>
-      <ion-label floating>Descripción</ion-label>
-      <ion-textarea ></ion-textarea>
-  </ion-item>
+      <ion-item>
+        <ion-label floating>Descripción</ion-label>
+        <ion-textarea formControlName="descripcionEstablecimiento"></ion-textarea>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(registerForm.get('descripcionEstablecimiento').hasError('required')) && registerForm.get('descripcionEstablecimiento').touched">
+        <div class="error"
+             *ngIf="(registerForm.get('descripcionEstablecimiento').hasError('required')) && registerForm.get('descripcionEstablecimiento').touched">
+          <p class="error_message">Ingresa una descripción valida.</p>
+        </div>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Contraseña</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
+      <div [formGroup]="passwordFormGroup">
+        <ion-item>
+          <ion-label stacked>Contraseña</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <ion-item no-lines
+                  *ngIf="(passwordFormGroup.get('password').hasError('required') ) && passwordFormGroup.get('password').touched">
+          <div class="error"
+               *ngIf="(passwordFormGroup.get('password').hasError('required') ) && passwordFormGroup.get('password').touched">
+            <p class="error_message">Ingresa una contraseña valida.</p>
+          </div>
+        </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Confirmar Constraseña</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
-    <br>
-    <ion-grid>
-      <ion-row justify-content-start>
-        <ion-col col-1>
-          <ion-checkbox [(ngModel)]="recordar"></ion-checkbox>
-        </ion-col>
-        <ion-col col-9>
-          <label>Declaro que he leido y aceptado los Terminos y Condiciones</label>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <div padding>
-      <button ion-button (click)="goPrincipalMenu()" color="primary" block>Regístrate</button>
-    </div>
-  </ion-list>
+        <ion-item>
+          <ion-label stacked>Confirmar Constraseña</ion-label>
+          <ion-input formControlName="confirmPassword" type="password"></ion-input>
+        </ion-item>
+        <ion-item no-lines
+                  *ngIf="(passwordFormGroup.get('confirmPassword').hasError('notEquivalent') || passwordFormGroup.get('confirmPassword').hasError('required') ) && passwordFormGroup.get('confirmPassword').touched">
+          <div class="error"
+               *ngIf="(passwordFormGroup.get('confirmPassword').hasError('required')) && (passwordFormGroup.get('confirmPassword').touched)">
+            <p class="error_message">Ingresa una confirmación valida.</p>
+          </div>
+          <div class="error"
+               *ngIf="(passwordFormGroup.get('confirmPassword').hasError('notEquivalent')) && (passwordFormGroup.get('confirmPassword').touched)">
+            <p class="error_message">La confirmación no coincide.</p>
+          </div>
+        </ion-item>
+
+      </div>
+      <br>
+      <ion-grid>
+        <ion-row justify-content-start>
+          <ion-col col-1>
+            <ion-checkbox formControlName="terminosCondiciones"></ion-checkbox>
+            <ion-item no-lines
+                      *ngIf="(registerForm.get('terminosCondiciones').hasError('requiredTrue'))">
+              <div class="error"
+                   *ngIf="(registerForm.get('terminosCondiciones').hasError('requiredTrue'))">
+                <p class="error_message">Debes aceptar los terminos y condiciones.</p>
+              </div>
+            </ion-item>
+          </ion-col>
+          <ion-col col-9>
+            <label>Declaro que he leido y aceptado los Terminos y Condiciones</label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div padding>
+        <button ion-button type="submit" color="primary" block [disabled]="!registerForm.valid">Regístrate</button>
+      </div>
+    </ion-list>
+  </form>
 </ion-content>

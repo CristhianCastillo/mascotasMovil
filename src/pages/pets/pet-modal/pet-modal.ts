@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-
-
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Mascota } from "../../../models/mascota";
 import { PetsServiceProvider } from '../../../providers/pets-service/pets-service';
 
 @Component({
@@ -12,19 +11,9 @@ import { PetsServiceProvider } from '../../../providers/pets-service/pets-servic
 })
 export class PetModalPage {
 
-  petForm: FormGroup;
-  tipoMascotaAlertOpts: { title: string, subTitle: string };
-
-  id: number;
-  imagen: string;
-  nombre: string;
-  tipoMascota: string;
-  genero: string;
-  fechaNacimiento: string;
-  raza: string;
-  esterilizado: string;
-  color: string;
-  descripcion: string;
+  private petForm: FormGroup;
+  public mascota : Mascota;
+  public tipoMascotaAlertOpts: { title: string, subTitle: string };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, public alertController: AlertController,
     public servicePet: PetsServiceProvider, private formBuilder: FormBuilder) {
@@ -33,34 +22,24 @@ export class PetModalPage {
       subTitle: 'Selecciona'
     };
 
-    this.id = this.navParams.get('id');
-    this.imagen = this.navParams.get('imagen');
-    this.nombre = this.navParams.get('nombre');
-    this.tipoMascota = this.navParams.get('tipoMascota');
-    this.genero = this.navParams.get('genero');
-    this.fechaNacimiento = this.navParams.get('fechaNacimiento');
-    this.raza = this.navParams.get('raza');
-    this.esterilizado = this.navParams.get('esterilizado');
-    this.color = this.navParams.get('color');
-    this.descripcion = this.navParams.get('descripcion');
-
-    this.petForm = this.createForm();
-  }
-
-  private createForm() {
-    return this.formBuilder.group({
-      nombre: ['', Validators.required],
-      tipoMascota: ['', Validators.required],
-      genero: ['', Validators.required],
-      fechaNacimiento: ['', Validators.required],
-      raza: ['', Validators.required],
-      esterilizado: ['', Validators.required],
-      color: ['', Validators.required],
-      descripcion: ['', Validators.required]
+    this.mascota = this.navParams.get('mascota');
+    this.petForm = this.formBuilder.group({
+      nombre: [this.mascota.nombre, Validators.required],
+      tipoMascota: [this.mascota.tipoMascota, Validators.required],
+      genero: [this.mascota.genero, Validators.required],
+      fechaNacimiento: [this.mascota.fechaNacimiento, Validators.required],
+      raza: [this.mascota.raza, Validators.required],
+      esterilizado: [this.mascota.esterilizado, Validators.required],
+      color: [this.mascota.color, Validators.required],
+      descripcion: [this.mascota.descripcion, Validators.required]
     });
   }
 
-  updateData() {
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad PetModalPage');
+  }
+
+  getDataPet() {
     const mascota = {
       imagen: '../../assets/imgs/pet - default.png',
       nombre: this.petForm.value['nombre'],
@@ -77,34 +56,34 @@ export class PetModalPage {
   }
 
   updatePet(data) {
-    this.servicePet.updatePet(this.id, data).subscribe(
+    this.servicePet.updatePet(this.mascota.id, data).subscribe(
       (result: boolean) => {
         console.log(result);
         if (result) {
-          this.userMessageCorrect("Un amigo tuyo acaba de ser actualizado.");
+          this.showUserMessageCorrect("Un amigo tuyo acaba de ser actualizado.");
         }
         else {
-          this.userMessageError("Ha ocurrido un error");
+          this.showUserMessageError("Ha ocurrido un error");
         }
       }
     );
   }
 
   deletePet() {
-    this.servicePet.deletePet(this.id).subscribe(
+    this.servicePet.deletePet(this.mascota.id).subscribe(
       (result: boolean) => {
         console.log(result);
         if (result) {
-          this.userMessageCorrect("Mascota Eliminada");
+          this.showUserMessageCorrect("Mascota Eliminada");
         }
         else {
-          this.userMessageError("Ha ocurrido un error");
+          this.showUserMessageError("Ha ocurrido un error");
         }
       }
     );
   }
 
-  userMessageCorrect(mensaje: string) {
+  showUserMessageCorrect(mensaje: string) {
     let alert = this.alertController.create({
       title: 'Mensaje',
       message: mensaje,
@@ -118,7 +97,7 @@ export class PetModalPage {
     alert.present()
   }
 
-  userMessageError(mensaje: string) {
+  showUserMessageError(mensaje: string) {
     let alert = this.alertController.create({
       title: 'Error',
       message: mensaje,
@@ -129,7 +108,7 @@ export class PetModalPage {
     alert.present()
   }
 
-  deleteAlert() {
+  showAlertDeletePet() {
     let alert = this.alertController.create({
       title: 'Eliminar',
       message: '¿Deseas eliminar esta mascota?',
@@ -148,15 +127,5 @@ export class PetModalPage {
       ]
     });
     alert.present();
-
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PetModalPage');
-  }
-
-  stpSelect() {
-    console.log('STP selected');
-  }
-
 }

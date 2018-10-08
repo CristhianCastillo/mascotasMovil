@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { SuppliesCreatePage } from '../supplies/supplies-create/supplies-create';
 import { SuppliesModalPage } from '../supplies/supplies-modal/supplies-modal';
+import { Suministro } from "../../models/suministro";
 
 @Component({
   selector: 'page-supplies',
@@ -9,54 +10,66 @@ import { SuppliesModalPage } from '../supplies/supplies-modal/supplies-modal';
 })
 export class SuppliesPage {
 
-  suministros = [
+  public suministros: any = [
     {
       nombreTipoSuministro: 'Juguetes',
-      detales: [
+      detalles: [
         {
-          nombreSuministro: 'Hueso',
-          cantidadSuministro: 3,
+          id: 1,
+          tipoSuministro: 'Juguetes',
+          nombre: 'Hueso',
+          cantidad: 3,
           unidadMedida: 'Unidades',
-          fechaCompra: '2018-08-08',
+          fecha: '2018-08-08',
           precio: 89.9,
-          tienda: 'Veterinaria Grecia',
+          proveedor: 'Veterinaria Grecia',
           consumoDiario: '1 por semana',
-          comentarios: 'Es el juguete favortio.'
+          comentario: 'Es el juguete favortio.',
+          idUsuario: 1
         },
         {
-          nombreSuministro: 'Pelota de lana',
-          cantidadSuministro: 8,
+          id: 2,
+          tipoSuministro: 'Juguetes',
+          nombre: 'Pelota de lana',
+          cantidad: 8,
           unidadMedida: 'Unidades',
-          fechaCompra: '2016-08-08',
+          fecha: '2016-08-08',
           precio: 100.9,
-          tienda: 'Veterinaria Past',
+          proveedor: 'Veterinaria Past',
           consumoDiario: '1 por semana',
-          comentarios: 'Es el juguete favortio.'
+          comentario: 'Es el juguete favortio.',
+          idUsuario: 1
         }
       ]
     },
     {
       nombreTipoSuministro: 'Alimento',
-      detales: [
+      detalles: [
         {
-          nombreSuministro: 'Purina cachorros',
-          cantidadSuministro: 25.5,
+          id: 3,
+          tipoSuministro: 'Alimento',
+          nombre: 'Purina cachorros',
+          cantidad: 25.5,
           unidadMedida: 'Kg',
-          fechaCompra: '2018-09-08',
+          fecha: '2018-09-08',
           precio: 100.0,
-          tienda: 'Veterinaria Grecia',
+          proveedor: 'Veterinaria Grecia',
           consumoDiario: '1 Kg por semana',
-          comentarios: 'Comida para los cachorros'
+          comentario: 'Comida para los cachorros',
+          idUsuario: 1
         },
         {
-          nombreSuministro: 'Purina gatitos',
-          cantidadSuministro: 10.3,
+          id: 4,
+          tipoSuministro: 'Alimento',
+          nombre: 'Purina gatitos',
+          cantidad: 10.3,
           unidadMedida: 'Kg',
-          fechaCompra: '2018-08-08',
+          fecha: '2018-08-08',
           precio: 50.0,
-          tienda: 'Veterinaria Past',
+          proveedor: 'Veterinaria Past',
           consumoDiario: '0.5 Kg por semana',
-          comentarios: 'Comida para los gatitos.'
+          comentario: 'Comida para los gatitos.',
+          idUsuario: 1
         }
       ]
     }
@@ -65,16 +78,15 @@ export class SuppliesPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  goToCreateSupplie(){
-    this.navCtrl.push(SuppliesCreatePage);
-  }
-
-  goToViewSupplie(detalle){
-    this.navCtrl.push(SuppliesModalPage, {detalle: detalle});
-  }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad SuppliesPage');
   }
 
+  goToCreateSupplie(){
+    this.navCtrl.push(SuppliesCreatePage);
+  }
+
+  goToViewSupplie(detalle: Suministro){
+    this.navCtrl.push(SuppliesModalPage, {detalle: detalle});
+  }
 }

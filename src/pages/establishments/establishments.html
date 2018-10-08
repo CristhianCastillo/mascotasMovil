@@ -23,10 +23,11 @@
 
   <div [ngSwitch]="pet">
     <ion-list *ngSwitchCase="'saved'">
-      <ion-item *ngFor="let establecimiento of establecimientosGuardados" (click)="gotToViewEstableSaved(establecimiento)">
+      <ion-item *ngFor="let establecimiento of establecimientosGuardados"
+                (click)="gotToViewEstableSaved(establecimiento)">
         <ion-card class="adv-map">
           <div style="position: relative">
-            <img [src]="establecimiento.imagenEstablecimiento">
+            <img [src]="establecimiento.imagen">
             <ion-fab right top>
               <button ion-fab class="fab-map">
                 <ion-icon name='pin'></ion-icon>
@@ -35,8 +36,9 @@
           </div>
           <ion-item>
             <ion-icon color="subtle" large item-start name='information-circle'></ion-icon>
-            <h2>{{establecimiento.nombreEstablecimiento}}</h2>
-            <p><strong>Horarios:</strong> {{establecimiento.horarios}} - {{establecimiento.horaInicio}} - {{establecimiento.horaFinal}}</p>
+            <h2>{{establecimiento.nombre}}</h2>
+            <p><strong>Horarios:</strong> {{establecimiento.horarios}} - {{establecimiento.horaInicio}} -
+              {{establecimiento.horaFinal}}</p>
           </ion-item>
           <ion-item actions>
             <span ion-text item-start color="secondary" class="item-bold">{{establecimiento.tiempo}}</span>
@@ -49,14 +51,15 @@
         </ion-card>
 
       </ion-item>
-      
+
     </ion-list>
 
     <ion-list *ngSwitchCase="'search'">
-      <ion-item *ngFor="let establecimiento of establecimientosBuscar" (click)="gotToViewEstableSearch(establecimiento)">
+      <ion-item *ngFor="let establecimiento of establecimientosBuscar"
+                (click)="gotToViewEstableSearch(establecimiento)">
         <ion-card class="adv-map">
           <div style="position: relative">
-            <img [src]="establecimiento.imagenEstablecimiento">
+            <img [src]="establecimiento.imagen">
             <ion-fab right top>
               <button ion-fab class="fab-map">
                 <ion-icon name='pin'></ion-icon>
@@ -65,8 +68,9 @@
           </div>
           <ion-item>
             <ion-icon color="subtle" large item-start name='information-circle'></ion-icon>
-            <h2>{{establecimiento.nombreEstablecimiento}}</h2>
-            <p><strong>Horarios:</strong> {{establecimiento.horarios}} - {{establecimiento.horaInicio}} - {{establecimiento.horaFinal}}</p>
+            <h2>{{establecimiento.nombre}}</h2>
+            <p><strong>Horarios:</strong> {{establecimiento.horarios}} - {{establecimiento.horaInicio}} -
+              {{establecimiento.horaFinal}}</p>
           </ion-item>
           <ion-item actions>
             <span ion-text item-start color="secondary" class="item-bold">{{establecimiento.tiempo}}</span>
@@ -79,7 +83,7 @@
         </ion-card>
 
       </ion-item>
-      
+
     </ion-list>
   </div>
 </ion-content>

@@ -3,10 +3,11 @@
     <ion-toolbar no-border-top>
       <ion-title>Evento para {{nombreMascota}}</ion-title>
       <ion-buttons end>
-          <button  ion-button (click)="deleteAlert()" icon-end >
-              <ion-icon name="cut"></ion-icon>
+          <button  ion-button (click)="showAlertDeleteEvent()" icon-end >
+              <ion-icon name="trash"></ion-icon>
             </button>
-            <button  ion-button (click)="upLoad()" icon-end >
+            <button  ion-button (click)="editEventForm.valid && getDataEvent()" icon-end
+                     [disabled]="!editEventForm.valid" icon-end >
                 <ion-icon name="create"></ion-icon>
             </button>
       </ion-buttons>
@@ -15,21 +16,21 @@
 </ion-header>
 
 <ion-content padding>
-  <form>
+  <form [formGroup]="editEventForm">
     <ion-list>
       <ion-item>
         <ion-label floating>Nombre Evento</ion-label>
-        <ion-input type="text" [(ngModel)]="nombreEvento"  name="nombreDelEvento"></ion-input>
+        <ion-input formControlName="nombreEvento" type="text" name="nombreDelEvento"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Ubicación</ion-label>
-        <ion-input type="text" [(ngModel)]="ubicacion" name="ubicacionDelEvento"></ion-input>
+        <ion-input formControlName="ubicacion" type="text" name="ubicacionDelEvento"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label>Tipo Actividad</ion-label>
-        <ion-select [(ngModel)]="tipoActividad" [selectOptions]="tipoActividadAlertOpts" name="tipoDeActividad">
+        <ion-select formControlName="tipoActividad" [selectOptions]="tipoActividadAlertOpts" name="tipoDeActividad">
           <ion-option>Vaterinario</ion-option>
           <ion-option>Peluqueria</ion-option>
           <ion-option>Vacuna B2</ion-option>
@@ -40,17 +41,17 @@
 
       <ion-item>
         <ion-label>Fecha Evento</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="fecha" name="fechaDelEvento"></ion-datetime>
+        <ion-datetime formControlName="fechaEvento" displayFormat="MM/DD/YYYY" name="fechaDelEvento"></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label>Hora Evento</ion-label>
-        <ion-datetime displayFormat="hh:mm A" [(ngModel)]="hora" name="horaDelEvento"></ion-datetime>
+        <ion-datetime formControlName="horaEvento" displayFormat="hh:mm A" name="horaDelEvento"></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Descripción</ion-label>
-        <ion-textarea name="descripcionDelEvento" [(ngModel)]="descripcionActividad"></ion-textarea>
+        <ion-textarea formControlName="descripcion" name="descripcionDelEvento"></ion-textarea>
       </ion-item>
     </ion-list>
   </form>

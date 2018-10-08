@@ -8,18 +8,20 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list  *ngFor="let mascota of agenda">
-      <ion-list-header>
-        {{mascota.nombre}}
-      </ion-list-header>
-      <ion-item *ngFor="let cita of mascota.citas" (click)= "goToViewEvent(cita, mascota.nombre)">
-        {{cita.tipoActividad}}
-        <ion-icon name='color-wand' item-start></ion-icon>
-        <ion-note item-end>{{cita.fecha}} {{cita.hora}}</ion-note>
-      </ion-item>
-    </ion-list>
+  <ion-list *ngFor="let mascota of agenda">
+    <ion-list-header>
+      {{mascota.nombre}}
+    </ion-list-header>
+    <ion-item *ngFor="let cita of mascota.citas" (click)="goToViewEvent(cita, mascota.nombre)">
+      {{cita.tipoActividad}}
+      <ion-icon name='color-wand' item-start></ion-icon>
+      <ion-note item-end>{{cita.fechaEvento}} {{cita.horaEvento}}</ion-note>
+    </ion-item>
+  </ion-list>
 
   <ion-fab right bottom>
-      <button ion-fab (click)="goToChoseePet()" color="danger"><ion-icon name="add"></ion-icon></button>
-    </ion-fab>
+    <button ion-fab (click)="goToChoseePet()" color="danger">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

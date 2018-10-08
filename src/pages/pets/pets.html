@@ -10,18 +10,20 @@
 <ion-content padding>
   <ion-list>
 
-    <ion-item *ngFor="let mascota of mascotasAny" (click)= "goToModal(mascota)">
+    <ion-item *ngFor="let mascota of mascotas" (click)="goToSelectedPet(mascota)">
       <ion-thumbnail item-start>
         <img [src]="mascota.imagen">
       </ion-thumbnail>
       <h2>{{mascota.nombre}}</h2>
       <p>{{mascota.raza}}</p>
       <p>{{mascota.fechaNacimiento}}</p>
-      <button ion-button clear  item-end>Detalles</button>
+      <button ion-button clear item-end>Detalles</button>
     </ion-item>
   </ion-list>
 
   <ion-fab right bottom>
-      <button ion-fab (click)="goToCreatePet()" color="danger"><ion-icon name="add"></ion-icon></button>
-    </ion-fab>
+    <button ion-fab (click)="goToCreatePet()" color="danger">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

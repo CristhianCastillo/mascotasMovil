@@ -1,43 +1,72 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 
-import { LoginPage } from '../login/login';
+import {LoginPage} from '../login/login';
 
 @Component({
   selector: 'page-slide-intro',
   templateUrl: 'slide-intro.html',
 })
+
 export class SlideIntroPage {
 
-  
+  // -------------------------------------------------------------------------------------------------------------------
+  // Attributes
+  // -------------------------------------------------------------------------------------------------------------------
 
-  slides = [
+  /**
+   * Slide from the start application.
+   */
+  public slides: any = [
     {
       title: "Bienvenido a Mascotas.ga!",
-      description: "",
-      image: "../assets/imgs/mascotas.jpg",
+      description: "Mi nombre es Maxi, acabo de conocerte y te quiero!!",
+      image: "../assets/imgs/slide-image-1.png",
     },
     {
       title: "¿Que es Mascotas.ga?",
-      description: "<b>Mascotas.ga</b> basicamente es una muestra de amor a tus mascotas.",
-      image: "../assets/imgs/amorMascotas.jpg",
+      description: "<b>Mascotas.ga</b> basicamente es una muestra de amor a tus mascotas.<br> <b>Osea a mi!!</b>",
+      image: "../assets/imgs/slide-image-2.png",
     },
     {
       title: "¿Que esperas para usarla?",
-      description: "The <b>Ionic Cloud</b> is a cloud platform for managing and scaling Ionic apps with integrated services like push notifications, native builds, user auth, and live updating.",
-      image: "../assets/imgs/esperar.png",
+      description: "<b>Amor</b> es todo lo que nosotros necesitamos y creeme, con esta aplicación lo lograras.",
+      image: "../assets/imgs/slide-image-3.png",
     }
   ];
+
+
+  // -------------------------------------------------------------------------------------------------------------------
+  // Contructors
+  // -------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Construct the component.
+   * @param navCtrl Navigation controller.
+   * @param navParams Navigation parameters.
+   */
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  goStart(){
-    this.navCtrl.setRoot(LoginPage);
-  }
+  // -------------------------------------------------------------------------------------------------------------------
+  // Events
+  // -------------------------------------------------------------------------------------------------------------------
 
-
+  /**
+   * Event when view did load.
+   */
   ionViewDidLoad() {
     console.log('ionViewDidLoad SlideIntroPage');
   }
 
+  // -------------------------------------------------------------------------------------------------------------------
+  // Methods
+  // -------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * Go to login page.
+   */
+  goLoginPage() {
+    this.navCtrl.setRoot(LoginPage);
+  }
 }

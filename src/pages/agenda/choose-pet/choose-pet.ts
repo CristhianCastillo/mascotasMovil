@@ -85,13 +85,12 @@ export class ChoosePetPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  goToCreateEvent(mascota){
-    console.log(mascota.nombre);
-    this.navCtrl.push(AgendaCreatePage, mascota);
-  }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChoosePetPage');
   }
 
+  goToCreateEvent(mascota){
+    console.log(mascota.nombre);
+    this.navCtrl.push(AgendaCreatePage, mascota);
+  }
 }

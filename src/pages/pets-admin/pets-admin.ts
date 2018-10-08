@@ -104,6 +104,10 @@ export class PetsAdminPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad PetsAdminPage');
+  }
+
   gotToViewHisPets(cliente) {
     this.navCtrl.push(PetsOwnerPage, { cliente: cliente });
   }
@@ -111,9 +115,4 @@ export class PetsAdminPage {
   gotToViewPet(mascota){
     this.navCtrl.push(PetServicesPage, {mascota: mascota});
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PetsAdminPage');
-  }
-
 }

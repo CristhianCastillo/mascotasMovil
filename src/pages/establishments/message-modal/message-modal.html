@@ -13,11 +13,11 @@
 
 
 <ion-content padding>
-  <form>
+  <form [formGroup]="modalMessageForm" (ngSubmit)="getDataMessage()">
     <ion-list>
       <ion-item>
         <ion-label>Mascota</ion-label>
-        <ion-select [(ngModel)]="mascotas" name="mascotasAplicacion">
+        <ion-select formControlName="mascota" name="mascotasAplicacion">
           <ion-option>Raton</ion-option>
           <ion-option>Perro</ion-option>
           <ion-option>Gato</ion-option>
@@ -26,22 +26,45 @@
           <ion-option>Aguila</ion-option>
         </ion-select>
       </ion-item>
+      <ion-item no-lines
+                *ngIf="(modalMessageForm.get('mascota').hasError('required')) && modalMessageForm.get('mascota').touched">
+        <div class="error"
+             *ngIf="(modalMessageForm.get('mascota').hasError('required')) && modalMessageForm.get('mascota').touched">
+          <p class="error_message">Selecciona una mascota</p>
+        </div>
+      </ion-item>
 
       <ion-item>
-        <ion-label>Servicio</ion-label>
-        <ion-select [(ngModel)]="servicio" name="serviciosAplicacion">
-          <ion-option value="f">Hembra</ion-option>
-          <ion-option value="m">Macho</ion-option>
+        <ion-label>Servicios</ion-label>
+        <ion-select formControlName="servicio" cancelText="Cancelar" okText="Aceptar" name="serviciosEstablecimiento">
+          <ion-option>Hospital</ion-option>
+          <ion-option>Tienda</ion-option>
+          <ion-option>Comida</ion-option>
+          <ion-option>Peluqueria</ion-option>
         </ion-select>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(modalMessageForm.get('servicio').hasError('required')) && modalMessageForm.get('servicio').touched">
+        <div class="error"
+             *ngIf="(modalMessageForm.get('servicio').hasError('required')) && modalMessageForm.get('servicio').touched">
+          <p class="error_message">Selecciona un servicio.</p>
+        </div>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Mensaje</ion-label>
-        <ion-textarea></ion-textarea>
+        <ion-textarea formControlName="mensaje" name="mensaje"></ion-textarea>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(modalMessageForm.get('mensaje').hasError('required')) && modalMessageForm.get('mensaje').touched">
+        <div class="error"
+             *ngIf="(modalMessageForm.get('mensaje').hasError('required')) && modalMessageForm.get('mensaje').touched">
+          <p class="error_message">Ingresa un mensaje valido.</p>
+        </div>
       </ion-item>
     </ion-list>
     <div padding>
-      <button ion-button (click)="doAlert()" full>Enviar</button>
+      <button ion-button type="submit" [disabled]="!modalMessageForm.valid" full>Enviar</button>
     </div>
   </form>
 </ion-content>

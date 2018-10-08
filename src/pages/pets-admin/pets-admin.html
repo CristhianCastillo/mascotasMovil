@@ -32,7 +32,8 @@
             <p><strong>No. Visitas</strong> {{cliente.numerovisitas}}</p>
           </ion-item>
           <ion-item actions>
-            <span ion-text item-start color="secondary" class="item-bold">Ultima Solicitud: {{cliente.ultimaSolicitud}}</span>
+            <span ion-text item-start color="secondary"
+                  class="item-bold">Ultima Solicitud: {{cliente.ultimaSolicitud}}</span>
           </ion-item>
         </ion-card>
       </ion-item>
@@ -42,16 +43,16 @@
       <div *ngFor="let cliente of clientes">
         <h2>{{cliente.nombreCliente}}</h2>
         <ion-item *ngFor="let mascota of cliente.mascotas" (click)="gotToViewPet(mascota)">
-            <ion-card class="adv-map">
-              <ion-item>
-                <ion-icon color="subtle" large item-start name='paw'></ion-icon>
-                <h2>{{mascota.nombreMascota}}</h2>
-              </ion-item>
-              <ion-item actions>
-                <span ion-text item-start color="secondary" class="item-bold">Ultima Solicitud: {{mascota.ultimaSolicitud}}</span>
-              </ion-item>
-            </ion-card>
-          </ion-item>
+          <ion-card class="adv-map">
+            <ion-item>
+              <ion-icon color="subtle" large item-start name='paw'></ion-icon>
+              <h2>{{mascota.nombreMascota}}</h2>
+            </ion-item>
+            <ion-item actions>
+              <span ion-text item-start color="secondary" class="item-bold">Ultima Solicitud: {{mascota.ultimaSolicitud}}</span>
+            </ion-item>
+          </ion-card>
+        </ion-item>
       </div>
     </ion-list>
   </div>

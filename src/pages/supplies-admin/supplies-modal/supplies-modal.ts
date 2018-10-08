@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
+import {Validators, FormGroup, FormBuilder} from '@angular/forms';
+import { Suministro } from "../../../models/suministro";
 
 @Component({
   selector: 'page-supplies-modal',
@@ -7,27 +9,90 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 })
 export class SuppliesModalPageAdmin {
 
-  detalle: any;
-  nombreSuministro: string;
-  cantidadSuministro: number;
-  unidadSuministro: string;
-  fechaCompra: string;
-  precio: number;
-  proveedor: string;
-  comentarios: string;
+  /**
+   * Form register.
+   */
+  private editSupplieForm: FormGroup;
+  public detalle: Suministro;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController) {
-    this.detalle = this.navParams.get('detalle');
-    this.nombreSuministro = this.detalle.nombreSuministro;
-    this.cantidadSuministro = this.detalle.cantidadSuministro;
-    this.unidadSuministro = this.detalle.unidadMedida;
-    this.fechaCompra = this.detalle.fechaCompra;
-    this.precio = this.detalle.precio;
-    this.proveedor = this.detalle.proveedor;
-    this.comentarios = this.detalle.comentarios;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController,
+              private formBuilder: FormBuilder) {
+    this.detalle = <Suministro>this.navParams.get('detalle');
+    console.log(this.detalle);
+    this.editSupplieForm = this.formBuilder.group({
+      tipoSuministro: [this.detalle.tipoSuministro, Validators.required],
+      nombre: [this.detalle.nombre, Validators.required],
+      cantidad: [this.detalle.cantidad, Validators.required],
+      unidadMedida: [this.detalle.unidadMedida, Validators.required],
+      fecha: [this.detalle.fecha, Validators.required],
+      precio: [this.detalle.precio, Validators.required],
+      proveedor: [this.detalle.proveedor, Validators.required],
+      comentario: [this.detalle.comentario, Validators.required]
+    });
   }
 
-  deleteAlert() {
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad SuppliesModalPage');
+  }
+
+  getDataSupplie(){
+    const suministro = {
+      tipoSuministro: this.editSupplieForm.value['tipoSuministro'],
+      nombre: this.editSupplieForm.value['nombre'],
+      cantidad: this.editSupplieForm.value['cantidad'],
+      unidadMedida: this.editSupplieForm.value['unidadMedida'],
+      fecha: this.editSupplieForm.value['fecha'],
+      precio: this.editSupplieForm.value['precio'],
+      proveedor: this.editSupplieForm.value['proveedor'],
+      consumoDiario: '',
+      comentario: this.editSupplieForm.value['comentario'],
+      idUsuario: 1
+    }
+    this.editSupplie(suministro);
+  }
+
+  editSupplie(suministro){
+    this.showUserMessageCorrect("Suministro actualizado correctamente.");
+    // this.servicePet.createPet(data).subscribe(
+    //   (result: Mascota) =>{
+    //     console.log(result);
+    //     if(result){
+    //       this.userMessageCorrect("Un amigo tuyo acaba de ser creado.");
+    //     }
+    //     else{
+    //       this.userMessageError("Ha ocurrido un error");
+    //     }
+    //   }
+    // );
+    console.log(suministro);
+  }
+
+  showUserMessageCorrect(mensaje: string) {
+    let alert = this.alertController.create({
+      title: 'Mensaje',
+      message: mensaje,
+      buttons: [{
+        text: 'Aceptar',
+        handler: () => {
+          this.navCtrl.pop();
+        }
+      }]
+    });
+    alert.present()
+  }
+
+  showUserMessageError(mensaje: string) {
+    let alert = this.alertController.create({
+      title: 'Error',
+      message: mensaje,
+      buttons: [{
+        text: 'Aceptar'
+      }]
+    });
+    alert.present()
+  }
+
+  deleteAlertSupplie() {
     let alert = this.alertController.create({
       title: 'Eliminar',
       message: '¿Deseas eliminar esta suministro?',
@@ -47,34 +112,15 @@ export class SuppliesModalPageAdmin {
           alert1.present();
         }
       },
-      {
-        text: 'Cancelar',
-        handler: () => {
-          console.log("Operación cancelada");
+        {
+          text: 'Cancelar',
+          handler: () => {
+            console.log("Operación cancelada");
+          }
         }
-      }
-    ]
+      ]
     });
     alert.present();
 
   }
-
-  upLoad() {
-    let alert = this.alertController.create({
-      title: 'Genial!!',
-      message: 'Actualizacion exitosa!',
-      buttons: [{
-        text: 'Aceptar',
-        handler: () => {
-          this.navCtrl.pop();
-        }
-      }]
-    });
-    alert.present();
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SuppliesModalPage');
-  }
-
 }

@@ -1,3 +1,9 @@
 page-message-modal {
-
+  .error {
+    text-align: center;
+    background-color: red;
+    .error_message {
+      color: white;
+    }
+  }
 }

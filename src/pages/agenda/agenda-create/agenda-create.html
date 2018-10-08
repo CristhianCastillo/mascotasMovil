@@ -1,54 +1,98 @@
 <ion-header>
-    <ion-navbar>
-        <ion-toolbar no-border-top>
-            <ion-title>Evento para {{nombreMascota}}</ion-title>
-            <ion-buttons end>
-              <button  ion-button (click)="doAlert()" icon-end >
-                <ion-icon name="create"></ion-icon>
-              </button>
-            </ion-buttons>
-          </ion-toolbar>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-    <form>
-      <ion-list>
-        <ion-item>
-          <ion-label floating>Nombre Evento</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
-  
-        <ion-item>
-            <ion-label floating>Ubicación</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
+  <ion-navbar>
+    <ion-toolbar no-border-top>
+      <ion-title>Evento para {{nombreMascota}}</ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="registerEventForm.valid && getDataEvent()" icon-end
+                [disabled]="!registerEventForm.valid">
+          <ion-icon name="create"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
 
-        <ion-item>
-          <ion-label>Tipo Actividad</ion-label>
-          <ion-select [(ngModel)]="tipoActividad" [selectOptions]="tipoActividadAlertOpts" name="tipoDeActividad">
-              <ion-option>Vacunacion</ion-option>
-              <ion-option>Veterinaria</ion-option>
-              <ion-option>Dientes</ion-option>
-              <ion-option>Jugar</ion-option>
-              <ion-option>Baño</ion-option>
-          </ion-select>
-        </ion-item>
+<ion-content padding>
+  <form [formGroup]="registerEventForm">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Nombre Evento</ion-label>
+        <ion-input formControlName="nombreEvento" type="text"></ion-input>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(registerEventForm.get('nombreEvento').hasError('required')) && registerEventForm.get('nombreEvento').touched">
+        <div class="error"
+             *ngIf="(registerEventForm.get('nombreEvento').hasError('required')) && registerEventForm.get('nombreEvento').touched">
+          <p class="error_message">Ingresa un nombre valido.</p>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Ubicación</ion-label>
+        <ion-input formControlName="ubicacion" type="text"></ion-input>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(registerEventForm.get('ubicacion').hasError('required')) && registerEventForm.get('ubicacion').touched">
+        <div class="error"
+             *ngIf="(registerEventForm.get('ubicacion').hasError('required')) && registerEventForm.get('ubicacion').touched">
+          <p class="error_message">Ingresa una ubicación valida valido.</p>
+        </div>
+      </ion-item>
 
-        <ion-item>
-            <ion-label>Fecha Evento</ion-label>
-            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="fechaEvento" name="fechaDelEvento"></ion-datetime>
-        </ion-item>
-  
-        <ion-item>
-            <ion-label>Hora Evento</ion-label>
-            <ion-datetime displayFormat="hh:mm A" [(ngModel)]="horaEvento" name="horaDelEvento"></ion-datetime>
-        </ion-item>
-      
-        <ion-item>
-            <ion-label floating>Descripción</ion-label>
-            <ion-textarea ></ion-textarea>
-        </ion-item>
-      </ion-list>
-    </form>
-  </ion-content>
+      <ion-item>
+        <ion-label>Tipo Actividad</ion-label>
+        <ion-select formControlName="tipoActividad" [selectOptions]="tipoActividadAlertOpts" name="tipoDeActividad">
+          <ion-option>Vacunacion</ion-option>
+          <ion-option>Veterinaria</ion-option>
+          <ion-option>Dientes</ion-option>
+          <ion-option>Jugar</ion-option>
+          <ion-option>Baño</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(registerEventForm.get('tipoActividad').hasError('required')) && registerEventForm.get('tipoActividad').touched">
+        <div class="error"
+             *ngIf="(registerEventForm.get('tipoActividad').hasError('required')) && registerEventForm.get('tipoActividad').touched">
+          <p class="error_message">Selecciona una actividad.</p>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Fecha Evento</ion-label>
+        <ion-datetime formControlName="fechaEvento" displayFormat="MM/DD/YYYY" [(ngModel)]="fechaEvento"
+                      name="fechaDelEvento"></ion-datetime>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(registerEventForm.get('fechaEvento').hasError('required')) && registerEventForm.get('fechaEvento').touched">
+        <div class="error"
+             *ngIf="(registerEventForm.get('fechaEvento').hasError('required')) && registerEventForm.get('fechaEvento').touched">
+          <p class="error_message">Selecciona una fecha para la actividad.</p>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Hora Evento</ion-label>
+        <ion-datetime formControlName="horaEvento" displayFormat="hh:mm A" [(ngModel)]="horaEvento"
+                      name="horaDelEvento"></ion-datetime>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(registerEventForm.get('horaEvento').hasError('required')) && registerEventForm.get('horaEvento').touched">
+        <div class="error"
+             *ngIf="(registerEventForm.get('horaEvento').hasError('required')) && registerEventForm.get('horaEvento').touched">
+          <p class="error_message">Selecciona una hora para la actividad.</p>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Descripción</ion-label>
+        <ion-textarea formControlName="descripcion" name="descripcionEvento"></ion-textarea>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(registerEventForm.get('descripcion').hasError('required')) && registerEventForm.get('descripcion').touched">
+        <div class="error"
+             *ngIf="(registerEventForm.get('descripcion').hasError('required')) && registerEventForm.get('descripcion').touched">
+          <p class="error_message">Ingresa una breve descripción.</p>
+        </div>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

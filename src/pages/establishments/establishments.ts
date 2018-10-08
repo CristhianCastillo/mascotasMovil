@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { EstablishmentsSavedModalPage } from '../establishments/establishments-saved-modal/establishments-saved-modal';
 import { EstablishmentsSearchPage } from '../establishments/establishments-search/establishments-search';
+import { Establecimiento } from "../../models/establecimiento";
 
 @Component({
   selector: 'page-establishments',
@@ -11,10 +12,10 @@ export class EstablishmentsPage {
 
   pet: string = "saved";
 
-  establecimientosGuardados = [
+  public establecimientosGuardados: any = [
     {
-      imagenEstablecimiento: '../../assets/imgs/shop - 1.jpg',
-      nombreEstablecimiento: 'Pet Store',
+      imagen: '../../assets/imgs/shop - 1.jpg',
+      nombre: 'Pet Store',
       distancia: '0.5 Km',
       tiempo: '15 min',
       direccion: 'Crr 45 F No 23',
@@ -29,10 +30,11 @@ export class EstablishmentsPage {
       calificacion: 'Buena'
     }
   ];
-  establecimientosBuscar = [
+
+  public establecimientosBuscar: any = [
     {
-      imagenEstablecimiento: '../../assets/imgs/shop - 2.jpg',
-      nombreEstablecimiento: 'Veterinaria Grecia',
+      imagen: '../../assets/imgs/shop - 2.jpg',
+      nombre: 'Veterinaria Grecia',
       distancia: '0.3 Km',
       tiempo: '10 min',
       direccion: 'Crr 45 F No 23',
@@ -49,19 +51,17 @@ export class EstablishmentsPage {
   ];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
-  
-
-  gotToViewEstableSaved(establecimiento){
-    console.log(establecimiento);
-    this.navCtrl.push(EstablishmentsSavedModalPage, {establecimiento: establecimiento});
-  }
-
-  gotToViewEstableSearch(establecimiento){
-    this.navCtrl.push(EstablishmentsSearchPage, {establecimiento: establecimiento});
-  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EstablishmentsPage');
   }
 
+  gotToViewEstableSaved(establecimiento: Establecimiento){
+    console.log(establecimiento);
+    this.navCtrl.push(EstablishmentsSavedModalPage, {establecimiento: establecimiento});
+  }
+
+  gotToViewEstableSearch(establecimiento: Establecimiento){
+    this.navCtrl.push(EstablishmentsSearchPage, {establecimiento: establecimiento});
+  }
 }

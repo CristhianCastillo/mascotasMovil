@@ -1,28 +1,26 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>{{nombreEstablecimiento}}</ion-title>
+    <ion-title>{{establecimiento.nombre}}</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="deleteAlert()" icon-end>
-        <ion-icon name="cut"></ion-icon>
+      <button ion-button (click)="deleteEstablishment()" icon-end>
+        <ion-icon name="trash"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content>
   <ion-card>
 
-    <img [src]="imagenEstablecimiento" />
+    <img [src]="establecimiento.imagen"/>
     <ion-grid>
       <ion-row>
         <ion-col>
           <ion-label stacked>Nombre Establecimiento:</ion-label>
         </ion-col>
         <ion-col>
-          <ion-label stacked>{{nombreEstablecimiento}}</ion-label>
+          <ion-label stacked>{{establecimiento.nombre}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -30,7 +28,7 @@
           <ion-label stacked>Dirección:</ion-label>
         </ion-col>
         <ion-col>
-          <ion-label stacked>{{direccion}}</ion-label>
+          <ion-label stacked>{{establecimiento.direccion}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -38,7 +36,7 @@
           <ion-label stacked>Telefono:</ion-label>
         </ion-col>
         <ion-col>
-          <ion-label stacked>{{telefono}}</ion-label>
+          <ion-label stacked>{{establecimiento.telefono}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -46,7 +44,7 @@
           <ion-label stacked>Email:</ion-label>
         </ion-col>
         <ion-col>
-          <ion-label stacked>{{email}}</ion-label>
+          <ion-label stacked>{{establecimiento.email}}</ion-label>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -54,7 +52,7 @@
           <ion-label stacked>Pagina Web:</ion-label>
         </ion-col>
         <ion-col>
-          <ion-label stacked>{{paginaWeb}}</ion-label>
+          <ion-label stacked>{{establecimiento.paginaWeb}}</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>

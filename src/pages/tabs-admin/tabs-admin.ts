@@ -10,11 +10,11 @@ import { DashboardAdminPage } from '../dashboard-admin/dashboard-admin';
 })
 export class TabsAdminPage {
 
-  tab1Root = EstablishmentAdminPage;
-  tab2Root = PetsAdminPage;
-  tab3Root = SuppliesAdminPage;
-  tab4Root = DashboardAdminPage;
-  myIndex: number;
+  public tab1Root = EstablishmentAdminPage;
+  public tab2Root = PetsAdminPage;
+  public tab3Root = SuppliesAdminPage;
+  public tab4Root = DashboardAdminPage;
+  public myIndex: number;
   constructor(navParams: NavParams) {
     this.myIndex = navParams.data.tabIndex || 0;
   }

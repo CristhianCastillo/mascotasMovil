@@ -11,11 +11,11 @@ import { AgendaPage } from '../agenda/agenda';
 })
 export class TabsPage {
 
-  tab1Root = PetsPage;
-  tab2Root = SuppliesPage;
-  tab3Root = EstablishmentsPage;
-  tab4Root = AgendaPage;
-  myIndex: number;
+  public tab1Root = PetsPage;
+  public tab2Root = SuppliesPage;
+  public tab3Root = EstablishmentsPage;
+  public tab4Root = AgendaPage;
+  public myIndex: number;
   constructor(navParams: NavParams) {
     this.myIndex = navParams.data.tabIndex || 0;
   }

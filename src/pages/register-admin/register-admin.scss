@@ -1,3 +1,9 @@
 page-register-admin {
-
+  .error {
+    text-align: center;
+    background-color: red;
+    .error_message {
+      color: white;
+    }
+  }
 }

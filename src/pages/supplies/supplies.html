@@ -12,10 +12,10 @@
     <ion-list-header>
       {{suministro.nombreTipoSuministro}}
     </ion-list-header>
-    <ion-item *ngFor="let detalle of suministro.detales" (click)="goToViewSupplie(detalle)">
-      {{detalle.nombreSuministro}}
+    <ion-item *ngFor="let detalle of suministro.detalles" (click)="goToViewSupplie(detalle)">
+      {{detalle.nombre}}
       <ion-icon name='color-wand' item-start></ion-icon>
-      <ion-note item-end>{{detalle.cantidadSuministro}} {{detalle.unidadMedida}}</ion-note>
+      <ion-note item-end>{{detalle.cantidad}} {{detalle.unidadMedida}}</ion-note>
     </ion-item>
   </ion-list>
 

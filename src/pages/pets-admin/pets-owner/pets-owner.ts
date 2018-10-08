@@ -8,14 +8,13 @@ import { PetServicesPage } from '../pet-services/pet-services';
 })
 export class PetsOwnerPage {
 
-  cliente: any;
-  mascotas: any[];
-  nombreCliente: string;
+  public cliente: any;
+  public mascotas: any[];
+  public nombreCliente: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.cliente = this.navParams.get('cliente');
     this.nombreCliente = this.cliente.nombreCliente;
     this.mascotas = this.cliente.mascotas;
-    console.log(this.mascotas[0]);
   }
 
   ionViewDidLoad() {

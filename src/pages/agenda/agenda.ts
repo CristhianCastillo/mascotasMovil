@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ChoosePetPage } from '../agenda/choose-pet/choose-pet';
 import { AgendaModalPage } from '../agenda/agenda-modal/agenda-modal';
+import {Cita} from "../../models/cita";
 
 @Component({
   selector: 'page-agenda',
@@ -9,67 +10,76 @@ import { AgendaModalPage } from '../agenda/agenda-modal/agenda-modal';
 })
 export class AgendaPage {
 
-  agenda = [
+  public agenda = [
     {
+      idMascota: 1,
       nombre: 'Muñeca',
       citas: [
         {
-          nombreEvento: "Corte de pelo",
+          id: 1,
+          nombre: "Corte de pelo",
           ubicacion: "Kr 45 F",
           tipoActividad: "Peluqueria",
-          fecha: "2018-01-01",
-          hora: "12:00",
-          descripcionActividad: "Corte de pelo semestral."
+          fechaEvento: "2018-01-01",
+          horaEvento: "12:00",
+          descripcionEvento: "Corte de pelo semestral."
         },
         {
-          nombreEvento: "Vacuna anual",
+          id: 2,
+          nombre: "Vacuna anual",
           ubicacion: "Calle 34 F 34",
           tipoActividad: "Vacuna B2",
-          fecha: "2019-05-01",
-          hora: "12:00",
-          descripcionActividad: "Vacuna anual contra la rabia"
+          fechaEvento: "2019-05-01",
+          horaEvento: "12:00",
+          descripcionEvento: "Vacuna anual contra la rabia"
         }
       ]
     },
     {
+      idMascota: 2,
       nombre: 'Maxi',
       citas: [
         {
-          nombreEvento: "Baño en casa",
+          id: 3,
+          nombre: "Baño en casa",
           ubicacion: "Kr 45 F",
           tipoActividad: "Baño",
-          fecha: "2018-08-10",
-          hora: "12:00",
-          descripcionActividad: "Baño semanal."
+          fechaEvento: "2018-08-10",
+          horaEvento: "12:00",
+          descripcionEvento: "Baño semanal."
         },
         {
-          nombreEvento: "Vacuna anual",
+          id: 4,
+          nombre: "Vacuna anual",
           ubicacion: "Calle 34 F 34",
           tipoActividad: "Vacuna B2",
-          fecha: "2019-05-01",
-          hora: "12:00",
-          descripcionActividad: "Vacuna anual contra la rabia"
+          fechaEvento: "2019-05-01",
+          horaEvento: "12:00",
+          descripcionEvento: "Vacuna anual contra la rabia"
         }
       ]
     },
     {
+      idMascota: 3,
       nombre: 'Remy',
       citas: [
         {
-          nombreEvento: "Ir al veterinario",
+          id: 5,
+          nombre: "Ir al veterinario",
           ubicacion: "Kr 45 F",
           tipoActividad: "Veterinario",
-          fecha: "2018-08-10",
-          hora: "12:00",
-          descripcionActividad: "Control medico semestral."
+          fechaEvento: "2018-08-10",
+          horaEvento: "12:00",
+          descripcionEvento: "Control medico semestral."
         },
         {
-          nombreEvento: "Cepillado de dientes",
+          id: 6,
+          nombre: "Cepillado de dientes",
           ubicacion: "Calle 34 F 34",
           tipoActividad: "dientes",
-          fecha: "2019-05-01",
-          hora: "15:00",
-          descripcionActividad: "Cepillado de dientes"
+          fechaEvento: "2019-05-01",
+          horaEvento: "15:00",
+          descripcionEvento: "Cepillado de dientes"
         }
       ]
     }
@@ -78,16 +88,15 @@ export class AgendaPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  goToViewEvent(cita, nombreAnimal){
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad AgendaPage');
+  }
+
+  goToViewEvent(cita: Cita, nombreAnimal){
     this.navCtrl.push(AgendaModalPage,{cita: cita, nombreAnimal});
   }
 
   goToChoseePet(){
     this.navCtrl.push(ChoosePetPage);
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AgendaPage');
-  }
-
 }

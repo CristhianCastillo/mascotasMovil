@@ -39,6 +39,9 @@ export interface PageInterface {
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = SlideIntroPage;
+  //rootPage:any = TabsPage;
+  //rootPage: any = TabsAdminPage;
+  //rootPage:any = EstablishmentAdminPage;
 
   pages: PageInterface[] = [
     { title: 'Mascotas', name: 'TabsPage', component: TabsPage, tabComponent: PetsPage, index: 0, icon: 'paw' },

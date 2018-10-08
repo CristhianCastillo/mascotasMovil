@@ -1,76 +1,78 @@
 <ion-header>
-    <ion-navbar>
-      <ion-toolbar no-border-top>
-          <ion-title>Datos {{nombre}}</ion-title>
-          <ion-buttons end>
-            <button  ion-button (click)="deleteAlert()" icon-end >
-              <ion-icon name="cut"></ion-icon>
-            </button>
-            <button  ion-button (click)="updateData()" icon-end >
-                <ion-icon name="create"></ion-icon>
-              </button>
-          </ion-buttons>
-        </ion-toolbar>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-    <form [formGroup]= "petForm" (ngSubmit) ="updateData()">
-      <ion-list>
-        <ion-item>
-          <ion-label floating>Nombre</ion-label>
-          <ion-input formControlName="nombre" type="text" [(ngModel)]="nombre" name="nombreMascota">
-          </ion-input>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label>Tipo de Mascota</ion-label>
-          <ion-select formControlName="tipoMascota" [selectOptions]="tipoMascotaAlertOpts" [(ngModel)]="tipoMascota" name="tipoDeMascota">
-            <ion-option>Raton</ion-option>
-            <ion-option>Perro</ion-option>
-            <ion-option>Gato</ion-option>
-            <ion-option>Conejo</ion-option>
-            <ion-option>Loro</ion-option>
-            <ion-option>Aguila</ion-option>
-          </ion-select>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label>Genero</ion-label>
-          <ion-select formControlName="genero" name="generoMascota" [(ngModel)]="genero">
-            <ion-option value="Hembra">Hembra</ion-option>
-            <ion-option value="Macho">Macho</ion-option>
-          </ion-select>
-        </ion-item>
-  
-        <ion-item>
-          <ion-label>Nacimiento</ion-label>
-          <ion-datetime formControlName="fechaNacimiento" displayFormat="MM/DD/YYYY" [(ngModel)]="fechaNacimiento" name="fechaNacimiento"></ion-datetime>
-        </ion-item>
-  
-        <ion-item>
-            <ion-label floating>Raza</ion-label>
-          <ion-input formControlName="raza" type="text" [(ngModel)]="raza" name="razaMascota"></ion-input>
-        </ion-item>
-  
-        <ion-item>
-            <ion-label>Esterilizado</ion-label>
-            <ion-select formControlName="esterilizado" name="mascotaEsterilizada" [(ngModel)]="esterilizado">
-              <ion-option value="Si">Si</ion-option>
-              <ion-option value="No">No</ion-option>
-            </ion-select>
-        </ion-item>
-  
-        <ion-item>
-            <ion-label floating>Color</ion-label>
-            <ion-input formControlName="color" type="text" [(ngModel)]="color" name="colorDeMascota"></ion-input>
-        </ion-item>
-  
-        <ion-item>
-            <ion-label floating>Descripcion</ion-label>
-            <ion-textarea formControlName="descripcion" name="Descripcion" [(ngModel)]="descripcion"></ion-textarea>
-        </ion-item>
-  
-      </ion-list>
-    </form>
-  </ion-content>
+  <ion-navbar>
+    <ion-toolbar no-border-top>
+      <ion-title>Datos {{nombre}}</ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="showAlertDeletePet()" icon-end>
+          <ion-icon name="trash"></ion-icon>
+        </button>
+        <button ion-button (click)="petForm.valid && getDataPet()" icon-end
+                [disabled]="!petForm.valid">
+          <ion-icon name="create"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="petForm">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Nombre</ion-label>
+        <ion-input formControlName="nombre" type="text" name="nombreMascota">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Tipo de Mascota</ion-label>
+        <ion-select formControlName="tipoMascota" [selectOptions]="tipoMascotaAlertOpts" name="tipoDeMascota">
+          <ion-option>Raton</ion-option>
+          <ion-option>Perro</ion-option>
+          <ion-option>Gato</ion-option>
+          <ion-option>Conejo</ion-option>
+          <ion-option>Loro</ion-option>
+          <ion-option>Aguila</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Genero</ion-label>
+        <ion-select formControlName="genero" name="generoMascota">
+          <ion-option value="Hembra">Hembra</ion-option>
+          <ion-option value="Macho">Macho</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Nacimiento</ion-label>
+        <ion-datetime formControlName="fechaNacimiento" displayFormat="MM/DD/YYYY"
+                      name="fechaNacimiento"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Raza</ion-label>
+        <ion-input formControlName="raza" type="text" name="razaMascota"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Esterilizado</ion-label>
+        <ion-select formControlName="esterilizado" name="mascotaEsterilizada">
+          <ion-option value="Si">Si</ion-option>
+          <ion-option value="No">No</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Color</ion-label>
+        <ion-input formControlName="color" type="text" name="colorDeMascota"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Descripcion</ion-label>
+        <ion-textarea formControlName="descripcion" name="Descripcion"></ion-textarea>
+      </ion-item>
+
+    </ion-list>
+  </form>
+</ion-content>
