@@ -114,8 +114,8 @@ import { GlobalErrorHandler } from '../providers/GlobalErrorHandler';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    //{provide: ErrorHandler, useClass: GlobalErrorHandler},
+    //{provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: ErrorHandler, useClass: GlobalErrorHandler},
     GlobalProvider,
     LoginServiceProvider,
     PetsServiceProvider
