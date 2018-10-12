@@ -79,6 +79,10 @@ export class MyApp {
     return this.global.tipoUsuario === 'tipoUsuario' ? true : false;
   }
 
+  obtenerMenuHabilitado(){
+    return this.global.estado;
+  }
+
   openPage(page: PageInterface) {
     let params = {};
     let namePage: string;
@@ -93,6 +97,7 @@ export class MyApp {
     } else {
       namePage = page.name;
       if(namePage === 'Exit'){
+        this.global.actulizarEstado(false);
         this.nav.setRoot(LoginPage);
       }
       else{

@@ -3,6 +3,7 @@ import { NavController, NavParams, Platform, AlertController } from 'ionic-angul
 import { StartPage } from '../start/start';
 import { LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
+import { GlobalProvider } from "../../providers/global/global";
 
 import { LoginServiceProvider }  from '../../providers/login-service/login-service';
 
@@ -35,7 +36,8 @@ export class LoginPage {
    * @param alertController
    */
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public loadingCtrl: LoadingController
-    , public serviceLogin: LoginServiceProvider, private formBuilder: FormBuilder, public alertController: AlertController ) {
+    , public serviceLogin: LoginServiceProvider, private formBuilder: FormBuilder, public alertController: AlertController,
+              public global: GlobalProvider) {
     let backAction =  platform.registerBackButtonAction(() => {
       console.log("second");
       this.navCtrl.pop();
@@ -79,6 +81,7 @@ export class LoginPage {
       (result: boolean) =>{
         console.log(result);
         if(result){
+          this.global.actulizarEstado(true);
           loader.dismiss();
           this.navCtrl.setRoot(TabsPage);
         }

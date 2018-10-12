@@ -117,6 +117,7 @@ export class RegisterAdminPage {
   }
 
   goPrincipalMenu(){
+    this.global.actulizarEstado(true);
     this.global.set('AdminUsuario');
     const loader = this.loadingCtrl.create({
       content: "Por favor espera...",

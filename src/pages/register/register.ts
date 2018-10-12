@@ -109,6 +109,7 @@ export class RegisterPage {
 
   goPrincipalMenu(){
     this.global.set('tipoUsuario');
+    this.global.actulizarEstado(true);
     const loader = this.loadingCtrl.create({
       content: "Por favor espera...",
       duration: 3000

@@ -4,13 +4,23 @@ import { Injectable } from '@angular/core';
 export class GlobalProvider {
 
   public tipoUsuario: string;
+  public estado: boolean;
 
   constructor() {
+    this.estado = false;
     this.tipoUsuario = 'tipoUsuario';
   }
 
   get state(){
     return this.tipoUsuario;
+  }
+
+  get estadoUsuario(){
+    return this.estado;
+  }
+
+  actulizarEstado(estado: boolean){
+    this.estado = estado;
   }
   
   set(nuevoEstado: string){
