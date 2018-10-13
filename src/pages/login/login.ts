@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, AlertController } from 'ionic-angular';
+import { NavController, NavParams, Platform, AlertController, MenuController } from 'ionic-angular';
 import { StartPage } from '../start/start';
 import { LoadingController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
@@ -37,7 +37,7 @@ export class LoginPage {
    */
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public loadingCtrl: LoadingController
     , public serviceLogin: LoginServiceProvider, private formBuilder: FormBuilder, public alertController: AlertController,
-              public global: GlobalProvider) {
+              public global: GlobalProvider, private menu: MenuController) {
     let backAction =  platform.registerBackButtonAction(() => {
       console.log("second");
       this.navCtrl.pop();
@@ -48,6 +48,20 @@ export class LoginPage {
       password: ['', Validators.required],
       recordarPassword : true
     });
+  }
+
+  ionViewDidEnter() {
+    this.menu.swipeEnable(false);
+    // If you have more than one side menu, use the id like below
+    // this.menu.swipeEnable(false, 'menu1');
+  }
+
+  ionViewWillLeave() {
+    // Don't forget to return the swipe to normal, otherwise
+    // the rest of the pages won't be able to swipe to open menu
+    this.menu.swipeEnable(true);
+    // If you have more than one side menu, use the id like below
+    // this.menu.swipeEnable(true, 'menu1');
   }
 
   /**
@@ -81,6 +95,7 @@ export class LoginPage {
       (result: boolean) =>{
         console.log(result);
         if(result){
+          this.global.set('usuario');
           this.global.actulizarEstado(true);
           loader.dismiss();
           this.navCtrl.setRoot(TabsPage);

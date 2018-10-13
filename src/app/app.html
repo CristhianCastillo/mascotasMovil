@@ -9,9 +9,9 @@
       <div class="image-logo">
         <img src="../assets/imgs/logo-mascotas.png">
       </div>
-      <div *ngIf="obtenerMenuHabilitado()">
-        <ion-list *ngIf="tipoUsuario(); else adminUsuario">
-          <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <div *ngIf="getMenuEnabled()">
+        <ion-list *ngIf="getUserEnabledType(); else adminUsuario">
+          <button menuClose ion-item *ngFor="let p of pagesUser" (click)="openPage(p)">
             <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
             {{p.title}}
           </button>

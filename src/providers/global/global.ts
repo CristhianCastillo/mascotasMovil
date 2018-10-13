@@ -8,7 +8,7 @@ export class GlobalProvider {
 
   constructor() {
     this.estado = false;
-    this.tipoUsuario = 'tipoUsuario';
+    this.tipoUsuario = 'usuario';
   }
 
   get state(){
@@ -23,7 +23,7 @@ export class GlobalProvider {
     this.estado = estado;
   }
   
-  set(nuevoEstado: string){
+  set (nuevoEstado: string){
     this.tipoUsuario = nuevoEstado;
   }
 

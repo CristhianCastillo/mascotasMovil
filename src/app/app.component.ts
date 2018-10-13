@@ -23,6 +23,9 @@ import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 
+/**
+ * Interface that represent a page in menu bar.
+ */
 export interface PageInterface {
   title: string;
   name: string;
@@ -36,6 +39,10 @@ export interface PageInterface {
 @Component({
   templateUrl: 'app.html'
 })
+
+/**
+ * Class that represent the initialize app.
+ */
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = SlideIntroPage;
@@ -43,7 +50,10 @@ export class MyApp {
   //rootPage: any = TabsAdminPage;
   //rootPage:any = EstablishmentAdminPage;
 
-  pages: PageInterface[] = [
+  /**
+   * Array that contents the options for a User.
+   */
+  pagesUser: PageInterface[] = [
     { title: 'Mascotas', name: 'TabsPage', component: TabsPage, tabComponent: PetsPage, index: 0, icon: 'paw' },
     { title: 'Suministros', name: 'TabsPage', component: TabsPage, tabComponent: SuppliesPage, index: 1, icon: 'filing' },
     { title: 'Establecimientos', name: 'TabsPage', component: TabsPage, tabComponent: EstablishmentsPage, index: 2, icon: 'medkit' },
@@ -52,6 +62,9 @@ export class MyApp {
     { title: 'Salir', name: 'Exit', component: HomePage, icon: 'exit' }
   ];
 
+  /**
+   * Array that contents the options for a Admin.
+   */
   pagesAdmin: PageInterface[] = [
     { title: 'Establecimiento', name: 'TabsAdminPage', component: TabsAdminPage, tabComponent: EstablishmentAdminPage, index: 0, icon: 'medkit' },
     { title: 'Mascotas', name: 'TabsAdminPage', component: TabsAdminPage, tabComponent: PetsAdminPage, index: 1, icon: 'paw' },
@@ -61,28 +74,46 @@ export class MyApp {
     { title: 'Salir', name: 'Exit', component: HomePage, icon: 'exit' }
   ];
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public global: GlobalProvider) {
+  /**
+   * Make the app principal.
+   * @param platform Platform app.
+   * @param statusBar StatusBar for a menu.
+   * @param splashScreen SlashScreen when the user move the screen.
+   * @param global Global provider for validate the user login.
+   */
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              public global: GlobalProvider) {
     this.initializeApp();
-     // used for an example of ngFor and navigation
   }
 
+  /**
+   * Initialize the app.
+   */
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
 
-  tipoUsuario(){
-    return this.global.tipoUsuario === 'tipoUsuario' ? true : false;
-  }
-
-  obtenerMenuHabilitado(){
+  /**
+   * Get a boolean value to validate if the user was login.
+   */
+  getMenuEnabled(){
     return this.global.estado;
   }
 
+  /**
+   * Get a boolean value to validate the type user login.
+   */
+  getUserEnabledType(){
+    return this.global.tipoUsuario === 'usuario' ? true : false;
+  }
+
+  /**
+   * Set the page selected.
+   * @param page Page selected by the user.
+   */
   openPage(page: PageInterface) {
     let params = {};
     let namePage: string;
@@ -105,7 +136,11 @@ export class MyApp {
       }
     }
   }
- 
+
+  /**
+   * Validate if the page was selected for change the actual color.
+   * @param page Page selected by the user.
+   */
   isActive(page: PageInterface) {
     // Again the Tabs Navigation
     let childNav = this.nav.getActiveChildNavs()[0];

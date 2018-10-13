@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { NavController, NavParams, Platform, MenuController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { TabsAdminPage } from '../tabs-admin/tabs-admin';
 import { GlobalProvider } from '../../providers/global/global';
@@ -25,7 +25,8 @@ export class RegisterAdminPage {
   private passwordFormGroup: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform, public loadingCtrl: LoadingController,
-  public global: GlobalProvider, private formBuilder: FormBuilder, private alertController: AlertController) {
+  public global: GlobalProvider, private formBuilder: FormBuilder, private alertController: AlertController,
+              private menu: MenuController) {
     let backAction =  platform.registerBackButtonAction(() => {
       console.log("second");
       this.navCtrl.pop();
@@ -52,6 +53,20 @@ export class RegisterAdminPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterAdminPage');
+  }
+
+  ionViewDidEnter() {
+    this.menu.swipeEnable(false);
+    // If you have more than one side menu, use the id like below
+    // this.menu.swipeEnable(false, 'menu1');
+  }
+
+  ionViewWillLeave() {
+    // Don't forget to return the swipe to normal, otherwise
+    // the rest of the pages won't be able to swipe to open menu
+    this.menu.swipeEnable(true);
+    // If you have more than one side menu, use the id like below
+    // this.menu.swipeEnable(true, 'menu1');
   }
 
   /**
@@ -117,8 +132,8 @@ export class RegisterAdminPage {
   }
 
   goPrincipalMenu(){
+    this.global.set('administrador');
     this.global.actulizarEstado(true);
-    this.global.set('AdminUsuario');
     const loader = this.loadingCtrl.create({
       content: "Por favor espera...",
       duration: 3000

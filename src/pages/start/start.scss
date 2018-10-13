@@ -1,3 +1,18 @@
 page-start {
-    
+  .title-header {
+    background-color: purple;
+    color: white;
+    font-weight: bold;
+    h1{
+      padding: 10px 0px  10px 0px;
+    }
+  }
+
+  $colors: (
+    primary:   #ffff
+  );
+
+  .toolbar-background {
+    background-color: map-get($colors, primary);
+  }
 }
