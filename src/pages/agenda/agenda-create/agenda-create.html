@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-toolbar no-border-top>
       <ion-title>Evento para {{nombreMascota}}</ion-title>
       <ion-buttons end>
@@ -34,17 +34,18 @@
                 *ngIf="(registerEventForm.get('ubicacion').hasError('required')) && registerEventForm.get('ubicacion').touched">
         <div class="error"
              *ngIf="(registerEventForm.get('ubicacion').hasError('required')) && registerEventForm.get('ubicacion').touched">
-          <p class="error_message">Ingresa una ubicación valida valido.</p>
+          <p class="error_message">Ingresa una ubicación valida.</p>
         </div>
       </ion-item>
 
       <ion-item>
         <ion-label>Tipo Actividad</ion-label>
-        <ion-select formControlName="tipoActividad" [selectOptions]="tipoActividadAlertOpts" name="tipoDeActividad">
-          <ion-option>Vacunacion</ion-option>
-          <ion-option>Veterinaria</ion-option>
-          <ion-option>Dientes</ion-option>
+        <ion-select formControlName="tipoActividad" [selectOptions]="tipoActividadAlertOpts" name="tipoDeActividad" cancelText="Cancelar" okText="Aceptar">
+          <ion-option>Veterinario</ion-option>
+          <ion-option>Peluqueria</ion-option>
+          <ion-option>Vacuna</ion-option>
           <ion-option>Jugar</ion-option>
+          <ion-option>Dientes</ion-option>
           <ion-option>Baño</ion-option>
         </ion-select>
       </ion-item>

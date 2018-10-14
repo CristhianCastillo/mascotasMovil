@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-toolbar no-border-top>
       <ion-title>Datos {{nombre}}</ion-title>
       <ion-buttons end>
@@ -23,10 +23,18 @@
         <ion-input formControlName="nombre" type="text" name="nombreMascota">
         </ion-input>
       </ion-item>
+      <ion-item no-lines
+                *ngIf="(petForm.get('nombre').hasError('required')) && petForm.get('nombre').touched">
+        <div class="error"
+             *ngIf="(petForm.get('nombre').hasError('required')) && petForm.get('nombre').touched">
+          <p class="error_message">Ingresa un nombre valido.</p>
+        </div>
+      </ion-item>
 
       <ion-item>
         <ion-label>Tipo de Mascota</ion-label>
-        <ion-select formControlName="tipoMascota" [selectOptions]="tipoMascotaAlertOpts" name="tipoDeMascota">
+        <ion-select formControlName="tipoMascota" [selectOptions]="tipoMascotaAlertOpts" name="tipoDeMascota"
+                    cancelText="Cancelar" okText="Aceptar">
           <ion-option>Raton</ion-option>
           <ion-option>Perro</ion-option>
           <ion-option>Gato</ion-option>
@@ -35,13 +43,27 @@
           <ion-option>Aguila</ion-option>
         </ion-select>
       </ion-item>
+      <ion-item no-lines
+                *ngIf="(petForm.get('tipoMascota').hasError('required')) && petForm.get('tipoMascota').touched">
+        <div class="error"
+             *ngIf="(petForm.get('tipoMascota').hasError('required')) && petForm.get('tipoMascota').touched">
+          <p class="error_message">Selecciona un tipo de mascota.</p>
+        </div>
+      </ion-item>
 
       <ion-item>
         <ion-label>Genero</ion-label>
-        <ion-select formControlName="genero" name="generoMascota">
+        <ion-select formControlName="genero" name="generoMascota" cancelText="Cancelar" okText="Aceptar">
           <ion-option value="Hembra">Hembra</ion-option>
           <ion-option value="Macho">Macho</ion-option>
         </ion-select>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(petForm.get('genero').hasError('required')) && petForm.get('genero').touched">
+        <div class="error"
+             *ngIf="(petForm.get('genero').hasError('required')) && petForm.get('genero').touched">
+          <p class="error_message">Selecciona un genero.</p>
+        </div>
       </ion-item>
 
       <ion-item>
@@ -49,28 +71,63 @@
         <ion-datetime formControlName="fechaNacimiento" displayFormat="MM/DD/YYYY"
                       name="fechaNacimiento"></ion-datetime>
       </ion-item>
+      <ion-item no-lines
+                *ngIf="(petForm.get('fechaNacimiento').hasError('required')) && petForm.get('fechaNacimiento').touched">
+        <div class="error"
+             *ngIf="(petForm.get('fechaNacimiento').hasError('required')) && petForm.get('fechaNacimiento').touched">
+          <p class="error_message">Ingresa una fecha de nacimiento.</p>
+        </div>
+      </ion-item>
 
       <ion-item>
         <ion-label floating>Raza</ion-label>
         <ion-input formControlName="raza" type="text" name="razaMascota"></ion-input>
       </ion-item>
+      <ion-item no-lines
+                *ngIf="(petForm.get('raza').hasError('required')) && petForm.get('raza').touched">
+        <div class="error"
+             *ngIf="(petForm.get('raza').hasError('required')) && petForm.get('raza').touched">
+          <p class="error_message">Raza no valida.</p>
+        </div>
+      </ion-item>
 
       <ion-item>
         <ion-label>Esterilizado</ion-label>
-        <ion-select formControlName="esterilizado" name="mascotaEsterilizada">
+        <ion-select formControlName="esterilizado" name="mascotaEsterilizada" cancelText="Cancelar" okText="Aceptar">
           <ion-option value="Si">Si</ion-option>
           <ion-option value="No">No</ion-option>
         </ion-select>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(petForm.get('esterilizado').hasError('required')) && petForm.get('esterilizado').touched">
+        <div class="error"
+             *ngIf="(petForm.get('esterilizado').hasError('required')) && petForm.get('esterilizado').touched">
+          <p class="error_message">Selecciona una opción.</p>
+        </div>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Color</ion-label>
         <ion-input formControlName="color" type="text" name="colorDeMascota"></ion-input>
       </ion-item>
+      <ion-item no-lines
+                *ngIf="(petForm.get('color').hasError('required')) && petForm.get('color').touched">
+        <div class="error"
+             *ngIf="(petForm.get('color').hasError('required')) && petForm.get('color').touched">
+          <p class="error_message">Ingresa un color valido.</p>
+        </div>
+      </ion-item>
 
       <ion-item>
         <ion-label floating>Descripcion</ion-label>
         <ion-textarea formControlName="descripcion" name="Descripcion"></ion-textarea>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(petForm.get('descripcion').hasError('required')) && petForm.get('descripcion').touched">
+        <div class="error"
+             *ngIf="(petForm.get('descripcion').hasError('required')) && petForm.get('descripcion').touched">
+          <p class="error_message">Ingresa una breve descripción.</p>
+        </div>
       </ion-item>
 
     </ion-list>

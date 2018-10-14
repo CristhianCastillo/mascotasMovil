@@ -15,7 +15,6 @@ export class SuppliesModalPage {
   private editSupplieForm: FormGroup;
   public detalle: Suministro;
 
-
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController,
               private formBuilder: FormBuilder) {
     this.detalle = <Suministro>this.navParams.get('detalle');
@@ -123,6 +122,5 @@ export class SuppliesModalPage {
     ]
     });
     alert.present();
-
   }
 }

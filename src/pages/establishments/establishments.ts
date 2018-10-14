@@ -10,8 +10,7 @@ import { Establecimiento } from "../../models/establecimiento";
 })
 export class EstablishmentsPage {
 
-  pet: string = "saved";
-
+  public pet: string = "saved";
   public establecimientosGuardados: any = [
     {
       imagen: '../../assets/imgs/shop - 1.jpg',
@@ -56,12 +55,12 @@ export class EstablishmentsPage {
     console.log('ionViewDidLoad EstablishmentsPage');
   }
 
-  gotToViewEstableSaved(establecimiento: Establecimiento){
+  gotToViewEstablishmentSaved(establecimiento: Establecimiento){
     console.log(establecimiento);
     this.navCtrl.push(EstablishmentsSavedModalPage, {establecimiento: establecimiento});
   }
 
-  gotToViewEstableSearch(establecimiento: Establecimiento){
+  gotToViewEstablishmentSearch(establecimiento: Establecimiento){
     this.navCtrl.push(EstablishmentsSearchPage, {establecimiento: establecimiento});
   }
 }

@@ -121,6 +121,5 @@ export class SuppliesModalPageAdmin {
       ]
     });
     alert.present();
-
   }
 }

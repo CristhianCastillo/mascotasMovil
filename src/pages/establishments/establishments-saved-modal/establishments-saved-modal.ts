@@ -17,6 +17,10 @@ export class EstablishmentsSavedModalPage {
     console.log(this.establecimiento);
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad EstablishmentsSavedModalPage');
+  }
+
   deleteEstablishment() {
     let alert = this.alerCtrl.create({
       title: 'Eliminar',
@@ -55,9 +59,4 @@ export class EstablishmentsSavedModalPage {
     const myModal = this.modal.create(MessageModalPage, {nombre: this.establecimiento.nombre}, myModalOptions);
     myModal.present();
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EstablishmentsSavedModalPage');
-  }
-
 }

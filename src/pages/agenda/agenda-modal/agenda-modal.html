@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-toolbar no-border-top>
       <ion-title>Evento para {{nombreMascota}}</ion-title>
       <ion-buttons end>
@@ -22,36 +22,80 @@
         <ion-label floating>Nombre Evento</ion-label>
         <ion-input formControlName="nombreEvento" type="text" name="nombreDelEvento"></ion-input>
       </ion-item>
+      <ion-item no-lines
+                *ngIf="(editEventForm.get('nombreEvento').hasError('required')) && editEventForm.get('nombreEvento').touched">
+        <div class="error"
+             *ngIf="(editEventForm.get('nombreEvento').hasError('required')) && editEventForm.get('nombreEvento').touched">
+          <p class="error_message">Ingresa un nombre valido.</p>
+        </div>
+      </ion-item>
 
       <ion-item>
         <ion-label floating>Ubicación</ion-label>
         <ion-input formControlName="ubicacion" type="text" name="ubicacionDelEvento"></ion-input>
       </ion-item>
+      <ion-item no-lines
+                *ngIf="(editEventForm.get('ubicacion').hasError('required')) && editEventForm.get('ubicacion').touched">
+        <div class="error"
+             *ngIf="(editEventForm.get('ubicacion').hasError('required')) && editEventForm.get('ubicacion').touched">
+          <p class="error_message">Ingresa una ubicación valida.</p>
+        </div>
+      </ion-item>
 
       <ion-item>
         <ion-label>Tipo Actividad</ion-label>
-        <ion-select formControlName="tipoActividad" [selectOptions]="tipoActividadAlertOpts" name="tipoDeActividad">
-          <ion-option>Vaterinario</ion-option>
+        <ion-select formControlName="tipoActividad" [selectOptions]="tipoActividadAlertOpts" name="tipoDeActividad"
+                    cancelText="Cancelar" okText="Aceptar">
+          <ion-option>Veterinario</ion-option>
           <ion-option>Peluqueria</ion-option>
-          <ion-option>Vacuna B2</ion-option>
+          <ion-option>Vacuna</ion-option>
           <ion-option>Jugar</ion-option>
-          <ion-option>dientes</ion-option>
+          <ion-option>Dientes</ion-option>
+          <ion-option>Baño</ion-option>
         </ion-select>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(editEventForm.get('tipoActividad').hasError('required')) && editEventForm.get('tipoActividad').touched">
+        <div class="error"
+             *ngIf="(editEventForm.get('tipoActividad').hasError('required')) && editEventForm.get('tipoActividad').touched">
+          <p class="error_message">Selecciona una actividad.</p>
+        </div>
       </ion-item>
 
       <ion-item>
         <ion-label>Fecha Evento</ion-label>
         <ion-datetime formControlName="fechaEvento" displayFormat="MM/DD/YYYY" name="fechaDelEvento"></ion-datetime>
       </ion-item>
+      <ion-item no-lines
+                *ngIf="(editEventForm.get('fechaEvento').hasError('required')) && editEventForm.get('fechaEvento').touched">
+        <div class="error"
+             *ngIf="(editEventForm.get('fechaEvento').hasError('required')) && editEventForm.get('fechaEvento').touched">
+          <p class="error_message">Selecciona una fecha para la actividad.</p>
+        </div>
+      </ion-item>
 
       <ion-item>
         <ion-label>Hora Evento</ion-label>
         <ion-datetime formControlName="horaEvento" displayFormat="hh:mm A" name="horaDelEvento"></ion-datetime>
       </ion-item>
+      <ion-item no-lines
+                *ngIf="(editEventForm.get('horaEvento').hasError('required')) && editEventForm.get('horaEvento').touched">
+        <div class="error"
+             *ngIf="(editEventForm.get('horaEvento').hasError('required')) && editEventForm.get('horaEvento').touched">
+          <p class="error_message">Selecciona una hora para la actividad.</p>
+        </div>
+      </ion-item>
 
       <ion-item>
         <ion-label floating>Descripción</ion-label>
         <ion-textarea formControlName="descripcion" name="descripcionDelEvento"></ion-textarea>
+      </ion-item>
+      <ion-item no-lines
+                *ngIf="(editEventForm.get('descripcion').hasError('required')) && editEventForm.get('descripcion').touched">
+        <div class="error"
+             *ngIf="(editEventForm.get('descripcion').hasError('required')) && editEventForm.get('descripcion').touched">
+          <p class="error_message">Ingresa una breve descripción.</p>
+        </div>
       </ion-item>
     </ion-list>
   </form>

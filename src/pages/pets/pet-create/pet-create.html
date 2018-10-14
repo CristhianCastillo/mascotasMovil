@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="dark">
       <ion-toolbar no-border-top>
           <ion-title>Datos {{nombre}}</ion-title>
           <ion-buttons end>
@@ -30,7 +30,8 @@
 
       <ion-item>
         <ion-label>Tipo de Mascota</ion-label>
-        <ion-select formControlName="tipoMascota" [selectOptions]="tipoMascotaAlertOpts" name="tipoMascota">
+        <ion-select formControlName="tipoMascota" [selectOptions]="tipoMascotaAlertOpts" name="tipoMascota"
+                    cancelText="Cancelar" okText="Aceptar">
             <ion-option>Raton</ion-option>
             <ion-option>Perro</ion-option>
             <ion-option>Gato</ion-option>
@@ -49,7 +50,7 @@
 
       <ion-item>
         <ion-label>Genero</ion-label>
-        <ion-select formControlName="genero" name="generoMascota">
+        <ion-select formControlName="genero" name="generoMascota" cancelText="Cancelar" okText="Aceptar">
           <ion-option value="Hembra">Hembra</ion-option>
           <ion-option value="Macho">Macho</ion-option>
         </ion-select>
@@ -88,7 +89,7 @@
 
       <ion-item>
           <ion-label>Esterilizado</ion-label>
-          <ion-select formControlName="esterilizado" name="esterilizado">
+          <ion-select formControlName="esterilizado" name="esterilizado" cancelText="Cancelar" okText="Aceptar">
             <ion-option value="Si">Si</ion-option>
             <ion-option value="No">No</ion-option>
           </ion-select>
@@ -109,7 +110,7 @@
                 *ngIf="(petForm.get('color').hasError('required')) && petForm.get('color').touched">
         <div class="error"
              *ngIf="(petForm.get('color').hasError('required')) && petForm.get('color').touched">
-          <p class="error_message">Color no valido.</p>
+          <p class="error_message">Ingresa un color valido.</p>
         </div>
       </ion-item>
 

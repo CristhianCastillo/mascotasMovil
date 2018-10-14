@@ -49,6 +49,7 @@ export class MyApp {
   //rootPage:any = TabsPage;
   //rootPage: any = TabsAdminPage;
   //rootPage:any = EstablishmentAdminPage;
+  //rootPage:any = AgendaPage;
 
   /**
    * Array that contents the options for a User.

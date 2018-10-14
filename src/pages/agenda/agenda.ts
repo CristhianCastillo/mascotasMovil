@@ -28,7 +28,7 @@ export class AgendaPage {
           id: 2,
           nombre: "Vacuna anual",
           ubicacion: "Calle 34 F 34",
-          tipoActividad: "Vacuna B2",
+          tipoActividad: "Vacuna",
           fechaEvento: "2019-05-01",
           horaEvento: "12:00",
           descripcionEvento: "Vacuna anual contra la rabia"
@@ -52,7 +52,7 @@ export class AgendaPage {
           id: 4,
           nombre: "Vacuna anual",
           ubicacion: "Calle 34 F 34",
-          tipoActividad: "Vacuna B2",
+          tipoActividad: "Vacuna",
           fechaEvento: "2019-05-01",
           horaEvento: "12:00",
           descripcionEvento: "Vacuna anual contra la rabia"
@@ -76,7 +76,7 @@ export class AgendaPage {
           id: 6,
           nombre: "Cepillado de dientes",
           ubicacion: "Calle 34 F 34",
-          tipoActividad: "dientes",
+          tipoActividad: "Dientes",
           fechaEvento: "2019-05-01",
           horaEvento: "15:00",
           descripcionEvento: "Cepillado de dientes"

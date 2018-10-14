@@ -5,23 +5,22 @@
 </ion-header>
 <ion-content>
   <div style="text-align: center; vertical-align: middle; padding-top: 20px;">
-    <img src="../assets/imgs/image-start.png" style="width: 300px;"/>
+    <img src="../assets/imgs/image-start.png" style="width: 230px;"/>
     <h6>Selecciona uno de los siguintes tipos de usuario para crear tu cuenta.</h6>
     <img src="../assets/imgs/logo-mascotas.png" style="width: 120px;"/>
   </div>
-
-  <ion-footer no-border>
-    <ion-toolbar>
-      <ion-grid>
-        <ion-row>
-          <ion-col col-6>
-            <button ion-button round full color="danger" (click)="goRegisterUser()">Usuario</button>
-          </ion-col>
-          <ion-col col-6>
-            <button ion-button round full (click)="goRegisterAdmin()">Propietario</button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-toolbar>
-  </ion-footer>
 </ion-content>
+<ion-footer no-border>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button round full color="danger" (click)="goRegisterUser()">Usuario</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button round full (click)="goRegisterAdmin()">Propietario</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

@@ -9,7 +9,6 @@ declare var google;
 export class DashboardAdminPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
   }
 
   ionViewDidLoad() {
@@ -25,9 +24,7 @@ export class DashboardAdminPage {
     var options = {
       title: 'Servicios solicitados'
     };
-
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
     chart.draw(data, options);
   }
-
 }

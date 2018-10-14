@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -68,7 +68,7 @@
 
       <ion-item>
         <ion-label>Horarios</ion-label>
-        <ion-select formControlName="horarios" name="horariosEstablecimiento">
+        <ion-select formControlName="horarios" name="horariosEstablecimiento" cancelText="Cancelar" okText="Aceptar">
           <ion-option value="24 H">24 Horas</ion-option>
           <ion-option value="Establecido">Establecido</ion-option>
         </ion-select>
@@ -93,7 +93,7 @@
       <ion-item no-lines
                 *ngIf="(editEstablishmentForm.get('descripcion').hasError('required')) && editEstablishmentForm.get('descripcion').touched">
         <div class="error"
-             *ngIf="(editEstablishmentForm.get('descripcion').hasError('required')) && editEstablishmentForm.get('decripcion').touched">
+             *ngIf="(editEstablishmentForm.get('descripcion').hasError('required')) && editEstablishmentForm.get('descripcion').touched">
           <p class="error_message">Ingresa una breve descripción.</p>
         </div>
       </ion-item>

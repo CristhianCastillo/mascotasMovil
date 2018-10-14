@@ -16,9 +16,14 @@ export class AgendaModalPage {
   private editEventForm: FormGroup;
   public evento: Cita;
   public nombreMascota: string;
+  public tipoActividadAlertOpts: { title: string, subTitle: string };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController,
               private formBuilder: FormBuilder) {
+    this.tipoActividadAlertOpts = {
+      title: 'Tipo Actividad',
+      subTitle: 'Selecciona'
+    };
 
     this.evento = <Cita>this.navParams.get("cita");
     this.nombreMascota = this.navParams.get("nombreAnimal");

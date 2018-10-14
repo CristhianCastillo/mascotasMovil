@@ -11,6 +11,7 @@ export class PetsOwnerPage {
   public cliente: any;
   public mascotas: any[];
   public nombreCliente: string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.cliente = this.navParams.get('cliente');
     this.nombreCliente = this.cliente.nombreCliente;

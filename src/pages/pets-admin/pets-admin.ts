@@ -9,9 +9,8 @@ import { PetServicesPage } from '../pets-admin/pet-services/pet-services';
 })
 export class PetsAdminPage {
 
-  pet: string = "duenios";
-
-  clientes = [
+  public pet: string = "duenios";
+  public clientes: any = [
     {
       nombreCliente: 'Cristhian Castillo',
       numerovisitas: 10,

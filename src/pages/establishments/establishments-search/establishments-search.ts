@@ -37,7 +37,6 @@ export class EstablishmentsSearchPage {
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false
     };
-
     const myModal = this.modal.create(MessageModalPage, {nombre: this.establecimiento.nombre}, myModalOptions);
     myModal.present();
   }

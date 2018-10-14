@@ -69,6 +69,10 @@ export class MessageModalPage {
     alert.present()
   }
 
+  closeModal(){
+    this.view.dismiss();
+  }
+
   showUserMessageError(mensaje: string) {
     let alert = this.alertController.create({
       title: 'Error',

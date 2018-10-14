@@ -91,7 +91,7 @@ export class RegisterAdminPage {
    * @param user
    */
   createUser(user){
-    this.userMessageCorrect("Cuenta creada con exito revisa tu correo electronico.");
+    this.showUserMessageCorrect("Cuenta creada con exito revisa tu correo electronico.");
     // this.servicePet.createPet(data).subscribe(
     //   (result: Mascota) =>{
     //     console.log(result);
@@ -106,7 +106,7 @@ export class RegisterAdminPage {
     console.log(user);
   }
 
-  userMessageCorrect(mensaje: string) {
+  showUserMessageCorrect(mensaje: string) {
     let alert = this.alertController.create({
       title: 'Mensaje',
       message: mensaje,
@@ -120,7 +120,7 @@ export class RegisterAdminPage {
     alert.present()
   }
 
-  userMessageError(mensaje: string) {
+  showUserMessageError(mensaje: string) {
     let alert = this.alertController.create({
       title: 'Error',
       message: mensaje,

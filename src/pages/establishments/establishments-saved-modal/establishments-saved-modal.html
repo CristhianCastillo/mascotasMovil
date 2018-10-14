@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-title>{{establecimiento.nombre}}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="deleteEstablishment()" icon-end>
@@ -12,7 +12,6 @@
 
 <ion-content>
   <ion-card>
-
     <img [src]="establecimiento.imagen"/>
     <ion-grid>
       <ion-row>

@@ -49,6 +49,10 @@ export class RegisterPage {
     });
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad RegisterPage');
+  }
+
   ionViewDidEnter() {
     this.menu.swipeEnable(false);
     // If you have more than one side menu, use the id like below
@@ -82,7 +86,7 @@ export class RegisterPage {
    * @param user
    */
   createUser(user){
-    this.userMessageCorrect("Cuenta creada con exito revisa tu correo electronico.");
+    this.showUserMessageCorrect("Cuenta creada con exito revisa tu correo electronico.");
     // this.servicePet.createPet(data).subscribe(
     //   (result: Mascota) =>{
     //     console.log(result);
@@ -97,7 +101,7 @@ export class RegisterPage {
     console.log(user);
   }
 
-  userMessageCorrect(mensaje: string) {
+  showUserMessageCorrect(mensaje: string) {
     let alert = this.alertController.create({
       title: 'Mensaje',
       message: mensaje,
@@ -111,7 +115,7 @@ export class RegisterPage {
     alert.present()
   }
 
-  userMessageError(mensaje: string) {
+  showUserMessageError(mensaje: string) {
     let alert = this.alertController.create({
       title: 'Error',
       message: mensaje,
@@ -132,9 +136,5 @@ export class RegisterPage {
     loader.present();
     this.navCtrl.setRoot(TabsPage);
     loader.dismiss();
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
   }
 }

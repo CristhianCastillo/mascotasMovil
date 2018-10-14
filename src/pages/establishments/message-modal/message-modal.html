@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-title>Enviar a {{nombreEstablecimiento}}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="closeModal()">
@@ -17,7 +17,7 @@
     <ion-list>
       <ion-item>
         <ion-label>Mascota</ion-label>
-        <ion-select formControlName="mascota" name="mascotasAplicacion">
+        <ion-select formControlName="mascota" cancelText="Cancelar" okText="Aceptar" name="mascotasAplicacion">
           <ion-option>Raton</ion-option>
           <ion-option>Perro</ion-option>
           <ion-option>Gato</ion-option>
@@ -30,7 +30,7 @@
                 *ngIf="(modalMessageForm.get('mascota').hasError('required')) && modalMessageForm.get('mascota').touched">
         <div class="error"
              *ngIf="(modalMessageForm.get('mascota').hasError('required')) && modalMessageForm.get('mascota').touched">
-          <p class="error_message">Selecciona una mascota</p>
+          <p class="error_message">Selecciona una mascota.</p>
         </div>
       </ion-item>
 

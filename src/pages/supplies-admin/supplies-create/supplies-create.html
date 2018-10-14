@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-toolbar no-border-top>
       <ion-title>Suministro</ion-title>
       <ion-buttons end>
@@ -18,7 +18,7 @@
     <ion-list>
       <ion-item>
         <ion-label>Tipo Suministro</ion-label>
-        <ion-select formControlName="tipoSuministro" name="tipoSuministro">
+        <ion-select formControlName="tipoSuministro" name="tipoSuministro" cancelText="Cancelar" okText="Aceptar">
           <ion-option value="Juguetes">Juguetes</ion-option>
           <ion-option value="Alimento">Alimento</ion-option>
         </ion-select>
@@ -57,7 +57,7 @@
 
       <ion-item>
         <ion-label>Unidad Medida</ion-label>
-        <ion-select formControlName="unidadMedida" name="unidadDeMedidia">
+        <ion-select formControlName="unidadMedida" name="unidadDeMedidia" cancelText="Cancelar" okText="Aceptar">
           <ion-option value="u">Unidades</ion-option>
           <ion-option value="Kg">Kg</ion-option>
           <ion-option value="g">g</ion-option>
