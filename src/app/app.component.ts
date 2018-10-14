@@ -94,7 +94,7 @@ export class MyApp {
     console.log("Inicializando");
     this.platform.ready().then(() => {
       //this.statusBar.backgroundColorByHexString('#cc0000');
-      this.statusBar.backgroundColorByHexString('#222');
+      this.statusBar.backgroundColorByHexString('#000000');
       this.splashScreen.hide();
       // this.statusBar.styleDefault();
       // if(this.platform.is('android')) {
