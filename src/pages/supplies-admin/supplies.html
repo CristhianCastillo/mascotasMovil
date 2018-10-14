@@ -12,9 +12,11 @@
     <ion-list-header>
       {{suministro.nombreTipoSuministro}}
     </ion-list-header>
-    <ion-item *ngFor="let detalle of suministro.detalles" (click)="goToViewSupplie(detalle)">
+    <ion-item *ngFor="let detalle of suministro.detalles" [ngSwitch]="detalle.tipoSuministro" (click)="goToViewSupplie(detalle)">
       {{detalle.nombre}}
-      <ion-icon name='color-wand' item-start></ion-icon>
+      <ion-icon *ngSwitchCase="'Juguetes'" name='american-football' item-start></ion-icon>
+      <ion-icon *ngSwitchCase="'Alimento'" name='cart' item-start></ion-icon>
+      <ion-icon *ngSwitchDefault name='construct' item-start></ion-icon>
       <ion-note item-end>{{detalle.cantidad}} {{detalle.unidadMedida}}</ion-note>
     </ion-item>
   </ion-list>

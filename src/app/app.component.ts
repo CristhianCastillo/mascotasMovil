@@ -91,9 +91,16 @@ export class MyApp {
    * Initialize the app.
    */
   initializeApp() {
+    console.log("Inicializando");
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      this.statusBar.backgroundColorByHexString('#007ac1');
       this.splashScreen.hide();
+      // this.statusBar.styleDefault();
+      // if(this.platform.is('android')) {
+      //   this.statusBar.overlaysWebView(false);
+      //   this.statusBar.backgroundColorByHexString('#000000');
+      // }
+      //this.splashScreen.hide();
     });
   }
 

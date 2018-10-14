@@ -127,7 +127,7 @@ export class LoginPage {
    * Go to reset password.
    */
   goResetPassword(){
-    this.navCtrl.setRoot(StartPage);
+    this.navCtrl.push(StartPage);
   }
 
   /**
