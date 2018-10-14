@@ -9,7 +9,7 @@ page-start {
   }
 
   $colors: (
-    primary:   #ffff
+    primary:   unquote($string: "#ffff")
   );
 
   .toolbar-background {
