@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
-//import { EstablishmentsSavedModalPage } from '../establishments/establishments-saved-modal/establishments-saved-modal';
-//import { EstablishmentsSearchPage } from '../establishments/establishments-search/establishments-search';
 import { Establecimiento } from "../../models/establecimiento";
 
 @IonicPage()
@@ -49,6 +47,7 @@ export class EstablishmentsPage {
       calificacion: 'Regular'
     }
   ];
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

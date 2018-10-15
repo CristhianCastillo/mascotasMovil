@@ -9,9 +9,10 @@ export class GlobalErrorHandler implements ErrorHandler {
   ) {}
 
   async handleError(error) {
+    console.log(error);
     const alert = this.alerts.create({
       title: 'Upsss!!',
-      subTitle: 'Estamos presentando problemas, intentalo más tarde',
+      subTitle: 'Estamos presentando problemas, intentalo más tarde. ' + error.message,
       enableBackdropDismiss: false,
       buttons: [
         {

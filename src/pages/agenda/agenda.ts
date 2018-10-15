@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
-//import { ChoosePetPage } from '../agenda/choose-pet/choose-pet';
-//import { AgendaModalPage } from '../agenda/agenda-modal/agenda-modal';
-import {Cita} from "../../models/cita";
+import { Cita } from "../../models/cita";
 
 @IonicPage()
 @Component({

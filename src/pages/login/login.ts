@@ -1,13 +1,9 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, AlertController, MenuController, IonicPage } from 'ionic-angular';
-//import { StartPage } from '../start/start';
-import { LoadingController } from 'ionic-angular';
-//import { TabsPage } from '../tabs/tabs';
-import { GlobalProvider } from "../../providers/global/global";
-
-import { LoginServiceProvider }  from '../../providers/login-service/login-service';
-
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import {Component} from '@angular/core';
+import {NavController, NavParams, Platform, AlertController, MenuController, IonicPage} from 'ionic-angular';
+import {LoadingController} from 'ionic-angular';
+import {GlobalProvider} from "../../providers/global/global";
+import {LoginServiceProvider} from '../../providers/login-service/login-service';
+import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -39,15 +35,15 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public loadingCtrl: LoadingController
     , public serviceLogin: LoginServiceProvider, private formBuilder: FormBuilder, public alertController: AlertController,
               public global: GlobalProvider, private menu: MenuController) {
-    let backAction =  platform.registerBackButtonAction(() => {
+    let backAction = platform.registerBackButtonAction(() => {
       console.log("second");
       this.navCtrl.pop();
       backAction();
-    },2)
+    }, 2)
     this.loginForm = this.formBuilder.group({
       usuario: ['', Validators.required],
       password: ['', Validators.required],
-      recordarPassword : true
+      recordarPassword: true
     });
   }
 
@@ -75,8 +71,8 @@ export class LoginPage {
   /**
    * Get data from the form.
    */
-  getDataForm(){
-    const usuarioLogin = { 
+  getDataForm() {
+    const usuarioLogin = {
       usuario: this.loginForm.value['usuario'],
       password: this.loginForm.value['password']
     };
@@ -87,24 +83,27 @@ export class LoginPage {
    * Make the authentification login with a REST service.
    * @param data User from the login.
    */
-  loginUser(data){
+  loginUser(data) {
     const loader = this.loadingCtrl.create({
       content: "Verificando..."
     });
     loader.present();
     this.serviceLogin.loginUser(data).subscribe(
-      (result: boolean) =>{
+      (result: boolean) => {
         console.log(result);
-        if(result){
+        if (result) {
           this.global.set('usuario');
           this.global.actulizarEstado(true);
-          loader.dismiss();
           this.navCtrl.setRoot('TabsPage');
         }
-        else{
-          loader.dismiss();
+        else {
           this.showMessageNoEnter("Usuario y/o password incorrectos");
         }
+        loader.dismiss();
+      },
+      (err) => {
+        loader.dismiss();
+        this.showMessageNoEnter(err.message);
       }
     );
   }
@@ -127,14 +126,14 @@ export class LoginPage {
   /**
    * Go to reset password.
    */
-  goResetPassword(){
+  goResetPassword() {
     this.navCtrl.push('StartPage');
   }
 
   /**
    * Go to register page.
    */
-  goRegisterPage(){
+  goRegisterPage() {
     this.navCtrl.push('StartPage');
-  }  
+  }
 }

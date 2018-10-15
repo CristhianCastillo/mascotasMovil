@@ -1,8 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams, MenuController, IonicPage} from 'ionic-angular';
 
-// import {LoginPage} from '../login/login';
-
 @IonicPage()
 @Component({
   selector: 'page-slide-intro',

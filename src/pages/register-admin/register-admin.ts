@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform, MenuController, IonicPage } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
-//import { TabsAdminPage } from '../tabs-admin/tabs-admin';
 import { GlobalProvider } from '../../providers/global/global';
-
 import { AlertController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { RegistrationValidator } from "../../validators/RegistrationValidator";

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
-//import { AgendaCreatePage } from '../agenda-create/agenda-create';
 
 @IonicPage()
 @Component({
@@ -9,7 +8,7 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
 })
 export class ChoosePetPage {
 
-  mascotas = [
+  public mascotas = [
     {
       id: 1,
       imagen: '../../assets/imgs/pet - 1.png',
@@ -83,6 +82,7 @@ export class ChoosePetPage {
       descripcion: 'Es un animal muy veloz.'
     }
   ];
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

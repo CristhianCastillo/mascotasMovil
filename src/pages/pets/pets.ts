@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage} from 'ionic-angular';
-//import { PetCreatePage } from '../pets/pet-create/pet-create';
-//import { PetModalPage } from '../pets/pet-modal/pet-modal';
 import { Mascota } from "../../models/mascota";
 import { LoadingController } from 'ionic-angular';
-
 import { PetsServiceProvider } from '../../providers/pets-service/pets-service';
 
 @IonicPage()

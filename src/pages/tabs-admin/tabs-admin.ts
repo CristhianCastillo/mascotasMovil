@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
 import { NavParams, IonicPage } from 'ionic-angular';
-//import { EstablishmentAdminPage } from '../establishment-admin/establishment-admin';
-//import { PetsAdminPage } from '../pets-admin/pets-admin';
-//import { SuppliesAdminPage } from '../supplies-admin/supplies';
-//import { DashboardAdminPage } from '../dashboard-admin/dashboard-admin';
 
 @IonicPage()
 @Component({

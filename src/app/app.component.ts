@@ -4,22 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GlobalProvider } from '../providers/global/global';
 
-//import { TabsAdminPage } from '../pages/tabs-admin/tabs-admin';
-//import { EstablishmentAdminPage } from '../pages/establishment-admin/establishment-admin';
-//import { PetsAdminPage } from '../pages/pets-admin/pets-admin';
-//import { SuppliesAdminPage } from '../pages/supplies-admin/supplies';
-//import { DashboardAdminPage } from '../pages/dashboard-admin/dashboard-admin';
-
-
-//import { TabsPage } from '../pages/tabs/tabs';
-//import { PetsPage } from '../pages/pets/pets';
-//import { SuppliesPage } from '../pages/supplies/supplies-ad';
-//import { EstablishmentsPage } from '../pages/establishments/establishments';
-//import { AgendaPage } from '../pages/agenda/agenda';
-
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
-// import { LoginPage } from '../pages/login/login';
 
 /**
  * Interface that represent a page in menu bar.
@@ -54,7 +40,7 @@ export class MyApp {
   /**
    * Array that contents the options for a User.
    */
-  pagesUser: PageInterface[] = [
+  public pagesUser: PageInterface[] = [
     { title: 'Mascotas', name: 'TabsPage', component: 'TabsPage', tabComponent: 'PetsPage', index: 0, icon: 'paw' },
     { title: 'Suministros', name: 'TabsPage', component: 'TabsPage', tabComponent: 'SuppliesPage', index: 1, icon: 'filing' },
     { title: 'Establecimientos', name: 'TabsPage', component: 'TabsPage', tabComponent: 'EstablishmentsPage', index: 2, icon: 'medkit' },
@@ -66,7 +52,7 @@ export class MyApp {
   /**
    * Array that contents the options for a Admin.
    */
-  pagesAdmin: PageInterface[] = [
+  public pagesAdmin: PageInterface[] = [
     { title: 'Establecimiento', name: 'TabsAdminPage', component: 'TabsAdminPage', tabComponent: 'EstablishmentAdminPage', index: 0, icon: 'medkit' },
     { title: 'Mascotas', name: 'TabsAdminPage', component: 'TabsAdminPage', tabComponent: 'PetsAdminPage', index: 1, icon: 'paw' },
     { title: 'Suministros', name: 'TabsAdminPage', component: 'TabsAdminPage', tabComponent: 'SuppliesAdminPage', index: 2, icon: 'filing' },
@@ -130,7 +116,6 @@ export class MyApp {
     if (page.index) {
       params = { tabIndex: page.index };
     }
- 
     // If tabs page is already active just change the tab index
     if (this.nav.getActiveChildNavs().length && page.index != undefined) {
       this.nav.getActiveChildNavs()[0].select(page.index);

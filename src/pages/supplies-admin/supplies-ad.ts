@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage} from 'ionic-angular';
-//import { SuppliesCreatePageAdmin } from './supplies-create/supplies-ad-create';
-//import { SuppliesModalPageAdmin } from './supplies-modal/supplies-ad-modal';
 import { Suministro } from "../../models/suministro";
 
 @IonicPage()

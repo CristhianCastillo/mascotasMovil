@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import { Validators, FormGroup, FormBuilder} from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @IonicPage()
 @Component({

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
-//import { PetsOwnerPage } from '../pets-admin/pets-owner/pets-owner';
-//import { PetServicesPage } from '../pets-admin/pet-services/pet-services';
 
 @IonicPage()
 @Component({
