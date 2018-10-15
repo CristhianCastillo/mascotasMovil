@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { PetsOwnerPage } from '../pets-admin/pets-owner/pets-owner';
-import { PetServicesPage } from '../pets-admin/pet-services/pet-services';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
+//import { PetsOwnerPage } from '../pets-admin/pets-owner/pets-owner';
+//import { PetServicesPage } from '../pets-admin/pet-services/pet-services';
 
+@IonicPage()
 @Component({
   selector: 'page-pets-admin',
   templateUrl: 'pets-admin.html',
@@ -108,10 +109,10 @@ export class PetsAdminPage {
   }
 
   gotToViewHisPets(cliente) {
-    this.navCtrl.push(PetsOwnerPage, { cliente: cliente });
+    this.navCtrl.push('PetsOwnerPage', { cliente: cliente });
   }
 
   gotToViewPet(mascota){
-    this.navCtrl.push(PetServicesPage, {mascota: mascota});
+    this.navCtrl.push('PetServicesPage', {mascota: mascota});
   }
 }

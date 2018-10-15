@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { EstablishmentsSavedModalPage } from '../establishments/establishments-saved-modal/establishments-saved-modal';
-import { EstablishmentsSearchPage } from '../establishments/establishments-search/establishments-search';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
+//import { EstablishmentsSavedModalPage } from '../establishments/establishments-saved-modal/establishments-saved-modal';
+//import { EstablishmentsSearchPage } from '../establishments/establishments-search/establishments-search';
 import { Establecimiento } from "../../models/establecimiento";
 
+@IonicPage()
 @Component({
   selector: 'page-establishments',
   templateUrl: 'establishments.html',
@@ -57,10 +58,10 @@ export class EstablishmentsPage {
 
   gotToViewEstablishmentSaved(establecimiento: Establecimiento){
     console.log(establecimiento);
-    this.navCtrl.push(EstablishmentsSavedModalPage, {establecimiento: establecimiento});
+    this.navCtrl.push('EstablishmentsSavedModalPage', {establecimiento: establecimiento});
   }
 
   gotToViewEstablishmentSearch(establecimiento: Establecimiento){
-    this.navCtrl.push(EstablishmentsSearchPage, {establecimiento: establecimiento});
+    this.navCtrl.push('EstablishmentsSearchPage', {establecimiento: establecimiento});
   }
 }

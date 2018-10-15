@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { AgendaCreatePage } from '../agenda-create/agenda-create';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
+//import { AgendaCreatePage } from '../agenda-create/agenda-create';
 
+@IonicPage()
 @Component({
   selector: 'page-choose-pet',
   templateUrl: 'choose-pet.html',
@@ -91,6 +92,6 @@ export class ChoosePetPage {
 
   goToCreateEvent(mascota){
     console.log(mascota.nombre);
-    this.navCtrl.push(AgendaCreatePage, mascota);
+    this.navCtrl.push('AgendaCreatePage', mascota);
   }
 }

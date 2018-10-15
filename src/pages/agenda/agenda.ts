@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { ChoosePetPage } from '../agenda/choose-pet/choose-pet';
-import { AgendaModalPage } from '../agenda/agenda-modal/agenda-modal';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
+//import { ChoosePetPage } from '../agenda/choose-pet/choose-pet';
+//import { AgendaModalPage } from '../agenda/agenda-modal/agenda-modal';
 import {Cita} from "../../models/cita";
 
+@IonicPage()
 @Component({
   selector: 'page-agenda',
   templateUrl: 'agenda.html',
@@ -93,10 +94,10 @@ export class AgendaPage {
   }
 
   goToViewEvent(cita: Cita, nombreAnimal){
-    this.navCtrl.push(AgendaModalPage,{cita: cita, nombreAnimal});
+    this.navCtrl.push('AgendaModalPage',{cita: cita, nombreAnimal});
   }
 
   goToChoseePet(){
-    this.navCtrl.push(ChoosePetPage);
+    this.navCtrl.push('ChoosePetPage');
   }
 }

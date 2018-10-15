@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { Cita } from "../../../models/cita";
 
+@IonicPage()
 @Component({
   selector: 'page-agenda-modal',
   templateUrl: 'agenda-modal.html',

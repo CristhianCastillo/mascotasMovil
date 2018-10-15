@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, AlertController} from 'ionic-angular';
+import {NavController, NavParams, AlertController, IonicPage} from 'ionic-angular';
 
+@IonicPage()
 @Component({
   selector: 'page-pet-services',
   templateUrl: 'pet-services.html',

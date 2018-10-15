@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, MenuController} from 'ionic-angular';
+import {NavController, NavParams, MenuController, IonicPage} from 'ionic-angular';
 
-import {LoginPage} from '../login/login';
+// import {LoginPage} from '../login/login';
 
+@IonicPage()
 @Component({
   selector: 'page-slide-intro',
   templateUrl: 'slide-intro.html',
@@ -81,6 +82,6 @@ export class SlideIntroPage {
    * Go to login page.
    */
   goLoginPage() {
-    this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.setRoot('LoginPage');
   }
 }

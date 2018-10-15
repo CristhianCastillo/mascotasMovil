@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { PetsServiceProvider } from '../../../providers/pets-service/pets-service';
 import { Mascota } from '../../../models/mascota';
 
+@IonicPage()
 @Component({
   selector: 'page-pet-create',
   templateUrl: 'pet-create.html',

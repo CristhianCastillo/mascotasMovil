@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, ModalOptions, AlertController} from 'ionic-angular';
+import { NavController, NavParams, ModalController, ModalOptions, AlertController, IonicPage} from 'ionic-angular';
 import { MessageModalPage } from '../message-modal/message-modal';
 import { Establecimiento } from "../../../models/establecimiento";
 
+@IonicPage()
 @Component({
   selector: 'page-establishments-saved-modal',
   templateUrl: 'establishments-saved-modal.html',

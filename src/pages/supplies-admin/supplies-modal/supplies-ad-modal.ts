@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, IonicPage } from 'ionic-angular';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { Suministro } from "../../../models/suministro";
 
+@IonicPage()
 @Component({
-  selector: 'page-supplies-modal',
-  templateUrl: 'supplies-modal.html',
+  selector: 'page-supplies-ad-modal',
+  templateUrl: 'supplies-ad-modal.html',
 })
 export class SuppliesModalPageAdmin {
 

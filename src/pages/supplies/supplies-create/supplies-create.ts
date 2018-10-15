@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, AlertController} from 'ionic-angular';
+import {NavController, NavParams, AlertController, IonicPage} from 'ionic-angular';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 
+@IonicPage()
 @Component({
   selector: 'page-supplies-create',
   templateUrl: 'supplies-create.html',

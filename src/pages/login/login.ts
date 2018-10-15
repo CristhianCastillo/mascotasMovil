@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, AlertController, MenuController } from 'ionic-angular';
-import { StartPage } from '../start/start';
+import { NavController, NavParams, Platform, AlertController, MenuController, IonicPage } from 'ionic-angular';
+//import { StartPage } from '../start/start';
 import { LoadingController } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
+//import { TabsPage } from '../tabs/tabs';
 import { GlobalProvider } from "../../providers/global/global";
 
 import { LoginServiceProvider }  from '../../providers/login-service/login-service';
 
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
+@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -98,7 +99,7 @@ export class LoginPage {
           this.global.set('usuario');
           this.global.actulizarEstado(true);
           loader.dismiss();
-          this.navCtrl.setRoot(TabsPage);
+          this.navCtrl.setRoot('TabsPage');
         }
         else{
           loader.dismiss();
@@ -127,13 +128,13 @@ export class LoginPage {
    * Go to reset password.
    */
   goResetPassword(){
-    this.navCtrl.push(StartPage);
+    this.navCtrl.push('StartPage');
   }
 
   /**
    * Go to register page.
    */
   goRegisterPage(){
-    this.navCtrl.push(StartPage);
+    this.navCtrl.push('StartPage');
   }  
 }

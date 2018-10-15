@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
 
 declare var google;
+@IonicPage()
 @Component({
   selector: 'page-dashboard-admin',
   templateUrl: 'dashboard-admin.html',

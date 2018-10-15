@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { SuppliesCreatePage } from '../supplies/supplies-create/supplies-create';
-import { SuppliesModalPage } from '../supplies/supplies-modal/supplies-modal';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
+//import { SuppliesCreatePage } from '../supplies/supplies-create/supplies-create';
+//import { SuppliesModalPage } from '../supplies/supplies-modal/supplies-modal';
 import { Suministro } from "../../models/suministro";
 
+@IonicPage()
 @Component({
   selector: 'page-supplies',
   templateUrl: 'supplies.html',
@@ -83,10 +84,10 @@ export class SuppliesPage {
   }
 
   goToCreateSupplie(){
-    this.navCtrl.push(SuppliesCreatePage);
+    this.navCtrl.push('SuppliesCreatePage');
   }
 
   goToViewSupplie(detalle: Suministro){
-    this.navCtrl.push(SuppliesModalPage, {detalle: detalle});
+    this.navCtrl.push('SuppliesModalPage', {detalle: detalle});
   }
 }

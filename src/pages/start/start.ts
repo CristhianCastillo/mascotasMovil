@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController, IonicPage } from 'ionic-angular';
 
-import { RegisterAdminPage } from '../register-admin/register-admin';
-import { RegisterPage } from '../register/register';
+//import { RegisterAdminPage } from '../register-admin/register-admin';
+//import { RegisterPage } from '../register/register';
 import { Platform } from 'ionic-angular';
 
+@IonicPage()
 @Component({
   selector: 'page-start',
   templateUrl: 'start.html'
@@ -31,10 +32,10 @@ export class StartPage {
   }
 
   goRegisterUser(){
-    this.navCtrl.push(RegisterPage);
+    this.navCtrl.push('RegisterPage');
   }
 
   goRegisterAdmin(){
-    this.navCtrl.push(RegisterAdminPage);
+    this.navCtrl.push('RegisterAdminPage');
   }
 }

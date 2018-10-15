@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder} from '@angular/forms';
 
+@IonicPage()
 @Component({
   selector: 'page-agenda-create',
   templateUrl: 'agenda-create.html',

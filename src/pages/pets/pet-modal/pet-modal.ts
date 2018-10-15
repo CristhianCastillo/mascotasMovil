@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, IonicPage } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Mascota } from "../../../models/mascota";
 import { PetsServiceProvider } from '../../../providers/pets-service/pets-service';
 
+@IonicPage()
 @Component({
   selector: 'page-pet-modal',
   templateUrl: 'pet-modal.html',

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, AlertController, ModalOptions } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController, ModalOptions, IonicPage } from 'ionic-angular';
 import { MessageModalPage } from '../message-modal/message-modal';
 import {Establecimiento} from "../../../models/establecimiento";
 
+@IonicPage()
 @Component({
   selector: 'page-establishments-search',
   templateUrl: 'establishments-search.html',

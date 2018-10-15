@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { SuppliesCreatePageAdmin } from '../supplies-admin/supplies-create/supplies-create';
-import { SuppliesModalPageAdmin } from '../supplies-admin/supplies-modal/supplies-modal';
+import { NavController, NavParams, IonicPage} from 'ionic-angular';
+//import { SuppliesCreatePageAdmin } from './supplies-create/supplies-ad-create';
+//import { SuppliesModalPageAdmin } from './supplies-modal/supplies-ad-modal';
 import { Suministro } from "../../models/suministro";
 
+@IonicPage()
 @Component({
-  selector: 'page-supplies',
-  templateUrl: 'supplies.html',
+  selector: 'page-supplies-ad',
+  templateUrl: 'supplies-ad.html',
 })
 export class SuppliesAdminPage {
 
@@ -79,11 +80,11 @@ export class SuppliesAdminPage {
   }
 
   goToCreateSupplie(){
-    this.navCtrl.push(SuppliesCreatePageAdmin);
+    this.navCtrl.push('SuppliesCreatePageAdmin');
   }
 
   goToViewSupplie(detalle: Suministro){
-    this.navCtrl.push(SuppliesModalPageAdmin, {detalle: detalle});
+    this.navCtrl.push('SuppliesModalPageAdmin', {detalle: detalle});
   }
 
   ionViewDidLoad() {
