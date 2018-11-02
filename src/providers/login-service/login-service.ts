@@ -8,12 +8,12 @@ export class LoginServiceProvider {
         console.log('Hello LoginServiceProvider Provider');
     }
 
-    loginUser(data): Observable<boolean> {
-        //return this.http.post<boolean>("http://localhost:8080/users", data, {
-        return this.http.post<boolean>("https://mascotas.ga/application/usuarios/login", data, {
+    loginUser(data): Observable<any> {
+        //return this.http.post<any>('http://localhost:8080/users/login', data, {
+          return this.http.post<any>('https://mascotas.ga/application/users/login', data, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })
-        })
+        });
     }
 }

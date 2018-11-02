@@ -12,11 +12,11 @@
 
     <ion-item *ngFor="let mascota of mascotas" (click)="goToSelectedPet(mascota)">
       <ion-thumbnail item-start>
-        <img [src]="mascota.imagen">
+        <img [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' + mascota.imagen)" [alt]="mascota.nombre">
       </ion-thumbnail>
       <h2>{{mascota.nombre}}</h2>
       <p>{{mascota.raza}}</p>
-      <p>{{mascota.fechaNacimiento}}</p>
+      <p>{{mascota.fechaNacimiento.split('T')[0]}}</p>
       <button ion-button clear item-end>Detalles</button>
     </ion-item>
   </ion-list>

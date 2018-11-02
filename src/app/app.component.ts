@@ -32,7 +32,7 @@ export class MyApp {
   
   rootPage: string = 'SlideIntroPage';
   //rootPage:any = SlideIntroPage;
-  //rootPage:any = TabsPage;
+  //rootPage: string = 'TabsPage';
   //rootPage: any = TabsAdminPage;
   //rootPage:any = EstablishmentAdminPage;
   //rootPage:any = AgendaPage;
@@ -92,17 +92,10 @@ export class MyApp {
   }
 
   /**
-   * Get a boolean value to validate if the user was login.
-   */
-  getMenuEnabled(){
-    return this.global.estado;
-  }
-
-  /**
    * Get a boolean value to validate the type user login.
    */
   getUserEnabledType(){
-    return this.global.tipoUsuario === 'usuario' ? true : false;
+    return this.global.tipoUsuario === 'Usuario' ? true : false;
   }
 
   /**
@@ -122,7 +115,8 @@ export class MyApp {
     } else {
       namePage = page.name;
       if(namePage === 'Exit'){
-        this.global.actulizarEstado(false);
+        this.global._id = '';
+        this.global._tipoUsuario = '';
         this.nav.setRoot('LoginPage');
       }
       else{

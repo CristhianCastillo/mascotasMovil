@@ -5,6 +5,7 @@ import { GlobalProvider } from '../../providers/global/global';
 import { AlertController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { RegistrationValidator } from "../../validators/RegistrationValidator";
+import { RegisterProvider } from '../../providers/register/register';
 
 @IonicPage()
 @Component({
@@ -25,7 +26,7 @@ export class RegisterAdminPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform, public loadingCtrl: LoadingController,
   public global: GlobalProvider, private formBuilder: FormBuilder, private alertController: AlertController,
-              private menu: MenuController) {
+              private menu: MenuController, private service: RegisterProvider) {
     let backAction =  platform.registerBackButtonAction(() => {
       console.log("second");
       this.navCtrl.pop();
@@ -76,10 +77,10 @@ export class RegisterAdminPage {
       nombreUsuario: this.registerForm.value['nombreUsuario'],
       nombres: this.registerForm.value['nombres'],
       apellidos: this.registerForm.value['apellidos'],
-      emailUsuario: this.registerForm.value['emailUsuario'],
-      nombreEstablecimiento: this.registerForm.value['nombreEstablecimiento'],
-      nitEstablecimiento: this.registerForm.value['nitEstablecimiento'],
-      descripcionEstablecimiento: this.registerForm.value['descripcionEstablecimiento'],
+      email: this.registerForm.value['emailUsuario'],
+      establecimiento: this.registerForm.value['nombreEstablecimiento'],
+      nit: this.registerForm.value['nitEstablecimiento'],
+      descripcion: this.registerForm.value['descripcionEstablecimiento'],
       password: this.passwordFormGroup.value['password']
     }
     this.createUser(user);
@@ -90,19 +91,40 @@ export class RegisterAdminPage {
    * @param user
    */
   createUser(user){
-    this.showUserMessageCorrect("Cuenta creada con exito revisa tu correo electronico.");
-    // this.servicePet.createPet(data).subscribe(
-    //   (result: Mascota) =>{
-    //     console.log(result);
-    //     if(result){
-    //       this.userMessageCorrect("Un amigo tuyo acaba de ser creado.");
-    //     }
-    //     else{
-    //       this.userMessageError("Ha ocurrido un error");
-    //     }
-    //   }
-    // );
-    console.log(user);
+    const loader = this.loadingCtrl.create({
+      content: "Verificando..."
+    });
+    loader.present();
+    this.service.createUserOwner(user).subscribe(
+      (result: any) => {
+        console.log(result);
+        if (result.status) {
+          loader.dismiss();
+          this.showUserMessageCorrect("Genial, por favor ingresa a la aplicación.");
+        }
+        else {
+          loader.dismiss();
+          const message = result.message;
+          switch(message){
+            case 'UserName':
+            this.showUserMessageError("El nombre de usuario ya se encuentra en uso.");
+            break;
+            case 'Email':
+            this.showUserMessageError("El email seleccionado ya esta registrado.");
+            break;
+            case 'Establishment':
+            this.showUserMessageError("El nombre del establecimiento ya esta registrado.");
+            break;
+            case 'Nit':
+            this.showUserMessageError("El nit del establecimiento ya esta registrado.");
+          }
+        }
+      },
+      (err) => {
+        loader.dismiss();
+        this.showUserMessageError(err.message);
+      }
+    );
   }
 
   showUserMessageCorrect(mensaje: string) {
@@ -112,7 +134,7 @@ export class RegisterAdminPage {
       buttons: [{
         text: 'Aceptar',
         handler: () => {
-          this.goPrincipalMenu();
+          this.navCtrl.pop();
         }
       }]
     });
@@ -129,17 +151,4 @@ export class RegisterAdminPage {
     });
     alert.present()
   }
-
-  goPrincipalMenu(){
-    this.global.set('administrador');
-    this.global.actulizarEstado(true);
-    const loader = this.loadingCtrl.create({
-      content: "Por favor espera...",
-      duration: 3000
-    });
-    loader.present();
-    this.navCtrl.setRoot('TabsAdminPage');
-    loader.dismiss();
-  }
-
 }

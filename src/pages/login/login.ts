@@ -89,12 +89,19 @@ export class LoginPage {
     });
     loader.present();
     this.serviceLogin.loginUser(data).subscribe(
-      (result: boolean) => {
+      (result: any) => {
         console.log(result);
-        if (result) {
-          this.global.set('usuario');
-          this.global.actulizarEstado(true);
-          this.navCtrl.setRoot('TabsPage');
+        if (result.status) {
+          if(result.root === 'Usuario'){
+            this.global.id = result.message;
+            this.global._tipoUsuario = 'Usuario';
+            this.navCtrl.setRoot('TabsPage');
+          }
+          else{
+            this.global.id = result.message;
+            this.global._tipoUsuario = 'Propietario';
+            this.navCtrl.setRoot('TabsAdminPage');
+          }
         }
         else {
           this.showMessageNoEnter("Usuario y/o password incorrectos");

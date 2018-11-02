@@ -10,35 +10,40 @@ export class PetsServiceProvider {
     console.log('Hello PetsServiceProvider Provider');
   }
 
-  getAllPets(){
-    return this.http.get("https://mascotas.ga/application/mascotas/obtenerTodos");
-    //return this.http.get("http://localhost:8080/pets");
+  getTypePets(){
+    //return this.http.get('http://localhost:8080/petsType');
+    return this.http.get('https://mascotas.ga/application/petsType');
   }
 
-  createPet(data: Mascota): Observable<Mascota> {
-    //return this.http.post<Mascota>("http://localhost:8080/pets", data, {
-    return this.http.post<Mascota>("https://mascotas.ga/application/mascotas/crear", data, {
+  getAllPets(usuario: string) {
+    //return this.http.get(`http://localhost:8080/pets/user/${usuario}`);
+    return this.http.get(`https://mascotas.ga/application/pets/user/${usuario}`);
+  }
+
+  createPet(data: Mascota): Observable<any> {
+    //return this.http.post<any>('http://localhost:8080/pets', data, {
+    return this.http.post<any>('https://mascotas.ga/application/pets', data, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
-    })
+    });
   }
 
-  updatePet(idMascota: number, data: Mascota): Observable<boolean> {
-    //return this.http.put<boolean>(`http://localhost:8080/pets/${idMascota}`, data, {
-    return this.http.put<boolean>(`https://mascotas.ga/application/mascotas/actualizar/${idMascota}`, data, {
+  updatePet(idMascota: string, data: Mascota): Observable<any> {
+    //return this.http.put<any>(`http://localhost:8080/pets/${idMascota}`, data, {
+    return this.http.put<any>(`https://mascotas.ga/application/pets/${idMascota}`, data, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
-    })
+    });
   }
 
-  deletePet(idMascota: Number): Observable<boolean> {
-    //return this.http.delete<boolean>(`http://localhost:8080/pets/${idMascota}`,{
-    return this.http.delete<boolean>(`https://mascotas.ga/application/mascotas/borrar/${idMascota}`,{
+  deletePet(idMascota: string): Observable<any> {
+    //return this.http.delete<any>(`http://localhost:8080/pets/${idMascota}`,{
+    return this.http.delete<any>(`https://mascotas.ga/application/pets/${idMascota}`,{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
-    })
+    });
   }
 }

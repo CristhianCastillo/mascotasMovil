@@ -18,6 +18,16 @@
 <ion-content padding>
   <form [formGroup]="petForm">
     <ion-list>
+      <ion-item no-lines>
+        <!--<img [src]="'data:image/png;base64,' + imagenPet" style="width:100px;" (click)="getPicture()" alt="Selecciona">-->
+        <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)"/>
+        <div class="profile-image-wrapper" (click)="getPicture()">
+          <div class="profile-image-placeholder" *ngIf="!this.mascota.imagen">
+            <ion-icon name="add"></ion-icon>
+          </div>
+          <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.mascota.imagen"></div>
+        </div>
+      </ion-item>
       <ion-item>
         <ion-label floating>Nombre</ion-label>
         <ion-input formControlName="nombre" type="text" name="nombreMascota">
@@ -35,12 +45,7 @@
         <ion-label>Tipo de Mascota</ion-label>
         <ion-select formControlName="tipoMascota" [selectOptions]="tipoMascotaAlertOpts" name="tipoDeMascota"
                     cancelText="Cancelar" okText="Aceptar">
-          <ion-option>Raton</ion-option>
-          <ion-option>Perro</ion-option>
-          <ion-option>Gato</ion-option>
-          <ion-option>Conejo</ion-option>
-          <ion-option>Loro</ion-option>
-          <ion-option>Aguila</ion-option>
+          <ion-option *ngFor="let type of typePets" [value]="type.id">{{type.nombre}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item no-lines
@@ -129,7 +134,6 @@
           <p class="error_message">Ingresa una breve descripción.</p>
         </div>
       </ion-item>
-
     </ion-list>
   </form>
 </ion-content>

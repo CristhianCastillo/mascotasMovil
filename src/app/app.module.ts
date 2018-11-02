@@ -30,6 +30,8 @@ import { GlobalErrorHandler } from '../providers/GlobalErrorHandler';
 import { GlobalProvider } from '../providers/global/global';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { PetsServiceProvider } from '../providers/pets-service/pets-service';
+import { RegisterProvider } from '../providers/register/register';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { PetsServiceProvider } from '../providers/pets-service/pets-service';
     {provide: ErrorHandler, useClass: GlobalErrorHandler},
     GlobalProvider,
     LoginServiceProvider,
-    PetsServiceProvider
+    PetsServiceProvider,
+    RegisterProvider,
+    Camera
   ]
 })
 export class AppModule {}
