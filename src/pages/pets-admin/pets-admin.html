@@ -7,53 +7,49 @@
   </ion-navbar>
 
   <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="pet">
-      <ion-segment-button value="duenios">
-        Dueños
-      </ion-segment-button>
-      <ion-segment-button value="mascotas">
-        Mascotas
-      </ion-segment-button>
-    </ion-segment>
+    <form [formGroup]="searchForm" (ngSubmit)="search()">
+      <ion-list>
+        <ion-item>
+          <ion-label>Fecha Inicial</ion-label>
+          <ion-datetime formControlName="fechaInicial" displayFormat="MM/DD/YYYY" name="fechaInicial"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>Fecha Final</ion-label>
+          <ion-datetime formControlName="fechaFinal" displayFormat="MM/DD/YYYY" name="fechaInicial"></ion-datetime>
+        </ion-item>
+      </ion-list>
+      <button ion-button full icon-start [disabled]="!searchForm.valid">
+        <ion-icon name="search"></ion-icon>
+        Buscar Solicitudes
+      </button>
+    </form>
   </ion-toolbar>
-  <!-- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar> -->
-  <ion-searchbar></ion-searchbar>
 </ion-header>
 
 <ion-content>
-
-  <div [ngSwitch]="pet">
-    <ion-list *ngSwitchCase="'duenios'">
-      <ion-item *ngFor="let cliente of clientes" (click)="gotToViewHisPets(cliente)">
-        <ion-card class="adv-map">
-          <ion-item>
-            <ion-icon color="subtle" large item-start name='contact'></ion-icon>
-            <h2>{{cliente.nombreCliente}}</h2>
-            <p><strong>No. Visitas</strong> {{cliente.numerovisitas}}</p>
-          </ion-item>
-          <ion-item actions>
-            <span ion-text item-start color="secondary"
-                  class="item-bold">Ultima Solicitud: {{cliente.ultimaSolicitud}}</span>
-          </ion-item>
-        </ion-card>
+  <ion-list>
+    <ion-list-header>
+      <h2>Solicitudes de los clientes</h2>
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let request of requests">
+      <ion-item>
+        <h2>Fecha</h2>
+        <p>{{request.fecha}} - {{request.usuario}}</p>
+        <h2>Tipo Actividad</h2>
+        <p>{{request.tipoActividad}}</p>
+        <h2>Mensaje</h2>
+        <p>{{request.mensaje}}</p>
+        <div *ngIf="request.respuesta != ''">
+          <h2>Respondiste</h2>
+          <p>{{request.respuesta}}</p>
+        </div>
       </ion-item>
-    </ion-list>
-
-    <ion-list *ngSwitchCase="'mascotas'">
-      <div *ngFor="let cliente of clientes">
-        <h2>{{cliente.nombreCliente}}</h2>
-        <ion-item *ngFor="let mascota of cliente.mascotas" (click)="gotToViewPet(mascota)">
-          <ion-card class="adv-map">
-            <ion-item>
-              <ion-icon color="subtle" large item-start name='paw'></ion-icon>
-              <h2>{{mascota.nombreMascota}}</h2>
-            </ion-item>
-            <ion-item actions>
-              <span ion-text item-start color="secondary" class="item-bold">Ultima Solicitud: {{mascota.ultimaSolicitud}}</span>
-            </ion-item>
-          </ion-card>
-        </ion-item>
-      </div>
-    </ion-list>
-  </div>
+      <ion-item-options *ngIf="request.respuesta ===''">
+        <button ion-button color="light" icon-start (click)=sendResponse(request)>
+          <ion-icon name="text"></ion-icon>
+          Responder
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

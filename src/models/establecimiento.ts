@@ -1,24 +1,33 @@
 export class Establecimiento{
-  public id: number;
+  public id: string;
+  public idUsuario: string;
+  public servicios: any;
   public nit: string;
   public nombre: string;
   public telefono: string;
   public direccion: string;
   public email: string;
   public paginaWeb: string;
-  public servicios: string[];
   public horarios: string;
-  public horaInicio: string;
+  public horaInicial: string;
   public horaFinal: string;
   public descripcion: string;
-  public estado: boolean;
   public imagen: string;
-  public distancia: string;
-  public tiempo: string;
-  public calificacion: string;
-  public idUsuario: number;
 
   constructor(){
-
+    this.id = '';
+    this.idUsuario = '';
+    this.servicios = [];
+    this.nit = '';
+    this.nombre = '';
+    this.telefono = '';
+    this.direccion = '';
+    this.email = '';
+    this.paginaWeb = '';
+    this.horarios = '';
+    this.horaInicial = '';
+    this.horaFinal = '';
+    this.descripcion = '';
+    this.imagen = '';
   }
 }

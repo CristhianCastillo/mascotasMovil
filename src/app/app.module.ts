@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-//import { IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
+import { IonicErrorHandler} from 'ionic-angular';
 import { MyApp } from './app.component';
 
 /**
@@ -22,7 +22,7 @@ import { HttpClientModule } from "@angular/common/http";
 /**
  * Error Handler
  */
-import { GlobalErrorHandler } from '../providers/GlobalErrorHandler';
+//import { GlobalErrorHandler } from '../providers/GlobalErrorHandler';
 
 /**
  * Providers
@@ -32,6 +32,12 @@ import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { PetsServiceProvider } from '../providers/pets-service/pets-service';
 import { RegisterProvider } from '../providers/register/register';
 import { Camera } from '@ionic-native/camera';
+import { AgendaProvider } from '../providers/agenda/agenda';
+import { DashboardsProvider } from '../providers/dashboards/dashboards';
+import { EstablishmentProvider } from '../providers/establishment/establishment';
+import { PetsAdminProvider } from '../providers/pets-admin/pets-admin';
+import { RequestsProvider } from '../providers/requests/requests';
+import { SuppliesProvider } from '../providers/supplies/supplies';
 
 @NgModule({
   declarations: [
@@ -57,13 +63,19 @@ import { Camera } from '@ionic-native/camera';
   providers: [
     StatusBar,
     SplashScreen,
-    // {provide: ErrorHandler, useClass: IonicErrorHandler},
-    {provide: ErrorHandler, useClass: GlobalErrorHandler},
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    //{provide: ErrorHandler, useClass: GlobalErrorHandler},
     GlobalProvider,
     LoginServiceProvider,
     PetsServiceProvider,
     RegisterProvider,
-    Camera
+    Camera,
+    AgendaProvider,
+    DashboardsProvider,
+    EstablishmentProvider,
+    PetsAdminProvider,
+    RequestsProvider,
+    SuppliesProvider
   ]
 })
 export class AppModule {}

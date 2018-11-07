@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, IonicPage } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Suministro } from "../../../models/suministro";
+import { SuppliesProvider } from '../../../providers/supplies/supplies';
 
 @IonicPage()
 @Component({
@@ -15,58 +16,76 @@ export class SuppliesModalPage {
    */
   private editSupplieForm: FormGroup;
   public detalle: Suministro;
+  public services: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder, private serviceSupplie:SuppliesProvider) {
     this.detalle = <Suministro>this.navParams.get('detalle');
     console.log(this.detalle);
     this.editSupplieForm = this.formBuilder.group({
-      tipoSuministro: [this.detalle.tipoSuministro, Validators.required],
+      tipoSuministro: [this.detalle.idTipo, Validators.required],
       nombre: [this.detalle.nombre, Validators.required],
       cantidad: [this.detalle.cantidad, Validators.required],
       unidadMedida: [this.detalle.unidadMedida, Validators.required],
       fecha: [this.detalle.fecha, Validators.required],
       precio: [this.detalle.precio, Validators.required],
       proveedor: [this.detalle.proveedor, Validators.required],
-      consumoDiario: [this.detalle.consumoDiario, Validators.required],
       comentario: [this.detalle.comentario, Validators.required]
     });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SuppliesModalPage');
+    this.serviceSupplie.getTypeSupplies().subscribe(
+      (data) => {
+        console.log(data);
+        this.services = data;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   getDataSupplie(){
     const suministro = {
-      tipoSuministro: this.editSupplieForm.value['tipoSuministro'],
+      idTipo: this.editSupplieForm.value['tipoSuministro'],
       nombre: this.editSupplieForm.value['nombre'],
       cantidad: this.editSupplieForm.value['cantidad'],
-      unidadMedida: this.editSupplieForm.value['unidadMedida'],
-      fecha: this.editSupplieForm.value['fecha'],
+      unidad: this.editSupplieForm.value['unidadMedida'],
+      fechaCompra: this.editSupplieForm.value['fecha'],
       precio: this.editSupplieForm.value['precio'],
       proveedor: this.editSupplieForm.value['proveedor'],
-      consumoDiario: this.editSupplieForm.value['consumoDiario'],
-      comentario: this.editSupplieForm.value['comentario'],
-      idUsuario: 1
+      comentario: this.editSupplieForm.value['comentario']
     }
     this.editSupplie(suministro);
   }
 
   editSupplie(suministro){
-    this.showUserMessageCorrect("Suministro actualizado correctamente.");
-    // this.servicePet.createPet(data).subscribe(
-    //   (result: Mascota) =>{
-    //     console.log(result);
-    //     if(result){
-    //       this.userMessageCorrect("Un amigo tuyo acaba de ser creado.");
-    //     }
-    //     else{
-    //       this.userMessageError("Ha ocurrido un error");
-    //     }
-    //   }
-    // );
+    this.serviceSupplie.updateSupplie(suministro, this.detalle.id).subscribe(
+      (result: any) => {
+        console.log(result);
+        if (result.status) {
+          this.showUserMessageCorrect('Suministro actualizado correctamente.')
+        } else {
+          this.showUserMessageError('No se ha podido actualizar el producto.');
+        }
+      }
+    );
     console.log(suministro);
+  }
+
+  deleteSupplie(){
+    this.serviceSupplie.deleteSuppplie(this.detalle.id).subscribe(
+      (result: any) => {
+        console.log(result);
+        if (result.status) {
+         this.showUserMessageCorrect('Suministro eliminado correctamente.');
+        } else {
+          this.showUserMessageError('No se ha podido eliminar el suministro.');
+        }
+      }
+    );
   }
 
   showUserMessageCorrect(mensaje: string) {
@@ -101,17 +120,7 @@ export class SuppliesModalPage {
       buttons: [{
         text: 'Aceptar',
         handler: () => {
-          let alert1 = this.alertController.create({
-            title: 'Eliminar',
-            message: 'Suministro eliminado',
-            buttons: [{
-              text: 'Aceptar',
-              handler: () => {
-                this.navCtrl.pop();
-              }
-            }]
-          });
-          alert1.present();
+          this.deleteSupplie();
         }
       },
       {

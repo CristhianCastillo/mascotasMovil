@@ -2,11 +2,11 @@
 
   <ion-navbar color="dark">
     <ion-title>Buscar: {{establecimiento.nombre}}</ion-title>
-    <ion-buttons end>
+    <!-- <ion-buttons end>
       <button ion-button (click)="saveEstablishment()" icon-end>
         <ion-icon name="add-circle"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>
@@ -14,7 +14,7 @@
 
 <ion-content>
   <ion-card>
-    <img [src]="establecimiento.imagen"/>
+      <img [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' + this.establecimiento.imagen)" [alt]="establecimiento.nombre">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -62,13 +62,13 @@
     </div>
     <ion-row no-padding>
       <ion-col>
-        <button ion-button clear small color="danger" icon-start>
+        <button ion-button clear small color="danger" icon-start (click)="calificarEstablecimiento('Buena')">
           <ion-icon name='thumbs-up'></ion-icon>
           Me gusta
         </button>
       </ion-col>
       <ion-col text-rigth>
-        <button ion-button clear small color="danger" icon-start>
+        <button ion-button clear small color="danger" icon-start (click)="calificarEstablecimiento('Mala')">
           <ion-icon name='thumbs-down'></ion-icon>
           No me gusta
         </button>

@@ -18,12 +18,7 @@
       <ion-item>
         <ion-label>Mascota</ion-label>
         <ion-select formControlName="mascota" cancelText="Cancelar" okText="Aceptar" name="mascotasAplicacion">
-          <ion-option>Raton</ion-option>
-          <ion-option>Perro</ion-option>
-          <ion-option>Gato</ion-option>
-          <ion-option>Conejo</ion-option>
-          <ion-option>Loro</ion-option>
-          <ion-option>Aguila</ion-option>
+          <ion-option *ngFor="let mascota of listaMascotas" [value]="mascota.id">{{mascota.nombre}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item no-lines
@@ -37,10 +32,7 @@
       <ion-item>
         <ion-label>Servicios</ion-label>
         <ion-select formControlName="servicio" cancelText="Cancelar" okText="Aceptar" name="serviciosEstablecimiento">
-          <ion-option>Hospital</ion-option>
-          <ion-option>Tienda</ion-option>
-          <ion-option>Comida</ion-option>
-          <ion-option>Peluqueria</ion-option>
+          <ion-option *ngFor="let service of services" [value]="service.id">{{service.nombre}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item no-lines

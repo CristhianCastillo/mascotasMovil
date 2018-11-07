@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder} from '@angular/forms';
+import { PetsServiceProvider } from '../../../providers/pets-service/pets-service';
+import { AgendaProvider } from '../../../providers/agenda/agenda';
+import { GlobalProvider } from '../../../providers/global/global';
+import { RequestsProvider } from '../../../providers/requests/requests';
 
 @Component({
   selector: 'page-message-modal',
@@ -10,10 +14,16 @@ export class MessageModalPage {
 
   private modalMessageForm: FormGroup;
   public nombreEstablecimiento: string;
+  public idEstablecimiento: string;
+  public listaMascotas: any;
+  public services; any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private view: ViewController,
-              public alertController: AlertController, private formBuilder: FormBuilder) {
+              public alertController: AlertController, private formBuilder: FormBuilder,
+              private servicePets: PetsServiceProvider, private serviceAgenda: AgendaProvider,
+              private global: GlobalProvider, private serviceRequest: RequestsProvider) {
     this.nombreEstablecimiento = this.navParams.get('nombre');
+    this.idEstablecimiento = this.navParams.get('id');
     this.modalMessageForm = this.formBuilder.group({
       mascota : ['', Validators.required],
       servicio: ['', Validators.required],
@@ -23,6 +33,26 @@ export class MessageModalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MessageModalPage');
+    const id = this.global._id;
+    this.servicePets.getAllPets(id).subscribe(
+      (data)=>{
+        console.log(data);
+        this.listaMascotas= data;
+      },
+      (error)=>{
+        console.error(error);
+      }
+    );
+
+    this.serviceAgenda.getServicesType().subscribe(
+      (data)=>{
+        console.log(data);
+        this.services = data;
+      },
+      (error)=>{
+        console.error(error);
+      }
+    );
   }
 
   ionViewWillLoad(){
@@ -31,28 +61,29 @@ export class MessageModalPage {
 
   getDataMessage(){
     const mensaje = {
-      mascota: this.modalMessageForm.value['mascota'],
-      servicio: this.modalMessageForm.value['servicio'],
-      mensaje: this.modalMessageForm.value['mensaje'],
-      establecimiento: this.nombreEstablecimiento
+      idMascota: this.modalMessageForm.value['mascota'],
+      idTipo: this.modalMessageForm.value['servicio'],
+      idEstablecimiento: this.idEstablecimiento,
+      mensaje: this.modalMessageForm.value['mensaje']
     }
     this.sendMessage(mensaje);
   }
 
   sendMessage(message){
-    this.showUserMessageCorrect("Solicitud enviada correctamente.");
-    // this.servicePet.createPet(data).subscribe(
-    //   (result: Mascota) =>{
-    //     console.log(result);
-    //     if(result){
-    //       this.userMessageCorrect("Un amigo tuyo acaba de ser creado.");
-    //     }
-    //     else{
-    //       this.userMessageError("Ha ocurrido un error");
-    //     }
-    //   }
-    // );
     console.log(message);
+    this.serviceRequest.addRequest(message).subscribe(
+      (data)=>{
+        console.log(data);
+        if(data.status){
+          this.showUserMessageCorrect('El mensaje ha sido enviado correctamente.');
+        } else{
+          this.showUserMessageError('No fue posible enviar el mensaje.');
+        }
+      },
+      (error)=>{
+        console.error(error);
+      }
+    );
   }
 
   showUserMessageCorrect(mensaje: string) {

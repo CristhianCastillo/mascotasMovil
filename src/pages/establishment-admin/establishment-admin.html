@@ -4,8 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-buttons end>
-      <button ion-button (click)="editEstablishmentForm.valid && getDataEstablishment()" icon-end
-              [disabled]="!editEstablishmentForm.valid">
+      <button ion-button (click)="editEstablishmentForm.valid && getDataEstablishment()" icon-end [disabled]="!editEstablishmentForm.valid">
         <ion-icon name="create"></ion-icon>
       </button>
     </ion-buttons>
@@ -14,16 +13,24 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="editEstablishmentForm">
+  <form *ngIf="establecimiento | async; else loading" [formGroup]="editEstablishmentForm">
     <ion-list>
+      <ion-item no-lines>
+        <!--<img [src]="'data:image/png;base64,' + imagenPet" style="width:100px;" (click)="getPicture()" alt="Selecciona">-->
+        <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
+        <div class="profile-image-wrapper" (click)="getPicture()">
+          <div class="profile-image-placeholder" *ngIf="!this.imagen">
+            <ion-icon name="add"></ion-icon>
+          </div>
+          <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.imagen"></div>
+        </div>
+      </ion-item>
       <ion-item>
         <ion-label floating>Nombre Establecimiento</ion-label>
         <ion-input formControlName="nombre" type="text" name="nombreEstablecimiento"></ion-input>
       </ion-item>
-      <ion-item no-lines
-                *ngIf="(editEstablishmentForm.get('nombre').hasError('required')) && editEstablishmentForm.get('nombre').touched">
-        <div class="error"
-             *ngIf="(editEstablishmentForm.get('nombre').hasError('required')) && editEstablishmentForm.get('nombre').touched">
+      <ion-item no-lines *ngIf="(editEstablishmentForm.get('nombre').hasError('required')) && editEstablishmentForm.get('nombre').touched">
+        <div class="error" *ngIf="(editEstablishmentForm.get('nombre').hasError('required')) && editEstablishmentForm.get('nombre').touched">
           <p class="error_message">Ingresa un nombre valido.</p>
         </div>
       </ion-item>
@@ -50,18 +57,15 @@
 
       <ion-item>
         <ion-label>Servicios</ion-label>
-        <ion-select formControlName="servicios" multiple="true" cancelText="Cancelar" okText="Aceptar"
-                    name="serviciosEstablecimiento">
+        <ion-select formControlName="servicios" multiple="true" cancelText="Cancelar" okText="Aceptar" name="serviciosEstablecimiento">
           <ion-option>Hospital</ion-option>
           <ion-option>Tienda</ion-option>
           <ion-option>Comida</ion-option>
           <ion-option>Peluqueria</ion-option>
         </ion-select>
       </ion-item>
-      <ion-item no-lines
-                *ngIf="(editEstablishmentForm.get('servicios').hasError('required')) && editEstablishmentForm.get('servicios').touched">
-        <div class="error"
-             *ngIf="(editEstablishmentForm.get('servicios').hasError('required')) && editEstablishmentForm.get('servicios').touched">
+      <ion-item no-lines *ngIf="(editEstablishmentForm.get('servicios').hasError('required')) && editEstablishmentForm.get('servicios').touched">
+        <div class="error" *ngIf="(editEstablishmentForm.get('servicios').hasError('required')) && editEstablishmentForm.get('servicios').touched">
           <p class="error_message">Selecciona al menos un servicio.</p>
         </div>
       </ion-item>
@@ -76,27 +80,26 @@
 
       <ion-item>
         <ion-label>Desde</ion-label>
-        <ion-datetime formControlName="horaInicial" displayFormat="hh:mm A"
-                      name="horaInicialEstablecimiento"></ion-datetime>
+        <ion-datetime formControlName="horaInicial" displayFormat="hh:mm A" name="horaInicialEstablecimiento"></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label>Hasta</ion-label>
-        <ion-datetime formControlName="horaFinal" displayFormat="hh:mm A"
-                      name="horaFinalEstablecimiento"></ion-datetime>
+        <ion-datetime formControlName="horaFinal" displayFormat="hh:mm A" name="horaFinalEstablecimiento"></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Descripcion</ion-label>
         <ion-textarea formControlName="descripcion" name="descripcionEstablecimiento"></ion-textarea>
       </ion-item>
-      <ion-item no-lines
-                *ngIf="(editEstablishmentForm.get('descripcion').hasError('required')) && editEstablishmentForm.get('descripcion').touched">
-        <div class="error"
-             *ngIf="(editEstablishmentForm.get('descripcion').hasError('required')) && editEstablishmentForm.get('descripcion').touched">
+      <ion-item no-lines *ngIf="(editEstablishmentForm.get('descripcion').hasError('required')) && editEstablishmentForm.get('descripcion').touched">
+        <div class="error" *ngIf="(editEstablishmentForm.get('descripcion').hasError('required')) && editEstablishmentForm.get('descripcion').touched">
           <p class="error_message">Ingresa una breve descripción.</p>
         </div>
       </ion-item>
     </ion-list>
   </form>
+  <ng-template #loading>
+    Loading User...
+  </ng-template>
 </ion-content>

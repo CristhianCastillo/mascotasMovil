@@ -21,8 +21,7 @@
       <ion-item>
         <ion-label>Tipo Suministro</ion-label>
         <ion-select formControlName="tipoSuministro" name="tipoSuministro" cancelText="Cancelar" okText="Aceptar">
-          <ion-option value="Juguetes">Juguetes</ion-option>
-          <ion-option value="Alimento">Alimento</ion-option>
+          <ion-option *ngFor="let service of services" [value]="service.id">{{service.nombre}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item no-lines
@@ -100,13 +99,13 @@
       </ion-item>
 
       <ion-item>
-        <ion-label floating>Proveedor</ion-label>
+        <ion-label floating>Tienda</ion-label>
         <ion-input formControlName="proveedor" type="text" name="nombreDeTienda"></ion-input>
       </ion-item>
       <ion-item no-lines
                 *ngIf="(editSupplieForm.get('proveedor').hasError('required')) && editSupplieForm.get('proveedor').touched">
         <div class="error"
-             *ngIf="(editSupplieForm.get('proveedor').hasError('required')) && editSupplieForm.get('proveedor').touched">
+             *ngIf="(editSupplieForm.get('proveedor').hasError('required')) && editSupplieFormm.get('proveedor').touched">
           <p class="error_message">Ingresa una tienda valida.</p>
         </div>
       </ion-item>

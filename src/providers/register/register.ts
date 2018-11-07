@@ -2,22 +2,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-/*
-  Generated class for the RegisterProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class RegisterProvider {
 
+  public URL: string = 'https://mascotas.ga/application/';
+  //public URL: string = 'http://localhost:8080/';
   constructor(public http: HttpClient) {
     console.log('Hello RegisterProvider Provider');
   }
 
   createUser(data): Observable<any> {
-    //return this.http.post<any>('http://localhost:8080/users', data, {
-      return this.http.post<any>('https://mascotas.ga/application/users', data, {
+    return this.http.post<any>(`${this.URL}user/user`, data, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -25,8 +20,7 @@ export class RegisterProvider {
   }
 
   createUserOwner(data): Observable<any> {
-    //return this.http.post<any>('http://localhost:8080/users/owner', data, {
-      return this.http.post<any>('https://mascotas.ga/application/users/owner', data, {
+    return this.http.post<any>(`${this.URL}user/owner`, data, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

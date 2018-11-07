@@ -1,125 +1,125 @@
 <ion-header>
 
-  <ion-navbar color="dark">
-    <ion-toolbar no-border-top>
-      <ion-title>Suministro</ion-title>
-      <ion-buttons end>
-        <button ion-button (click)="registerSupplieForm.valid && getDataSupplie()" icon-end
-                [disabled]="!registerSupplieForm.valid">
-          <ion-icon name="create"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-  <form [formGroup]="registerSupplieForm">
-    <ion-list>
-      <ion-item>
-        <ion-label>Tipo Suministro</ion-label>
-        <ion-select formControlName="tipoSuministro" name="tipoSuministro" cancelText="Cancelar" okText="Aceptar">
-          <ion-option value="Juguetes">Juguetes</ion-option>
-          <ion-option value="Alimento">Alimento</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item no-lines
-                *ngIf="(registerSupplieForm.get('tipoSuministro').hasError('required')) && registerSupplieForm.get('tipoSuministro').touched">
-        <div class="error"
-             *ngIf="(registerSupplieForm.get('tipoSuministro').hasError('required')) && registerSupplieForm.get('tipoSuministro').touched">
-          <p class="error_message">Selecciona un tipo de suministro.</p>
-        </div>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>Nombre Suministro</ion-label>
-        <ion-input formControlName="nombre" type="text" name="nombreDelSuministro"></ion-input>
-      </ion-item>
-      <ion-item no-lines
-                *ngIf="(registerSupplieForm.get('nombre').hasError('required')) && registerSupplieForm.get('nombre').touched">
-        <div class="error"
-             *ngIf="(registerSupplieForm.get('nombre').hasError('required')) && registerSupplieForm.get('nombre').touched">
-          <p class="error_message">Ingresa un nombre valido.</p>
-        </div>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>Cantidad Suministro</ion-label>
-        <ion-input formControlName="cantidad" type="number" name="cantidadDelSuministro"></ion-input>
-      </ion-item>
-      <ion-item no-lines
-                *ngIf="(registerSupplieForm.get('cantidad').hasError('required')) && registerSupplieForm.get('cantidad').touched">
-        <div class="error"
-             *ngIf="(registerSupplieForm.get('cantidad').hasError('required')) && registerSupplieForm.get('cantidad').touched">
-          <p class="error_message">Ingresa una cantidad valida.</p>
-        </div>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Unidad Medida</ion-label>
-        <ion-select formControlName="unidadMedida" name="unidadDeMedidia" cancelText="Cancelar" okText="Aceptar">
-          <ion-option value="u">Unidades</ion-option>
-          <ion-option value="Kg">Kg</ion-option>
-          <ion-option value="g">g</ion-option>
-          <ion-option value="m">m</ion-option>
-          <ion-option value="cm">cm</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item no-lines
-                *ngIf="(registerSupplieForm.get('unidadMedida').hasError('required')) && registerSupplieForm.get('unidadMedida').touched">
-        <div class="error"
-             *ngIf="(registerSupplieForm.get('unidadMedida').hasError('required')) && registerSupplieForm.get('unidadMedida').touched">
-          <p class="error_message">Selecciona una unidad de medida.</p>
-        </div>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Fecha Compra</ion-label>
-        <ion-datetime formControlName="fecha" displayFormat="MM/DD/YYYY" name="fechaDeCompra"></ion-datetime>
-      </ion-item>
-      <ion-item no-lines
-                *ngIf="(registerSupplieForm.get('fecha').hasError('required')) && registerSupplieForm.get('fecha').touched">
-        <div class="error"
-             *ngIf="(registerSupplieForm.get('fecha').hasError('required')) && registerSupplieForm.get('fecha').touched">
-          <p class="error_message">Ingresa una fecha valida.</p>
-        </div>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>Precio</ion-label>
-        <ion-input formControlName="precio" type="number" name="precioDelSuministro"></ion-input>
-      </ion-item>
-      <ion-item no-lines
-                *ngIf="(registerSupplieForm.get('precio').hasError('required')) && registerSupplieForm.get('precio').touched">
-        <div class="error"
-             *ngIf="(registerSupplieForm.get('precio').hasError('required')) && registerSupplieForm.get('precio').touched">
-          <p class="error_message">Ingresa un precio valido.</p>
-        </div>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>Proveedor</ion-label>
-        <ion-input formControlName="proveedor" type="text" name="nombreDeTienda"></ion-input>
-      </ion-item>
-      <ion-item no-lines
-                *ngIf="(registerSupplieForm.get('proveedor').hasError('required')) && registerSupplieForm.get('proveedor').touched">
-        <div class="error"
-             *ngIf="(registerSupplieForm.get('proveedor').hasError('required')) && registerSupplieForm.get('proveedor').touched">
-          <p class="error_message">Ingresa una tienda valida.</p>
-        </div>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>Comentarios</ion-label>
-        <ion-textarea formControlName="comentario" name="comentariosDelSuministro"></ion-textarea>
-      </ion-item>
-      <ion-item no-lines
-                *ngIf="(registerSupplieForm.get('comentario').hasError('required')) && registerSupplieForm.get('comentario').touched">
-        <div class="error"
-             *ngIf="(registerSupplieForm.get('comentario').hasError('required')) && registerSupplieForm.get('comentario').touched">
-          <p class="error_message">Ingresa un comentario valido.</p>
-        </div>
-      </ion-item>
-    </ion-list>
-  </form>
-</ion-content>
+    <ion-navbar color="dark">
+      <ion-toolbar no-border-top>
+        <ion-title>Suministro</ion-title>
+        <ion-buttons end>
+          <button ion-button (click)="registerSupplieForm.valid && getDataSupplie()" icon-end
+                  [disabled]="!registerSupplieForm.valid">
+            <ion-icon name="create"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <form [formGroup]="registerSupplieForm">
+      <ion-list>
+        <ion-item>
+          <ion-label>Tipo Suministro</ion-label>
+          <ion-select formControlName="tipoSuministro" name="tipoSuministro" cancelText="Cancelar" okText="Aceptar">
+            <ion-option *ngFor="let service of services" [value]="service.id">{{service.nombre}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item no-lines
+                  *ngIf="(registerSupplieForm.get('tipoSuministro').hasError('required')) && registerSupplieForm.get('tipoSuministro').touched">
+          <div class="error"
+               *ngIf="(registerSupplieForm.get('tipoSuministro').hasError('required')) && registerSupplieForm.get('tipoSuministro').touched">
+            <p class="error_message">Selecciona un tipo de suministro.</p>
+          </div>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label floating>Nombre Suministro</ion-label>
+          <ion-input formControlName="nombre" type="text" name="nombreDelSuministro"></ion-input>
+        </ion-item>
+        <ion-item no-lines
+                  *ngIf="(registerSupplieForm.get('nombre').hasError('required')) && registerSupplieForm.get('nombre').touched">
+          <div class="error"
+               *ngIf="(registerSupplieForm.get('nombre').hasError('required')) && registerSupplieForm.get('nombre').touched">
+            <p class="error_message">Ingresa un nombre valido.</p>
+          </div>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label floating>Cantidad Suministro</ion-label>
+          <ion-input formControlName="cantidad" type="number" name="cantidadDelSuministro"></ion-input>
+        </ion-item>
+        <ion-item no-lines
+                  *ngIf="(registerSupplieForm.get('cantidad').hasError('required')) && registerSupplieForm.get('cantidad').touched">
+          <div class="error"
+               *ngIf="(registerSupplieForm.get('cantidad').hasError('required')) && registerSupplieForm.get('cantidad').touched">
+            <p class="error_message">Ingresa una cantidad valida.</p>
+          </div>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Unidad Medida</ion-label>
+          <ion-select formControlName="unidadMedida" name="unidadDeMedidia" cancelText="Cancelar" okText="Aceptar">
+            <ion-option value="u">Unidades</ion-option>
+            <ion-option value="Kg">Kg</ion-option>
+            <ion-option value="g">g</ion-option>
+            <ion-option value="m">m</ion-option>
+            <ion-option value="cm">cm</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item no-lines
+                  *ngIf="(registerSupplieForm.get('unidadMedida').hasError('required')) && registerSupplieForm.get('unidadMedida').touched">
+          <div class="error"
+               *ngIf="(registerSupplieForm.get('unidadMedida').hasError('required')) && registerSupplieForm.get('unidadMedida').touched">
+            <p class="error_message">Selecciona una unidad de medida.</p>
+          </div>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Fecha Compra</ion-label>
+          <ion-datetime formControlName="fecha" displayFormat="MM/DD/YYYY" name="fechaDeCompra"></ion-datetime>
+        </ion-item>
+        <ion-item no-lines
+                  *ngIf="(registerSupplieForm.get('fecha').hasError('required')) && registerSupplieForm.get('fecha').touched">
+          <div class="error"
+               *ngIf="(registerSupplieForm.get('fecha').hasError('required')) && registerSupplieForm.get('fecha').touched">
+            <p class="error_message">Ingresa una fecha valida.</p>
+          </div>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label floating>Precio</ion-label>
+          <ion-input formControlName="precio" type="number" name="precioDelSuministro"></ion-input>
+        </ion-item>
+        <ion-item no-lines
+                  *ngIf="(registerSupplieForm.get('precio').hasError('required')) && registerSupplieForm.get('precio').touched">
+          <div class="error"
+               *ngIf="(registerSupplieForm.get('precio').hasError('required')) && registerSupplieForm.get('precio').touched">
+            <p class="error_message">Ingresa un precio valido.</p>
+          </div>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label floating>Tienda</ion-label>
+          <ion-input formControlName="proveedor" type="text" name="nombreDeTienda"></ion-input>
+        </ion-item>
+        <ion-item no-lines
+                  *ngIf="(registerSupplieForm.get('proveedor').hasError('required')) && registerSupplieForm.get('proveedor').touched">
+          <div class="error"
+               *ngIf="(registerSupplieForm.get('proveedor').hasError('required')) && registerSupplieForm.get('proveedor').touched">
+            <p class="error_message">Ingresa una tienda valida.</p>
+          </div>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label floating>Comentarios</ion-label>
+          <ion-textarea formControlName="comentario" name="comentariosDelSuministro"></ion-textarea>
+        </ion-item>
+        <ion-item no-lines
+                  *ngIf="(registerSupplieForm.get('comentario').hasError('required')) && registerSupplieForm.get('comentario').touched">
+          <div class="error"
+               *ngIf="(registerSupplieForm.get('comentario').hasError('required')) && registerSupplieForm.get('comentario').touched">
+            <p class="error_message">Ingresa un comentario valido.</p>
+          </div>
+        </ion-item>
+      </ion-list>
+    </form>
+  </ion-content>
+  

@@ -13,9 +13,8 @@
       {{mascota.nombre}}
     </ion-list-header>
     <ion-item *ngFor="let cita of mascota.citas" [ngSwitch]="cita.tipoActividad"
-              (click)="goToViewEvent(cita, mascota.nombre)">
-      {{cita.tipoActividad}}
-
+              (click)="goToViewEvent(cita, mascota.id, mascota.nombre)">
+      {{cita.nombre}}
       <ion-icon *ngSwitchCase="'Veterinario'" name='medkit' item-start></ion-icon>
       <ion-icon *ngSwitchCase="'Peluqueria'" name='cut' item-start></ion-icon>
       <ion-icon *ngSwitchCase="'Vacuna'" name='color-filter' item-start></ion-icon>
@@ -23,7 +22,7 @@
       <ion-icon *ngSwitchCase="'Dientes'" name='color-wand' item-start></ion-icon>
       <ion-icon *ngSwitchCase="'Baño'" name='color-fill' item-start></ion-icon>
       <ion-icon *ngSwitchDefault name='clipboard' item-start></ion-icon>
-      <ion-note item-end>{{cita.fechaEvento}} {{cita.horaEvento}}</ion-note>
+      <ion-note item-end>{{cita.fecha}}</ion-note>
     </ion-item>
   </ion-list>
 

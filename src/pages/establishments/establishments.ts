@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { Establecimiento } from "../../models/establecimiento";
+import { DomSanitizer } from '@angular/platform-browser';
+import { EstablishmentProvider } from '../../providers/establishment/establishment';
+import { LoadingController } from 'ionic-angular';
+import { GlobalProvider } from '../../providers/global/global';
+import { RequestsProvider } from '../../providers/requests/requests';
 
 @IonicPage()
 @Component({
@@ -9,50 +14,45 @@ import { Establecimiento } from "../../models/establecimiento";
 })
 export class EstablishmentsPage {
 
-  public pet: string = "saved";
-  public establecimientosGuardados: any = [
-    {
-      imagen: '../../assets/imgs/shop - 1.jpg',
-      nombre: 'Pet Store',
-      distancia: '0.5 Km',
-      tiempo: '15 min',
-      direccion: 'Crr 45 F No 23',
-      telefono: '3193191948',
-      email: 'petShop@gmail.com',
-      paginaWeb: 'www.petShop.com',
-      servicios: ['Veterinaria', 'Tienda'],
-      horarios: 'Establecidos',
-      horaInicio: '08:00',
-      horaFinal: '23:00',
-      descripcion: 'Establecimiento para mascotas.',
-      calificacion: 'Buena'
-    }
-  ];
+  public pet: string = "solicitudes";
+  public establecimientosBuscar: any;
+  public solicitudesUsuario: any;
 
-  public establecimientosBuscar: any = [
-    {
-      imagen: '../../assets/imgs/shop - 2.jpg',
-      nombre: 'Veterinaria Grecia',
-      distancia: '0.3 Km',
-      tiempo: '10 min',
-      direccion: 'Crr 45 F No 23',
-      telefono: '6197601',
-      email: 'veterinariaGrecia@gmail.com',
-      paginaWeb: 'www.veterinariagrecia.com',
-      servicios: ['Veterinaria', 'Tienda', 'Peluqueria'],
-      horarios: 'Establecidos',
-      horaInicio: '04:00',
-      horaFinal: '23:00',
-      descripcion: 'Establecimiento para todo tipo de mascotas.',
-      calificacion: 'Regular'
-    }
-  ];
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public _DomSanitizer: DomSanitizer,
+    private service: EstablishmentProvider, private loadingController: LoadingController,
+    private global: GlobalProvider, private serviceRequest: RequestsProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EstablishmentsPage');
+  }
+
+  ionViewDidEnter(){
+    const loader = this.loadingController.create({
+      content: 'Actualizando...'
+    });
+    loader.present();
+    this.service.getAllEstablishments().subscribe(
+      (data)=>{
+        console.log(data);
+        this.establecimientosBuscar = data;
+      },
+      (error)=>{
+        console.error(error);
+        loader.dismiss();
+      }
+    );
+    this.serviceRequest.getUserRequests(this.global._id).subscribe(
+      (data)=>{
+        console.log(data);
+        this.solicitudesUsuario = data;
+      },
+      (error)=>{
+        console.error(error);
+        loader.dismiss();
+      }
+    );
+    loader.dismiss();
   }
 
   gotToViewEstablishmentSaved(establecimiento: Establecimiento){

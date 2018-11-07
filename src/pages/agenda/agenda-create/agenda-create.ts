@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { AgendaProvider } from '../../../providers/agenda/agenda'
 
 @IonicPage()
 @Component({
@@ -17,9 +18,10 @@ export class AgendaCreatePage {
   public tipoActividadAlertOpts: { title: string, subTitle: string };
   public idMascota: any;
   public nombreMascota: string;
+  public services: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder, private service: AgendaProvider) {
     this.tipoActividadAlertOpts = {
       title: 'Tipo Actividad',
       subTitle: 'Selecciona'
@@ -40,34 +42,41 @@ export class AgendaCreatePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AgendaCreatePage');
+    this.service.getServicesType().subscribe(
+      (result: any ) => {
+        this.services = result;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   getDataEvent(){
     const evento = {
-      nombreEvento: this.registerEventForm.value['nombreEvento'],
+      idMascota: this.idMascota,
+      nombre: this.registerEventForm.value['nombreEvento'],
       ubicacion: this.registerEventForm.value['ubicacion'],
-      tipoActividad: this.registerEventForm.value['tipoActividad'],
-      fechaEvento: this.registerEventForm.value['fechaEvento'],
-      horaEvento: this.registerEventForm.value['horaEvento'],
+      idTipo: this.registerEventForm.value['tipoActividad'],
+      fecha: this.registerEventForm.value['fechaEvento'] + ' ' + this.registerEventForm.value['horaEvento'],
       descripcion: this.registerEventForm.value['descripcion']
     }
     this.createEvent(evento);
   }
 
   createEvent(event){
-    this.showUserMessageCorrect("Evento generado correctamente.");
-    // this.servicePet.createPet(data).subscribe(
-    //   (result: Mascota) =>{
-    //     console.log(result);
-    //     if(result){
-    //       this.userMessageCorrect("Un amigo tuyo acaba de ser creado.");
-    //     }
-    //     else{
-    //       this.userMessageError("Ha ocurrido un error");
-    //     }
-    //   }
-    // );
     console.log(event);
+    this.service.createEvent(event).subscribe(
+       (result: any) =>{
+         console.log(result);
+         if(result.status){
+           this.showUserMessageCorrect("Evento registrado correctamente.");
+         }
+         else{
+           this.showUserMessageError("El evento no ha sido registrado.");
+         }
+       }
+     );
   }
 
   showUserMessageCorrect(mensaje: string) {

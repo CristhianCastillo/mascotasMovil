@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
+import { GlobalProvider } from '../../providers/global/global';
+import { RequestsProvider } from '../../providers/requests/requests';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { ToastController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -8,109 +14,131 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
 })
 export class PetsAdminPage {
 
-  public pet: string = "duenios";
-  public clientes: any = [
-    {
-      nombreCliente: 'Cristhian Castillo',
-      numerovisitas: 10,
-      ultimaSolicitud: '2018-09-02 12:01 pm',
-      mascotas: [
-        {
-          nombreMascota: 'Maxi',
-          ultimaSolicitud: '2018-09-02 12:01 pm',
-          servicios: [
-            {
-              tipoServicio: 'Peluqueria',
-              estado: 'Finalizada',
-              fecha: '2018-07-02 12:01 pm',
-              mensaje: 'Hola, me podrias atender a las 2:00pm??.. Gracias!!'
-            },
-            {
-              tipoServicio: 'Baño',
-              estado: 'No Finalizada',
-              fecha: '2018-09-02 12:01 pm',
-              mensaje: 'Hola, me podrias atender a las 10:00am??.. Gracias!!'
-            }
-          ]
-        },
-        {
-          nombreMascota: 'Gatita',
-          ultimaSolicitud: '2018-05-02 14:01 pm',
-          servicios: [
-            {
-              tipoServicio: 'Peluqueria',
-              estado: 'Finalizada',
-              fecha: '2018-07-02 12:01 pm',
-              mensaje: 'Hola, me podrias atender a las 2:00pm??.. Gracias!!'
-            },
-            {
-              tipoServicio: 'Baño',
-              estado: 'No Finalizada',
-              fecha: '2018-09-02 12:01 pm',
-              mensaje: 'Hola, me podrias atender a las 10:00am??.. Gracias!!'
-            }
-          ]
-        }
+  public searchForm: FormGroup;
+  public requests: any;
+  public requestSelected: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private global: GlobalProvider,
+    private service: RequestsProvider, private formBuilder: FormBuilder, public toastCtrl: ToastController,
+    public alertCtrl: AlertController, private  loadingController: LoadingController) {
 
-      ]
-    },
-    {
-      nombreCliente: 'Juan Castillo',
-      numerovisitas: 5,
-      ultimaSolicitud: '2018-09-02 12:01 pm',
-      mascotas: [
-        {
-          nombreMascota: 'Maxi',
-          ultimaSolicitud: '2018-09-02 12:01 pm',
-          servicios: [
-            {
-              tipoServicio: 'Peluqueria',
-              estado: 'Finalizada',
-              fecha: '2018-07-02 12:01 pm',
-              mensaje: 'Hola, me podrias atender a las 2:00pm??.. Gracias!!'
-            },
-            {
-              tipoServicio: 'Baño',
-              estado: 'No Finalizada',
-              fecha: '2018-09-02 12:01 pm',
-              mensaje: 'Hola, me podrias atender a las 10:00am??.. Gracias!!'
-            }
-          ]
-        },
-        {
-          nombreMascota: 'Gatita',
-          ultimaSolicitud: '2018-05-02 14:01 pm',
-          servicios: [
-            {
-              tipoServicio: 'Peluqueria',
-              estado: 'Finalizada',
-              fecha: '2018-07-02 12:01 pm',
-              mensaje: 'Hola, me podrias atender a las 2:00pm??.. Gracias!!'
-            },
-            {
-              tipoServicio: 'Baño',
-              estado: 'No Finalizada',
-              fecha: '2018-09-02 12:01 pm',
-              mensaje: 'Hola, me podrias atender a las 10:00am??.. Gracias!!'
-            }
-          ]
-        }
-      ]
-    }
-  ];
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+      this.searchForm = this.formBuilder.group({
+        fechaInicial: ['', Validators.required],
+        fechaFinal: ['', Validators.required]
+      });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PetsAdminPage');
   }
 
-  gotToViewHisPets(cliente) {
-    this.navCtrl.push('PetsOwnerPage', { cliente: cliente });
+  ionViewDidEnter(){
+    const loader = this.loadingController.create({
+      content: 'Actualizando...'
+    });
+    loader.present();
+    this.service.getTopRequests(this.global._id).subscribe(
+      (data: any) => {
+        this.requests = data;
+        loader.dismiss();
+      },
+      (error) => {
+        console.error(error);
+        loader.dismiss();
+      }
+    );
   }
 
-  gotToViewPet(mascota){
-    this.navCtrl.push('PetServicesPage', {mascota: mascota});
+  search(){
+    const filtro = {
+      fechaInicial: this.searchForm.value['fechaInicial'],
+      fechaFinal: this.searchForm.value['fechaFinal']
+    }
+    console.log(filtro);
+    this.service.getRequestsDate(filtro, this.global._id).subscribe(
+      (result: any) => {
+        console.log(result);
+        if (result === 'false') {
+          let toast = this.toastCtrl.create({
+            message: 'No se pueden buscar las solicitudes en este momento.',
+            duration: 2000,
+          });
+          toast.present();
+        } else {
+          this.requests = result;
+        }
+      }
+    );
+  }
+
+  sendResponse(response){
+    console.log(response.id);
+    let prompt = this.alertCtrl.create({
+      title: 'Enviar Respuesta',
+      message: "Usuario dice: " + response.mensaje,
+      inputs: [
+        {
+          name: 'Respuesta',
+          placeholder: 'tu respuesta'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            if(data != null && data != ''){
+              const respuesta ={
+                respuesta : data.Respuesta
+              }
+              this.service.sendResponse(respuesta, response.id).subscribe(
+                (result: any) => {
+                  console.log(result);
+                  if (result.status) {
+                   this.showUserMessageCorrect('Mensaje enviado correctamente.');
+                  } else {
+                    this.showUserMessageError('No se ha podido enviar el mensaje.');
+                  }
+                }
+              );
+
+            }
+            console.log('Saved clicked');
+            console.log(JSON.stringify(data)); //to see the object
+            console.log(data.Respuesta);
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+  showUserMessageCorrect(mensaje: string) {
+    let alert = this.alertCtrl.create({
+      title: 'Mensaje',
+      message: mensaje,
+      buttons: [{
+        text: 'Aceptar',
+        handler: () => {
+          
+        }
+      }]
+    });
+    alert.present()
+  }
+
+  showUserMessageError(mensaje: string) {
+    let alert = this.alertCtrl.create({
+      title: 'Error',
+      message: mensaje,
+      buttons: [{
+        text: 'Aceptar'
+      }]
+    });
+    alert.present()
   }
 }

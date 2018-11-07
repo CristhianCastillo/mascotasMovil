@@ -8,8 +8,8 @@
 
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="pet">
-      <ion-segment-button value="saved">
-        Guardados
+      <ion-segment-button value="solicitudes">
+        Solicitudes
       </ion-segment-button>
       <ion-segment-button value="search">
         Buscar
@@ -22,36 +22,22 @@
 <ion-content>
 
   <div [ngSwitch]="pet">
-    <ion-list *ngSwitchCase="'saved'">
-      <ion-item *ngFor="let establecimiento of establecimientosGuardados"
-                (click)="gotToViewEstablishmentSaved(establecimiento)">
-        <ion-card class="adv-map">
-          <div style="position: relative">
-            <img [src]="establecimiento.imagen">
-            <ion-fab right top>
-              <button ion-fab class="fab-map">
-                <ion-icon name='pin'></ion-icon>
-              </button>
-            </ion-fab>
-          </div>
-          <ion-item>
-            <ion-icon color="subtle" large item-start name='information-circle'></ion-icon>
-            <h2>{{establecimiento.nombre}}</h2>
-            <p><strong>Horarios:</strong> {{establecimiento.horarios}} - {{establecimiento.horaInicio}} -
-              {{establecimiento.horaFinal}}</p>
-          </ion-item>
-          <ion-item actions>
-            <span ion-text item-start color="secondary" class="item-bold">{{establecimiento.tiempo}}</span>
-            <span ion-text item-start color="subtle">({{establecimiento.distancia}})</span>
-            <button ion-button color="primary" clear item-end icon-start>
-              <ion-icon name='navigate'></ion-icon>
-              Ir
-            </button>
-          </ion-item>
-        </ion-card>
-
-      </ion-item>
-
+    <ion-list *ngSwitchCase="'solicitudes'">
+        <ion-card *ngFor="let solicitud of solicitudesUsuario">
+            <ion-card-header>
+              {{solicitud.mascota}} - {{solicitud.fecha}}
+            </ion-card-header>
+            <ion-card-content>
+              <h5>Establecimiento</h5>
+              <p>{{solicitud.establecimiento}}</p>
+              <h5>Mensaje</h5>
+              <p>{{solicitud.mensaje}}</p>
+              <div *ngIf="solicitud.estado">
+                <h5>Respuesta</h5>
+                <p>{{solicitud.respuesta}}</p>
+              </div>
+            </ion-card-content>
+          </ion-card>
     </ion-list>
 
     <ion-list *ngSwitchCase="'search'">
@@ -59,7 +45,7 @@
                 (click)="gotToViewEstablishmentSearch(establecimiento)">
         <ion-card class="adv-map">
           <div style="position: relative">
-            <img [src]="establecimiento.imagen">
+              <img [src]="_DomSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' + establecimiento.imagen)" [alt]="establecimiento.nombre">
             <ion-fab right top>
               <button ion-fab class="fab-map">
                 <ion-icon name='pin'></ion-icon>
@@ -69,12 +55,15 @@
           <ion-item>
             <ion-icon color="subtle" large item-start name='information-circle'></ion-icon>
             <h2>{{establecimiento.nombre}}</h2>
-            <p><strong>Horarios:</strong> {{establecimiento.horarios}} - {{establecimiento.horaInicio}} -
+            <p><strong>Horarios:</strong> {{establecimiento.horarios}} - {{establecimiento.horaInicial}} -
               {{establecimiento.horaFinal}}</p>
+            <p>Dirección: {{establecimiento.direccion}}</p>
           </ion-item>
           <ion-item actions>
-            <span ion-text item-start color="secondary" class="item-bold">{{establecimiento.tiempo}}</span>
-            <span ion-text item-start color="subtle">({{establecimiento.distancia}})</span>
+              <h5>
+                <ion-icon name="thumbs-up"></ion-icon>  {{establecimiento.calificacionesBuenas}}
+                <ion-icon name="thumbs-down"></ion-icon>  {{establecimiento.calificacionesMalas}}
+              </h5>
             <button ion-button color="primary" clear item-end icon-start>
               <ion-icon name='navigate'></ion-icon>
               Ir
