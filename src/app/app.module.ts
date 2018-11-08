@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { IonicErrorHandler} from 'ionic-angular';
+//import { IonicErrorHandler} from 'ionic-angular';
 import { MyApp } from './app.component';
 
 /**
@@ -22,7 +22,7 @@ import { HttpClientModule } from "@angular/common/http";
 /**
  * Error Handler
  */
-//import { GlobalErrorHandler } from '../providers/GlobalErrorHandler';
+import { GlobalErrorHandler } from '../providers/GlobalErrorHandler';
 
 /**
  * Providers
@@ -38,6 +38,7 @@ import { EstablishmentProvider } from '../providers/establishment/establishment'
 import { PetsAdminProvider } from '../providers/pets-admin/pets-admin';
 import { RequestsProvider } from '../providers/requests/requests';
 import { SuppliesProvider } from '../providers/supplies/supplies';
+import { ScreenOrientation } from "@ionic-native/screen-orientation";
 
 @NgModule({
   declarations: [
@@ -63,8 +64,8 @@ import { SuppliesProvider } from '../providers/supplies/supplies';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    //{provide: ErrorHandler, useClass: GlobalErrorHandler},
+    //{provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: ErrorHandler, useClass: GlobalErrorHandler},
     GlobalProvider,
     LoginServiceProvider,
     PetsServiceProvider,
@@ -75,7 +76,8 @@ import { SuppliesProvider } from '../providers/supplies/supplies';
     EstablishmentProvider,
     PetsAdminProvider,
     RequestsProvider,
-    SuppliesProvider
+    SuppliesProvider,
+    ScreenOrientation
   ]
 })
 export class AppModule {}

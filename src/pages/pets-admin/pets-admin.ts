@@ -78,18 +78,18 @@ export class PetsAdminPage {
       inputs: [
         {
           name: 'Respuesta',
-          placeholder: 'tu respuesta'
+          placeholder: 'Tu respuesta'
         },
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           handler: data => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Save',
+          text: 'Enviar',
           handler: data => {
             if(data != null && data != ''){
               const respuesta ={

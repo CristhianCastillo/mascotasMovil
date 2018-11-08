@@ -4,6 +4,7 @@ import {LoadingController} from 'ionic-angular';
 import {GlobalProvider} from "../../providers/global/global";
 import {LoginServiceProvider} from '../../providers/login-service/login-service';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
+import { ScreenOrientation } from "@ionic-native/screen-orientation";
 
 @IonicPage()
 @Component({
@@ -34,7 +35,8 @@ export class LoginPage {
    */
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public loadingCtrl: LoadingController
     , public serviceLogin: LoginServiceProvider, private formBuilder: FormBuilder, public alertController: AlertController,
-              public global: GlobalProvider, private menu: MenuController) {
+              public global: GlobalProvider, private menu: MenuController, private screenOrientation: ScreenOrientation) {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
     let backAction = platform.registerBackButtonAction(() => {
       console.log("second");
       this.navCtrl.pop();

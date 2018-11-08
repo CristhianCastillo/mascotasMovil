@@ -33,19 +33,17 @@
     </ion-list-header>
     <ion-item-sliding *ngFor="let request of requests">
       <ion-item>
-        <h2>Fecha</h2>
-        <p>{{request.fecha}} - {{request.usuario}}</p>
-        <h2>Tipo Actividad</h2>
-        <p>{{request.tipoActividad}}</p>
-        <h2>Mensaje</h2>
+        <p><strong>Horario: </strong>{{request.fecha}} - <strong>Usuario: </strong>{{request.usuario}}</p>
+        <p><strong>Tipo Actividad: </strong>{{request.tipoActividad}}</p>
+        <h2 style="font-weight: bold; color: red;">Mensaje</h2>
         <p>{{request.mensaje}}</p>
         <div *ngIf="request.respuesta != ''">
-          <h2>Respondiste</h2>
+          <h2 style="font-weight: bold; color: orange;">Respondiste</h2>
           <p>{{request.respuesta}}</p>
         </div>
       </ion-item>
-      <ion-item-options *ngIf="request.respuesta ===''">
-        <button ion-button color="light" icon-start (click)=sendResponse(request)>
+      <ion-item-options>
+        <button ion-button color="secondary" icon-start (click)=sendResponse(request) *ngIf="!request.estado">
           <ion-icon name="text"></ion-icon>
           Responder
         </button>

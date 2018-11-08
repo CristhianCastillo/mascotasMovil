@@ -16,27 +16,39 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
-  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <!--<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>-->
 </ion-header>
 
 <ion-content>
 
   <div [ngSwitch]="pet">
     <ion-list *ngSwitchCase="'solicitudes'">
-        <ion-card *ngFor="let solicitud of solicitudesUsuario">
+        <ion-card *ngFor="let solicitud of solicitudesUsuario" [ngSwitch]="solicitud.estado">
             <ion-card-header>
-              {{solicitud.mascota}} - {{solicitud.fecha}}
+              <h2 style="font-weight: bold; color: red;">{{solicitud.mascota}} - {{solicitud.fecha}}</h2>
             </ion-card-header>
             <ion-card-content>
-              <h5>Establecimiento</h5>
+              <h5 style="font-weight: bold;">Establecimiento</h5>
               <p>{{solicitud.establecimiento}}</p>
-              <h5>Mensaje</h5>
+              <h5 style="font-weight: bold;">Mensaje</h5>
               <p>{{solicitud.mensaje}}</p>
               <div *ngIf="solicitud.estado">
-                <h5>Respuesta</h5>
+                <h5 style="font-weight: bold;">Respuesta</h5>
                 <p>{{solicitud.respuesta}}</p>
               </div>
             </ion-card-content>
+          <ion-row>
+            <ion-col>
+              <button *ngSwitchCase="true" ion-button icon-start clear small>
+                <ion-icon name="done-all"></ion-icon>
+                <div>Tu solicitud ha sido atendida.</div>
+              </button>
+              <button *ngSwitchCase="false" color="dont-see" ion-button icon-start clear small>
+                <ion-icon name="eye-off"></ion-icon>
+                <div>Tu solicitud no ha sido atendida aun.</div>
+              </button>
+            </ion-col>
+          </ion-row>
           </ion-card>
     </ion-list>
 
@@ -57,7 +69,7 @@
             <h2>{{establecimiento.nombre}}</h2>
             <p><strong>Horarios:</strong> {{establecimiento.horarios}} - {{establecimiento.horaInicial}} -
               {{establecimiento.horaFinal}}</p>
-            <p>Dirección: {{establecimiento.direccion}}</p>
+            <p><strong>Dirección:</strong> {{establecimiento.direccion}}</p>
           </ion-item>
           <ion-item actions>
               <h5>
@@ -70,9 +82,7 @@
             </button>
           </ion-item>
         </ion-card>
-
       </ion-item>
-
     </ion-list>
   </div>
 </ion-content>

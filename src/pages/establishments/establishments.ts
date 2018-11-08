@@ -16,7 +16,9 @@ export class EstablishmentsPage {
 
   public pet: string = "solicitudes";
   public establecimientosBuscar: any;
+  public establecimientosBuscarMaster: any;
   public solicitudesUsuario: any;
+  public solicitudesUsuarioMaster: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public _DomSanitizer: DomSanitizer,
     private service: EstablishmentProvider, private loadingController: LoadingController,
@@ -36,6 +38,7 @@ export class EstablishmentsPage {
       (data)=>{
         console.log(data);
         this.establecimientosBuscar = data;
+        this.establecimientosBuscarMaster = data;
       },
       (error)=>{
         console.error(error);
@@ -46,6 +49,7 @@ export class EstablishmentsPage {
       (data)=>{
         console.log(data);
         this.solicitudesUsuario = data;
+        this.solicitudesUsuarioMaster = data;
       },
       (error)=>{
         console.error(error);
@@ -55,6 +59,14 @@ export class EstablishmentsPage {
     loader.dismiss();
   }
 
+  initializeItemsEstablecimientos(){
+    this.establecimientosBuscar = this.establecimientosBuscarMaster;
+  }
+
+  initializeItemsSolicitudes(){
+    this.solicitudesUsuario = this.solicitudesUsuarioMaster;
+  }
+  
   gotToViewEstablishmentSaved(establecimiento: Establecimiento){
     console.log(establecimiento);
     this.navCtrl.push('EstablishmentsSavedModalPage', {establecimiento: establecimiento});
