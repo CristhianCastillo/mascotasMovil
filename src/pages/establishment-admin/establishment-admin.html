@@ -58,10 +58,7 @@
       <ion-item>
         <ion-label>Servicios</ion-label>
         <ion-select formControlName="servicios" multiple="true" cancelText="Cancelar" okText="Aceptar" name="serviciosEstablecimiento">
-          <ion-option>Hospital</ion-option>
-          <ion-option>Tienda</ion-option>
-          <ion-option>Comida</ion-option>
-          <ion-option>Peluqueria</ion-option>
+          <ion-option *ngFor="let service of services" [value]="service.nombre">{{service.nombre}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item no-lines *ngIf="(editEstablishmentForm.get('servicios').hasError('required')) && editEstablishmentForm.get('servicios').touched">

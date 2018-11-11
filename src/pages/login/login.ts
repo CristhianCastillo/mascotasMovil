@@ -23,6 +23,8 @@ export class LoginPage {
    */
   public recordar: boolean;
 
+  public usuariosTest: any;
+
   /**
    *
    * @param navCtrl
@@ -36,7 +38,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform, public loadingCtrl: LoadingController
     , public serviceLogin: LoginServiceProvider, private formBuilder: FormBuilder, public alertController: AlertController,
               public global: GlobalProvider, private menu: MenuController, private screenOrientation: ScreenOrientation) {
-    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    //this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
     let backAction = platform.registerBackButtonAction(() => {
       console.log("second");
       this.navCtrl.pop();
@@ -91,11 +93,13 @@ export class LoginPage {
           if(result.root === 'Usuario'){
             this.global.id = result.message;
             this.global._tipoUsuario = 'Usuario';
+            this.global._token = result.token;
             this.navCtrl.setRoot('TabsPage');
           }
           else{
             this.global.id = result.message;
             this.global._tipoUsuario = 'Propietario';
+            this.global._token = result.token;
             this.navCtrl.setRoot('TabsAdminPage');
           }
         }

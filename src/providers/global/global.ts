@@ -8,6 +8,7 @@ export class GlobalProvider {
   public _password: string;
   public _tipoUsuario: string;
   public _estado: boolean;
+  public _token: string;
 
   constructor() {
     this._estado = false;
@@ -52,6 +53,14 @@ export class GlobalProvider {
 
   set estado(estado: boolean){
     this._estado = estado;
+  }
+
+  get token() {
+    return this._token;
+  }
+
+  set token(token: string) {
+    this._token = token;
   }
 
 }

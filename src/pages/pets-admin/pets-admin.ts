@@ -100,6 +100,7 @@ export class PetsAdminPage {
                   console.log(result);
                   if (result.status) {
                    this.showUserMessageCorrect('Mensaje enviado correctamente.');
+                   this.ionViewDidEnter();
                   } else {
                     this.showUserMessageError('No se ha podido enviar el mensaje.');
                   }

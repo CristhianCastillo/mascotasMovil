@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Establecimiento } from '../../models/establecimiento';
 import {tap} from 'rxjs/operators';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { AgendaProvider } from "../../providers/agenda/agenda";
 
 @IonicPage()
 @Component({
@@ -24,10 +25,11 @@ export class EstablishmentAdminPage {
   public establecimiento: Observable<Establecimiento>;
   public imagen: any;
   public idEstablecimiento: string;
+  public services: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertController: AlertController,
     private formBuilder: FormBuilder, private service: EstablishmentProvider,
-    public global: GlobalProvider, public camera: Camera) {
+    public global: GlobalProvider, public camera: Camera, private agendaService: AgendaProvider) {
       this.editEstablishmentForm = this.formBuilder.group({
         nombre: ['', Validators.required],
         telefono: [''],
@@ -53,6 +55,15 @@ export class EstablishmentAdminPage {
       (result: any) =>{
         this.idEstablecimiento = result.id;
         this.imagen = result.imagen;
+      }
+    );
+
+    this.agendaService.getServicesType().subscribe(
+      (result: any ) => {
+        this.services = result;
+      },
+      (error) => {
+        console.error(error);
       }
     );
   }
