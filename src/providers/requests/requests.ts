@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { GlobalProvider } from "../global/global";
+import { Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class RequestsProvider {
@@ -12,7 +14,13 @@ export class RequestsProvider {
     console.log('Hello RequestsProvider Provider');
   }
 
-  getTopRequests(idUsuario: string){
+  getTest(): Observable<any> {
+    return this.http.get('https://randomuser.me/api').map((data) => {
+      return data['results'];
+    });
+  }
+
+  getTopRequests(idUsuario: string) {
     return this.http.get(`${this.URL}request/ownerTop/${idUsuario}`, {
       headers: new HttpHeaders({
         'Authorization': this.global._token
@@ -20,7 +28,7 @@ export class RequestsProvider {
     });
   }
 
-  getUserRequests(idUsuario: string){
+  getUserRequests(idUsuario: string) {
     return this.http.get(`${this.URL}request/user/${idUsuario}`, {
       headers: new HttpHeaders({
         'Authorization': this.global._token
@@ -28,7 +36,7 @@ export class RequestsProvider {
     });
   }
 
-  getRequestsDate(data: any, idUsuario: string){
+  getRequestsDate(data: any, idUsuario: string) {
     return this.http.post<any>(`${this.URL}request/ownerDate/${idUsuario}`, data, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -37,7 +45,7 @@ export class RequestsProvider {
     });
   }
 
-  addRequest(data: any){
+  addRequest(data: any) {
     return this.http.post<any>(`${this.URL}request`, data, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
